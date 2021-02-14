@@ -11,11 +11,13 @@
     "develop": "yarn --cwd ./website develop",
     "build": "yarn --cwd ./website build",
     "serve": "yarn --cwd ./website serve",
-    "fix": "yarn prettier ./website/src/pages/* -w"
+    "fix": "yarn prettier ./website/src/pages/* -w",
+    "deploy": "yarn --cwd ./website gatsby build --prefix-paths && gh-pages -d website/public -b master"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
     "gatsby-cli": "^2.19.1",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.1",
     "react-bootstrap": "^1.4.3",
     "typescript": "^4.1.5"
