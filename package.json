@@ -1,0 +1,23 @@
+{
+  "name": "miking-lang.github.io",
+  "version": "1.0.0",
+  "description": "The official Miking website",
+  "main": "index.js",
+  "repository": "https://github.com/miking-lang/miking-lang.github.io.git",
+  "author": "David Broman <dbro@kth.se>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "develop": "yarn --cwd ./website develop",
+    "build": "yarn --cwd ./website build",
+    "serve": "yarn --cwd ./website serve",
+    "fix": "yarn prettier ./website/src/pages/* -w"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "gatsby-cli": "^2.19.1",
+    "prettier": "^2.2.1",
+    "react-bootstrap": "^1.4.3",
+    "typescript": "^4.1.5"
+  }
+}
