@@ -1,25 +1,43 @@
 {
-  "name": "miking-lang.github.io",
-  "version": "1.0.0",
-  "description": "The official Miking website",
-  "main": "index.js",
-  "repository": "https://github.com/miking-lang/miking-lang.github.io.git",
-  "author": "David Broman <dbro@kth.se>",
-  "license": "MIT",
-  "private": false,
+  "name": "miking-lang-github-io",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "develop": "yarn --cwd ./website develop",
-    "build": "yarn --cwd ./website build",
-    "serve": "yarn --cwd ./website serve",
-    "fix": "yarn prettier ./website/src/pages/* -w",
-    "deploy": "yarn --cwd ./website gatsby build --prefix-paths && gh-pages -d website/public -b master"
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0",
-    "gatsby-cli": "^2.19.1",
-    "gh-pages": "^3.1.0",
-    "prettier": "^2.2.1",
-    "react-bootstrap": "^1.4.3",
-    "typescript": "^4.1.5"
+    "@docusaurus/core": "2.0.0-beta.15",
+    "@docusaurus/preset-classic": "2.0.0-beta.15",
+    "@mdx-js/react": "^1.6.21",
+    "clsx": "^1.1.1",
+    "prism-react-renderer": "^1.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "2.0.0-beta.15",
+    "@tsconfig/docusaurus": "^1.0.4",
+    "typescript": "^4.5.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
