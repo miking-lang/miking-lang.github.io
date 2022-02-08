@@ -8,6 +8,12 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-image: url("/img/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  color: white;
+  text-shadow: 1px 1px 4px black, -1px -1px 4px black, 1px -1px 4px black, -1px 1px 4px black;
 }
 
 @media screen and (max-width: 966px) {
