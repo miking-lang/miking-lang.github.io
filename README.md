@@ -8,6 +8,29 @@ The website is built using [Docusaurus 2](https://docusaurus.io/), a modern stat
 
 Install [Node.js](https://nodejs.org/en/) on your computer.
 
+### Pull remote source files
+
+Run the command
+```
+$ npm run pull
+```
+to populate the `docs/` folder with remote Markdown content.
+
+To add remote content, follow the procedure below.
+1. Add a placeholder file `_<id>-remote.md` somewhere under the `docs/` folder.
+   This file is ignored by Docusaurus as it starts with `_`.
+2. Add an element
+   ```
+   {url: <url>, remotePath: <rpath>, localPath: <lpath>},
+   ```
+   to the `remoteDocs` array of `pull.js`, where `<url>` is the GitHub repo,
+   `<rpath>` is the path of the source file in `<url>`, and `<lpath>` is the
+   local path under the `docs/` folder. Use only `<id>` for the local path file
+   name, and not `_<id>-remote.md`. 
+3. Now, when you run `npm run pull`, the remote file is combined with the local
+   placeholder `_<id>-remote.md` to produce a file `<id>-remote.md`. This
+   produced file is ignored by git.
+
 ### Local Development
 
 ```

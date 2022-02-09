@@ -39,6 +39,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      hideableSidebar: true,
       navbar: {
         title: 'Miking',
         // TODO Add Miking logo
@@ -49,7 +50,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro', // TODO
+            docId: 'miking',
             position: 'left',
             label: 'Documentation',
           },
@@ -72,8 +73,8 @@ const config = {
             title: 'Documentation',
             items: [
               {
-                label: 'Miking', // TODO
-                to: '/docs/intro',
+                label: 'Miking',
+                to: '/docs/miking',
               },
             ],
           },
