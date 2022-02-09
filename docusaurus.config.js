@@ -76,6 +76,10 @@ const config = {
                 label: 'Miking',
                 to: '/docs/miking',
               },
+              {
+                label: 'Miking DPPL',
+                to: '/docs/miking-dppl',
+              },
             ],
           },
           {
