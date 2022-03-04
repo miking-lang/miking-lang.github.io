@@ -1,6 +1,6 @@
 # Publications
 
-The following vision paper is currently the main paper for Miking. Please cite this paper if you use the Miking system or if you would like to refer to it.
+The following vision paper is currently the main paper for Miking. Please cite this paper if you are using the Miking framework or if you would like to refer to it.
 
 - David Broman. **A Vision of Miking: Interactive Programmatic Modeling, Sound Language Composition, and Self-Learning Compilation**. In *Proceedings of the 12th ACM SIGPLAN International Conference on Software Language Engineering (SLE 2019)*, Athens, Greece, ACM, 2019. [[PDF](https://people.kth.se/~dbro/papers/broman-2019-miking-vision.pdf)] [[ACM Link](https://dl.acm.org/doi/10.1145/3357766.3359531)]
 
