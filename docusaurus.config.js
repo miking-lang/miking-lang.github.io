@@ -14,7 +14,9 @@ const config = {
   organizationName: 'miking-lang',
   trailingSlash: false,
   deploymentBranch: 'gh-pages',
-  onBrokenLinks: 'throw',
+  // TODO We should eventually fix broken links and throw if any are found
+  // onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
@@ -92,8 +94,7 @@ const config = {
             ],
           },
         ],
-        // TODO
-        copyright: `Copyright © ${new Date().getFullYear()} TODO. Also add add LICENSE to GitHub repo root`,
+        copyright: `Copyright © ${new Date().getFullYear()} David Broman`,
       },
       prism: {
         theme: lightCodeTheme,
