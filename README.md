@@ -63,4 +63,9 @@ Use
 ```
 $ npm run deploy
 ```
-to deploy to the `gh-pages` branch.
+to deploy to the `gh-pages` branch. If the command fails and asks you to set the `GIT_USER` environment variable, try running
+```
+$ USE_SSH=true npm run deploy
+```
+instead. You can also set the `GIT_USER` variable if you want to use HTTPS to deploy. More information can be found [here](https://docusaurus.io/docs/deployment#deploying-to-github-pages).
+
