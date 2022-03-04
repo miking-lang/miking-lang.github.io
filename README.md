@@ -1,12 +1,22 @@
 # Miking Website
 
-The `master` branch contains the source code for the official Miking website, located at [https://miking.org](https://miking.org). The website is deployed through the `gh-pages` branch. Hence, we should only commit changes to the `master` branch.
+This repository contains the source code for the Miking website [https://miking.org](https://miking.org). Most of the content lives in markdown files located in other repositories, such as `miking-lang/miking` and `miking-lang/miking-dppl`, whereas this repository contains pictures, document structure, and source code.
+
+The `master` branch contains the source code for the official Miking website. The website is deployed through the `gh-pages` branch. Hence, we should only commit changes to the `master`branch.
 
 The website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 ### Installation
 
 Install [Node.js](https://nodejs.org/en/) on your computer.
+
+Run command
+
+```
+npm install
+```
+
+to install all dependent packages (including the Docusaurus libraries).
 
 ### Pull remote source files
 

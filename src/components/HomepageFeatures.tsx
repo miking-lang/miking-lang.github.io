@@ -12,28 +12,30 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Development',
-    image: '/img/tmp.svg',
+    image: '/img/development.png',
     description: (
       <>
-        TODO: Currently in beta. Go to GitHub to contribute.
+      The Miking framework is an open-source effort that is currently in Beta status.
+      Please visit the <a href="https://github.com/miking-lang/miking"> Github pages </a>
+      if you would like to contribute to the development.
       </>
     ),
   },
   {
     title: 'Vision',
-    image: '/img/tmp.svg',
+    image: '/img/vision.png',
     description: (
       <>
-        TODO
+        Our vision is that Miking will become the leading environment for rapid and efficient development of domain-specific languages. Please see the <a href="https://people.kth.se/~dbro/papers/broman-2019-miking-vision.pdf">Miking vision paper</a> for an overview.
       </>
     ),
   },
   {
     title: 'Documentation',
-    image: '/img/tmp.svg',
+    image: '/img/documentation.png',
     description: (
       <>
-        TODO
+        To learn more, please check out the online documentation for both the <a href="/docs/miking">Miking core environment</a>, and the domain-specific language for differentiable probabilistic programming, <a href="/docs/miking-dppl">Miking DPPL</a>.
       </>
     ),
   },
