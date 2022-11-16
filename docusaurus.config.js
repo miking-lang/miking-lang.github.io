@@ -62,6 +62,11 @@ const config = {
             label: 'Publications',
           },
           {
+            to: 'workshop-2022',
+            position: 'left',
+            label: 'Workshop 2022',
+          },
+          {
             href: 'https://github.com/miking-lang/',
             label: 'GitHub',
             position: 'right',
