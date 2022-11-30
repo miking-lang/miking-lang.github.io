@@ -7,7 +7,9 @@ The following vision paper is currently the main paper for Miking. Please cite t
 
 The following publictions are related to the Miking effort, directly or indirectly:
 
-- Daniel Lundén, Joey Öhman, Jan Kudlicka, Viktor Senderov, Fredrik Ronquist, and David Broman. **Compiling Universal Probabilistic Programming Languages with Efficient Parallel Sequential Monte Carlo Inference**. To appear in the *Proceedings of 31th European Symposium on Programming (ESOP 2022)*, 2022. [[ArXiv preprint](https://arxiv.org/abs/2112.00364)]
+- Viktor Palmkvist, Elias Castegren, Philipp Haller, and David Broman. **Statically Resolvable Ambiguity**. In the Proceedings of the 50th ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2023), 2023. [[PDF](https://people.kth.se/~dbro/papers/palmkvist-et-al-popl-2023-statically-resolvable-ambiguity.pdf)]
+
+- Daniel Lundén, Joey Öhman, Jan Kudlicka, Viktor Senderov, Fredrik Ronquist, and David Broman. **Compiling Universal Probabilistic Programming Languages with Efficient Parallel Sequential Monte Carlo Inference**. To appear in the *Proceedings of 31th European Symposium on Programming (ESOP 2022)*, 2022. [[Springer Link](https://link.springer.com/chapter/10.1007/978-3-030-99336-8_2)] [[PDF](https://rdcu.be/cKhIR)]
 
 - Fredrik Ronquist, Jan Kudlicka, Viktor Senderov, Johannes Borgström, Nicolas Lartillot, Daniel Lundén, Lawrence Murray, Thomas B. Schön, and David Broman. **Universal probabilistic programming offers a powerful approach to statistical phylogenetics**. In *Communications Biology*, Volume 4, Article number 244, Nature Publishing Group, 2021. [[Open Access, Nature Publishing Group](https://doi.org/10.1038/s42003-021-01753-7)]
 
