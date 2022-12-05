@@ -239,9 +239,12 @@ TODO: How to use Windows power shell
 
 :::
 
-Example MExpr program that you can use to verify your installation:
+Example MExpr program that you can use to verify your installation. Save this
+as `fib.mc` and compile it with `mi compile fib.mc`. Try running it as
+`./fib 50`.
 
-```mc
+```mc title="fib.mc"
+/- These are from the Miking standard library -/
 include "common.mc"
 include "string.mc"
 
