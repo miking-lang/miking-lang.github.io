@@ -239,37 +239,39 @@ TODO: How to use Windows power shell
 
 :::
 
-Example MExpr program:
+Example MExpr program that you can use to verify your installation:
 
 ```mc
+include "common.mc"
 include "string.mc"
 
-mexpr
+/- A string is a sequence of chars! -/
+let s1: String = "foo"
+let s2: [Char] = ['f', 'o', 'o']
+utest s1 with s2
 
-let s1: String = "foo" in
-let s2: [Char] = ['f', 'o', 'o'] in
-utest s1 with s2 in
-
--- Fibonacci function
+/- Fibonacci function -/
 let fib = lam n.
   recursive let work = lam i. lam curr. lam next.
     if eqi i n then
       curr
     else
-      work /- inline comment -/ (addi i 1) next (addi curr next)
+      work (addi i 1) next (addi curr next)
   in
   work 0 0 1
+
+mexpr
+
+if neqi (length argv) 2 then
+  printLn (join ["usage: ", get argv 0, " N"]);
+  exit 1
+else -- continue
+
+let printFib = lam n.
+  printLn (join ["fib ", int2string n, " = ", int2string (fib n)])
 in
 
-utest fib 0 with 0 in
-utest fib 1 with 1 in
-utest fib 2 with 1 in
-utest fib 3 with 2 in
-utest fib 4 with 3 in
-utest fib 5 with 5 in
-utest fib 6 with 8 in
-utest fib 7 with 13 in
-()
+loop (string2int (get argv 1)) printFib
 ```
 
 ## Install Syntax Highlighter
