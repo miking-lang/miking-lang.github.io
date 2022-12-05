@@ -30,11 +30,11 @@ how to install Opam on Mac or on your Linux distribution:
 
 :::
 
-Create the Opam 4.12 switch:
+Create the Opam 5.0 beta switch:
 
 ```
 opam update
-opam switch create 4.12.0+domains --packages=ocaml-variants.4.12.0+domains --repositories=multicore=git+https://github.com/ocaml-multicore/multicore-opam.git,default
+opam switch create ocaml5-beta ocaml-variants.5.0.0~beta2+options
 eval $(opam env)
 ```
 
@@ -108,15 +108,17 @@ Docker desktop. WSL2 installation, powershell script.
 </TabItem>
 
 <TabItem value="docker-mac" label="Mac">
-For Mac you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/mac-install">this page</a> for more info. Make sure that you know if you are running an older Mac with Intel chip or a newer one with Apple Silicon. Download the appropriate Docker Desktop release.
+For Mac you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/mac-install">this page</a> for more info. Make sure that you know if you are running an older Mac with Intel chip or a newer one with Apple Silicon (M1). Download the appropriate Docker Desktop release.
 <br /><br />
-Due to the current performance of Docker on Mac, we highly recommend using Opam if possible.
+<b>Due to the current performance of Docker on Mac, we highly recommend using Opam if possible.</b>
 <br /><br />
 Now install the CLI interface for Docker using <a href="https://docs.brew.sh/Installation">Homebrew</a>:
 
     brew install docker
 
 Now you should be able to run Docker containers from the terminal through the <code>docker</code> command, given that the Docker Desktop application is running.
+
+If using Mac with Apple Silicon, you might have to include the `--platform=linux/amd64` parameter when running the image.
 </TabItem>
 
 <TabItem value="docker-linux" label="Linux">
@@ -180,7 +182,7 @@ of scripts for starting the Miking container:
 
 Using GNU Make to launch the image with `make run-docker`:
 
-```makefile
+```makefile title="Makefile"
 run-docker:
     $(eval IMAGE := mikinglang/miking:latest-alpine)
     $(eval CONTAINERNAME := hello-miking)
@@ -203,7 +205,7 @@ in the Makefile rule with `sudo` or instead run `sudo make docker-run`.
 
 Using a Bash script launch the image with `./midock.sh`:
 
-```bash
+```bash title="midock.sh"
 #!/usr/bin/env bash
 
 IMAGE='mikinglang/miking:latest-alpine'
@@ -231,9 +233,27 @@ the Bash script is located then replace the `-v $(pwd):/mnt:ro` with
 If you need to run Docker with `sudo`, then either prepend the `docker run`
 in the script with `sudo` or instead run `sudo ./midock.sh`.
 </TabItem>
-<TabItem value="dockerlaunch-powershell" label="Power Shell" default>
+<TabItem value="dockerlaunch-powershell" label="PowerShell" default>
 
-TODO: How to use Windows power shell
+In PowerShell on Windows, launch the image using the following script as
+`.\midock.ps1`:
+
+```powershell title="midock.ps1"
+$Image = "mikinglang/miking:latest-alpine"
+$ContainerName = "hello-miking"
+
+# Mount Directory that we are running the script from
+$MountDir = Get-Location
+
+# Uncomment this to use the relative location to script instead
+# $MountDir = $PSScriptRoot
+
+docker run --rm -it `
+           --name $ContainerName `
+           --hostname $ContainerName `
+           -v "${MountDir}:/mnt:ro" `
+           $Image bash
+```
 </TabItem>
 </Tabs>
 
