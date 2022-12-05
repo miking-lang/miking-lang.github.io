@@ -1,0 +1,173 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Installation
+
+We currently support two methods of installing Miking:
+
+ 1. Natively built using the Opam package manager. (Mac, Linux)
+ 2. Pre-built Docker images with optional dependencies included. (Windows, Mac, Linux)
+
+For basic usage of Miking with a limited set of dependencies, we recommend the
+first option. If any of the extended Miking features are required, or if Opam
+is not suitable for your system, then we recommend installing one of the Docker
+images.
+
+## Native Install with Opam
+
+See the box below for information regarding installing Opam on your system. The rest of this section assumes that the `opam` program is available on your command line.
+
+:::info Install Opam
+
+<Tabs>
+<TabItem value="mac" label="Mac">
+TODO: Opam for Mac
+
+</TabItem>
+<TabItem value="linux" label="Linux">
+TODO: Opam for Linux
+</TabItem>
+</Tabs>
+
+:::
+
+Install [Opam here](https://opam.ocaml.org/doc/Install.html)
+
+Supported operating systems: Mac, Linux
+
+When installing natively with Opam, we require that your system has `opam`
+installed. It is highly recommended that you also have `make` installed on your
+system.
+
+Create the Opam 4.12 switch:
+
+```sh
+opam update
+opam switch create 4.12.0+domains --packages=ocaml-variants.4.12.0+domains --repositories=multicore=git+https://github.com/ocaml-multicore/multicore-opam.git,default
+eval $(opam env)
+```
+
+Install required dependencies:
+
+```sh
+opam install dune linenoise
+```
+
+Install optional dependencies (some features in the standard library will not
+work without these):
+
+```sh
+opam install pyml toml lwt owl ocamlformat.0.20.1
+```
+
+Clone the Miking git repository to a suitable location on your system:
+
+```
+git clone https://github.com/miking-lang/miking.git
+```
+
+Assuming that you have `make` installed, we can now install Miking as:
+
+```
+cd miking
+make install
+```
+
+## Install with Docker
+
+Before running the Docker image you must ensure that Docker is installed.
+
+:::info Install Docker
+
+<Tabs>
+<TabItem value="windows" label="Windows" default>
+For Windows you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/windows-install">this page</a> for more info. Any 
+
+Docker desktop. WSL2 installation, powershell script.
+</TabItem>
+
+<TabItem value="mac" label="Mac">
+For Mac you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/mac-install">this page</a> for more info. Make sure that you know if you are running an older Mac with Intel chip or a newer one with Apple Silicon. Download the appropriate Docker Desktop release.
+<br /><br />
+Due to the current performance of Docker on Mac, we highly recommend using Opam if possible.
+<br /><br />
+Now install the CLI interface for Docker using <a href="https://docs.brew.sh/Installation">Homebrew</a>:
+
+    brew install docker
+
+Now you should be able to run Docker containers from the terminal through the <code>docker</code> command, given that the Docker Desktop application is running.
+</TabItem>
+
+<TabItem value="linux" label="Linux">
+For Linux we recommend using Docker Engine. See <a href="https://docs.docker.com/engine/install">this page</a> for more information about how to install Docker Engine for your Linux distribution.
+<br /><br />
+If using Arch Linux or one of its derivatives, follow the instructions on the Arch Wiki page (<a href="https://wiki.archlinux.org/title/Docker">link</a>) instead.
+<br /><br />
+It is possible that your Docker Engine process is running with root privileges. <b>In this case you will need to run all commands below with <code>sudo</code> or add yourself to the docker group.</b> If unsure, try running a docker command without <code>sudo</code> first.
+</TabItem>
+</Tabs>
+
+:::
+
+Install Docker on your system. On Windows and Mac we assume that you are using
+Docker Desktop. On Linux we assume that Docker Engine is being used. Note that
+we only provide images built for x86_64. If you are using an M1 Mac or another
+system that is not a x86_64 architecture, you will need to have some form of
+emulation enabled for your system.
+
+Install Docker Engine for Linux: [link](https://docs.docker.com/engine/install/)
+
+Special case for Arch Linux: [link to Arch Wiki](https://wiki.archlinux.org/title/Docker)
+
+Fetch the image by downloading it from Docker Hub:
+
+```
+docker pull mikinglang/miking
+```
+
+If you are in need of CUDA functionality, you can pull the CUDA image instead:
+
+```
+docker pull mikinglang/miking:latest-cuda
+```
+
+Both contain all dependencies necessary to use all features in the standard
+library. If you however desire to use the GPU acceleration feature in Miking,
+you should use the CUDA-based image.
+
+:::caution
+
+An executable built inside the Docker image should only be executed inside the Docker image.
+
+:::
+
+### Example Launch Scripts
+
+```
+docker run --rm -it -v $(pwd):/mnt:ro mikinglang/miking bash
+```
+
+Example MExpr program:
+
+```mc
+include "string.mc"
+
+mexpr
+
+let s1: String = "foo" in
+let s2: [Char] = ['f', 'o', 'o'] in
+utest s1 with s2 in
+
+-- Fibonacci function
+let fib = lam n.
+  recursive let work = lam i. lam curr. lam next.
+    if eqi i n then
+      curr
+    else
+      work /- inline comment -/ (addi i 1) next (addi curr next)
+  in
+  work 0 0 1
+in
+
+```
+
