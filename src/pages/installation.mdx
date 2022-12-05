@@ -13,31 +13,22 @@ first option. If any of the extended Miking features are required, or if Opam
 is not suitable for your system, then we recommend installing one of the Docker
 images.
 
-## Native Install with Opam
+We also provide syntax highlighting for some of the popular editors. See the
+[Install Syntax Highlighter](#install-syntax-highlighter) section for more
+information.
 
-See the box below for information regarding installing Opam on your system. The rest of this section assumes that the `opam` program is available on your command line.
+## Native Install with Opam (Mac, Linux)
+
+For native install, `opam` is required and `make` is highly
+recommended.
 
 :::info Install Opam
 
-<Tabs>
-<TabItem value="opam-mac" label="Mac">
-TODO: Opam for Mac
-
-</TabItem>
-<TabItem value="opam-linux" label="Linux">
-TODO: Opam for Linux
-</TabItem>
-</Tabs>
+See the [Opam installation guide](https://opam.ocaml.org/doc/Install.html) for
+how to install Opam on Mac or on your Linux distribution:
+[Link](https://opam.ocaml.org/doc/Install.html)
 
 :::
-
-Install [Opam here](https://opam.ocaml.org/doc/Install.html)
-
-Supported operating systems: Mac, Linux
-
-When installing natively with Opam, we require that your system has `opam`
-installed. It is highly recommended that you also have `make` installed on your
-system.
 
 Create the Opam 4.12 switch:
 
@@ -53,27 +44,57 @@ Install required dependencies:
 opam install dune linenoise
 ```
 
-Install optional dependencies (some features in the standard library will not
-work without these):
+:::tip Optional Dependencies
+
+Some features in the standard library will not work without these:
 
 ```
 opam install pyml toml lwt owl ocamlformat.0.20.1
 ```
+:::
 
-Clone the Miking git repository to a suitable location on your system:
+Clone the Miking git repository to a suitable location on your system and enter
+the directory:
 
 ```
 git clone https://github.com/miking-lang/miking.git
-```
-
-Assuming that you have `make` installed, we can now install Miking as:
-
-```
 cd miking
+```
+
+If you do not have `git` installed on your system then you can manually
+download a zip file of the source code from our GitHub page:
+[https://github.com/miking-lang/miking/archive/refs/heads/develop.zip](https://github.com/miking-lang/miking/archive/refs/heads/develop.zip)
+
+Assuming that you have downloaded the repository and are currently located in
+that directory, then you can either install Miking on your system with `make`
+or directly from your shell:
+
+:::info Install Miking
+
+<Tabs>
+<TabItem value="mi-install-makefile" label="Makefile" default>
+
+With `make` available, we can install Miking as:
+
+```
 make install
 ```
+</TabItem>
 
-## Install with Docker
+<TabItem value="mi-install-shell" label="Shell">
+
+If `make` is not available on your system, then you can directly install Miking
+by running the provided `./make` shell script as:
+
+```
+./make boot && ./make install-boot && ./make && ./make install
+```
+</TabItem>
+</Tabs>
+
+:::
+
+## Install with Docker (Windows, Mac, Linux)
 
 Before running the Docker image you must ensure that Docker is installed.
 
@@ -144,7 +165,7 @@ editor then they can be installed with the `apk` package manager.
 
 ### Example Launch Scripts
 
-The entire Docker run command can be a bit cumbersome to run every time you
+The entire Docker run command can be a bit cumbersome to type every time you
 want to compile something with Miking. We therefore recommend some suggestions
 of scripts for starting the Miking container:
 
