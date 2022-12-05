@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Installation
+# Install Miking
 
 We currently support two methods of installing Miking:
 
@@ -20,11 +20,11 @@ See the box below for information regarding installing Opam on your system. The 
 :::info Install Opam
 
 <Tabs>
-<TabItem value="mac" label="Mac">
+<TabItem value="opam-mac" label="Mac">
 TODO: Opam for Mac
 
 </TabItem>
-<TabItem value="linux" label="Linux">
+<TabItem value="opam-linux" label="Linux">
 TODO: Opam for Linux
 </TabItem>
 </Tabs>
@@ -41,7 +41,7 @@ system.
 
 Create the Opam 4.12 switch:
 
-```sh
+```
 opam update
 opam switch create 4.12.0+domains --packages=ocaml-variants.4.12.0+domains --repositories=multicore=git+https://github.com/ocaml-multicore/multicore-opam.git,default
 eval $(opam env)
@@ -49,14 +49,14 @@ eval $(opam env)
 
 Install required dependencies:
 
-```sh
+```
 opam install dune linenoise
 ```
 
 Install optional dependencies (some features in the standard library will not
 work without these):
 
-```sh
+```
 opam install pyml toml lwt owl ocamlformat.0.20.1
 ```
 
@@ -77,16 +77,16 @@ make install
 
 Before running the Docker image you must ensure that Docker is installed.
 
-:::info Install Docker
+:::info Install Docker on Your Platform
 
 <Tabs>
-<TabItem value="windows" label="Windows" default>
+<TabItem value="docker-windows" label="Windows" default>
 For Windows you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/windows-install">this page</a> for more info. Any 
 
 Docker desktop. WSL2 installation, powershell script.
 </TabItem>
 
-<TabItem value="mac" label="Mac">
+<TabItem value="docker-mac" label="Mac">
 For Mac you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/mac-install">this page</a> for more info. Make sure that you know if you are running an older Mac with Intel chip or a newer one with Apple Silicon. Download the appropriate Docker Desktop release.
 <br /><br />
 Due to the current performance of Docker on Mac, we highly recommend using Opam if possible.
@@ -98,26 +98,16 @@ Now install the CLI interface for Docker using <a href="https://docs.brew.sh/Ins
 Now you should be able to run Docker containers from the terminal through the <code>docker</code> command, given that the Docker Desktop application is running.
 </TabItem>
 
-<TabItem value="linux" label="Linux">
+<TabItem value="docker-linux" label="Linux">
 For Linux we recommend using Docker Engine. See <a href="https://docs.docker.com/engine/install">this page</a> for more information about how to install Docker Engine for your Linux distribution.
 <br /><br />
 If using Arch Linux or one of its derivatives, follow the instructions on the Arch Wiki page (<a href="https://wiki.archlinux.org/title/Docker">link</a>) instead.
 <br /><br />
-It is possible that your Docker Engine process is running with root privileges. <b>In this case you will need to run all commands below with <code>sudo</code> or add yourself to the docker group.</b> If unsure, try running a docker command without <code>sudo</code> first.
+It is possible that your Docker Engine process is running with root privileges. <b>In this case you will need to run all commands below with <code>sudo</code> or add yourself to the docker group.</b> If unsure, try running a Docker command without <code>sudo</code> first.
 </TabItem>
 </Tabs>
 
 :::
-
-Install Docker on your system. On Windows and Mac we assume that you are using
-Docker Desktop. On Linux we assume that Docker Engine is being used. Note that
-we only provide images built for x86_64. If you are using an M1 Mac or another
-system that is not a x86_64 architecture, you will need to have some form of
-emulation enabled for your system.
-
-Install Docker Engine for Linux: [link](https://docs.docker.com/engine/install/)
-
-Special case for Arch Linux: [link to Arch Wiki](https://wiki.archlinux.org/title/Docker)
 
 Fetch the image by downloading it from Docker Hub:
 
@@ -141,11 +131,88 @@ An executable built inside the Docker image should only be executed inside the D
 
 :::
 
-### Example Launch Scripts
+Now you can run the Docker image as:
 
 ```
-docker run --rm -it -v $(pwd):/mnt:ro mikinglang/miking bash
+docker run --rm -it mikinglang/miking bash
 ```
+
+This will launch the miking Docker image with a bash shell where you have
+access to the `mi` command. The standard Docker image is based on Alpine and
+if additional features are desired within the Docker container such as an
+editor then they can be installed with the `apk` package manager.
+
+### Example Launch Scripts
+
+The entire Docker run command can be a bit cumbersome to run every time you
+want to compile something with Miking. We therefore recommend some suggestions
+of scripts for starting the Miking container:
+
+:::note Docker Helper scripts
+
+<Tabs>
+<TabItem value="dockerlaunch-makefile" label="Makefile" default>
+
+Using GNU Make to launch the image with `make run-docker`:
+
+```makefile
+run-docker:
+    $(eval IMAGE := mikinglang/miking:latest-alpine)
+    $(eval CONTAINERNAME := hello-miking)
+    $(eval PWD := $(shell pwd))
+    docker run --name $(CONTAINERNAME)     \
+               --hostname $(CONTAINERNAME) \
+               --rm -it                    \
+               -v "$(PWD):/mnt:ro"         \
+               $(IMAGE) bash
+```
+
+This will mount the directory where the Makefile is located under `/mnt`. If
+also with to write data to the same directory then this can be done by removing
+the `:ro` part.
+
+If you need to run Docker with `sudo`, then either prepend the `docker run`
+in the Makefile rule with `sudo` or instead run `sudo make docker-run`.
+</TabItem>
+<TabItem value="dockerlaunch-bash" label="Bash" default>
+
+Using a Bash script launch the image with `./midock.sh`:
+
+```bash
+#!/usr/bin/env bash
+
+IMAGE='mikinglang/miking:latest-alpine'
+CONTAINERNAME='hello-miking'
+
+# This can be used to help you specify relative directory to the Bash
+# script itself.
+RELDIR="$(cd "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1; pwd -P)"
+
+exec docker run --name ${CONTAINERNAME}     \
+                --hostname ${CONTAINERNAME} \
+                --rm -it                    \
+                -v "$(pwd):/mnt:ro"         \
+                ${IMAGE} bash
+```
+
+Make it executable by running `chmod +x midock.sh`.
+
+This will mount the current directory when running the script under `/mnt` as
+read-only. If you also wish to write data to the same directory then this can
+be done by removing the `:ro` part. If you wish to mount the directory where
+the Bash script is located then replace the `-v $(pwd):/mnt:ro` with
+`-v "${RELDIR}:/mnt:ro"`.
+
+If you need to run Docker with `sudo`, then either prepend the `docker run`
+in the script with `sudo` or instead run `sudo ./midock.sh`.
+</TabItem>
+<TabItem value="dockerlaunch-powershell" label="Power Shell" default>
+
+TODO: How to use Windows power shell
+</TabItem>
+</Tabs>
+
+:::
 
 Example MExpr program:
 
@@ -169,5 +236,59 @@ let fib = lam n.
   work 0 0 1
 in
 
+utest fib 0 with 0 in
+utest fib 1 with 1 in
+utest fib 2 with 1 in
+utest fib 3 with 2 in
+utest fib 4 with 3 in
+utest fib 5 with 5 in
+utest fib 6 with 8 in
+utest fib 7 with 13 in
+()
 ```
 
+## Install Syntax Highlighter
+
+Syntax highlighting is available for Miking in the editors Vim, Emacs, VSCode,
+and Sublime Text. See the corresponding tab below for information about how to
+install Miking syntax highlighting for your editor.
+
+:::note Choose your editor
+
+<Tabs>
+<TabItem value="syntax-vim" label="Vim" default>
+
+See the miking-vim GitHub repository:
+[Link](https://github.com/miking-lang/miking-vim)
+</TabItem>
+<TabItem value="syntax-emacs" label="Emacs" default>
+
+See the miking-emacs GitHub repository:
+[Link](https://github.com/miking-lang/miking-emacs)
+</TabItem>
+<TabItem value="syntax-vscode" label="VSCode" default>
+
+Download the vsix file from the GitHub releases page and install it using the
+terminal:
+
+```
+curl -OL https://github.com/miking-lang/miking-vscode/releases/download/1.0.0/miking-core-vscode-1.0.0.vsix
+code --install-extension miking-core-vscode-1.0.0.vsix
+```
+
+If you prefer to build it from source, see the GitHub page for more
+information: [Link](https://github.com/miking-lang/miking-vscode)
+</TabItem>
+<TabItem value="syntax-sublime" label="Sublime Text" default>
+
+Miking syntax highlighting is available on Package Control as
+[Miking Syntax Highlighting](https://packagecontrol.io/packages/Miking%20Syntax%20Highlighting).
+
+Assuming that you have Package Control installed, open the command palette by
+Ctrl+Shift+P and select the _Package Control: Install Package_. Then choose
+search for _Miking Syntax Highlighting_ and install the package. You might have
+to reload any MCore files that you have open.
+</TabItem>
+</Tabs>
+
+:::
