@@ -163,6 +163,10 @@ access to the `mi` command. The standard Docker image is based on Alpine and
 if additional features are desired within the Docker container such as an
 editor then they can be installed with the `apk` package manager.
 
+All dependencies necessary for rebuilding the Miking compiler is also included
+in the Docker image should you wish to do any modifications. You will also find
+the Miking source code under `/src/miking` included in the image.
+
 ### Example Launch Scripts
 
 The entire Docker run command can be a bit cumbersome to type every time you
