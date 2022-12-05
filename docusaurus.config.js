@@ -51,6 +51,11 @@ const config = {
         // },
         items: [
           {
+            to: 'installation',
+            position: 'left',
+            label: 'Installation',
+          },
+          {
             type: 'doc',
             docId: 'miking',
             position: 'left',
