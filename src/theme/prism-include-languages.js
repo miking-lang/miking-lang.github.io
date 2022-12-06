@@ -25,6 +25,10 @@ const prismIncludeLanguages = (PrismObject) => {
       require(`prismjs/components/prism-${lang}`);
     });
 
+    // Additional highlightings that exist in Prism that we want
+    require(`prismjs/components/prism-powershell.js`);
+
+    // Custom syntax highlighting
     require("../prism/prism-mcore.js")
 
     delete window.Prism;

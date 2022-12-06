@@ -49,7 +49,7 @@ opam install dune linenoise
 Some features in the standard library will not work without these:
 
 ```
-opam install pyml toml lwt owl ocamlformat.0.20.1
+opam install pyml toml lwt owl ocamlformat.0.24.1
 ```
 :::
 
@@ -102,16 +102,19 @@ Before running the Docker image you must ensure that Docker is installed.
 
 <Tabs>
 <TabItem value="docker-windows" label="Windows" default>
-For Windows you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/windows-install">this page</a> for more info. Any 
+For Windows you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/windows-install">this page</a> for more info. After installing it will most likely ask you to install Windows Subsystem for Linux (WSL) if you haven't already. This will require a restart of your computer.
 
-Docker desktop. WSL2 installation, powershell script.
+With Docker Desktop installed and running, you should have access to the `docker` command from PowerShell.
 </TabItem>
 
 <TabItem value="docker-mac" label="Mac">
 For Mac you will need to install the Docker Desktop application. See <a href="https://docs.docker.com/desktop/install/mac-install">this page</a> for more info. Make sure that you know if you are running an older Mac with Intel chip or a newer one with Apple Silicon (M1). Download the appropriate Docker Desktop release.
 <br /><br />
+<div class="admonition admonition-warning alert alert--warning">
+<span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>
 <b>Due to the current performance of Docker on Mac, we highly recommend using Opam if possible.</b>
-<br /><br />
+</div>
+<br />
 Now install the CLI interface for Docker using <a href="https://docs.brew.sh/Installation">Homebrew</a>:
 
     brew install docker
@@ -213,7 +216,7 @@ CONTAINERNAME='hello-miking'
 
 # This can be used to help you specify relative directory to the Bash
 # script itself.
-RELDIR="$(cd "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1; pwd -P)"
+RELDIR="$(cd "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1; pwd)"
 
 exec docker run --name ${CONTAINERNAME}     \
                 --hostname ${CONTAINERNAME} \
@@ -246,7 +249,7 @@ $ContainerName = "hello-miking"
 $MountDir = Get-Location
 
 # Uncomment this to use the relative location to script instead
-# $MountDir = $PSScriptRoot
+#$MountDir = $PSScriptRoot
 
 docker run --rm -it `
            --name $ContainerName `
@@ -254,14 +257,20 @@ docker run --rm -it `
            -v "${MountDir}:/mnt:ro" `
            $Image bash
 ```
+
+This will mount the current directory when running the script under `/mnt` as
+read-only. If you also wish to write data to the same directory then this can
+be done by removing the `:ro` part. If you wish to mount the directory where
+the PowerShell script is located then you can uncomment the line `$MountDir =
+$PSScriptRoot`.
 </TabItem>
 </Tabs>
 
 :::
 
-Example MExpr program that you can use to verify your installation. Save this
-as `fib.mc` and compile it with `mi compile fib.mc`. Try running it as
-`./fib 50`.
+Here is an example MExpr program that you can use to verify your installation.
+Save this as `fib.mc` and compile it with `mi compile fib.mc`. Try running it
+as `./fib 50`.
 
 ```mc title="fib.mc"
 /- These are from the Miking standard library -/
