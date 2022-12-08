@@ -73,24 +73,33 @@ opam install pyml toml lwt owl ocamlformat.0.24.1
 </TabItem>
 <TabItem value="optdep-macos-arm64" label="Mac (Apple M1)">
 
-Before installing the Opam packages, we need to manually install openblas and
-set some environment variables:
+Before installing the Opam packages, it is most likely necessary to perform
+the following steps before proceeding with the installation:
 
 ```bash
-brew install openblas
+# Install gcc and openblas
+brew install gcc openblas
 
+# Make sure that we have gcc as our cc compiler
+cd $HOMEBREW_PREFIX/bin && ln -s gcc-12 cc
+```
+
+Now verify that your `cc` compiler points to the correct location by running
+`which cc`. *You might need to open a new terminal window for this.*
+
+Once `cc` points to the correct location, run the following commands to install
+the remaining dependencies:
+
+```
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig:${PKG_CONFIG_PATH}"
 export OWL_CFLAGS="-g -O3 -Ofast -funroll-loops -ffast-math -DSFMT_MEXP=19937 -fno-strict-aliasing -Wno-tautological-constant-out-of-range-compare"
 export OWL_AEOS_CFLAGS="-g -O3 -Ofast -funroll-loops -ffast-math -DSFMT_MEXP=19937 -fno-strict-aliasing"
 export EIGENCPP_OPTFLAGS="-Ofast -funroll-loops -ffast-math"
 export EIGEN_FLAGS="-O3 -Ofast -funroll-loops -ffast-math"
-```
 
-Now install the Opam dependencies:
-
-```
 opam install pyml toml lwt owl ocamlformat.0.24.1
 ```
+
 
 </TabItem>
 </Tabs>
