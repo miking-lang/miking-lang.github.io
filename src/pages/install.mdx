@@ -5,7 +5,7 @@ import TabItem from '@theme/TabItem';
 
 We currently support two methods of installing Miking:
 
- 1. Natively built using the Opam package manager. (Mac, Linux)
+ 1. Natively installed binary using the Opam package manager. (Mac, Linux)
  2. Pre-built Docker images with optional dependencies included. (Windows, Mac, Linux)
 
 For basic usage of Miking with a limited set of dependencies, we recommend the
@@ -90,7 +90,7 @@ the following steps before proceeding with the installation:
 # Install gcc and openblas
 brew install gcc openblas
 
-# Make sure that we have gcc as our cc compiler (change version from 12 to
+# Make sure that you have gcc as your cc compiler (change version from 12 to
 # your GCC version if it is different)
 cd $HOMEBREW_PREFIX/bin && ln -s gcc-12 cc
 ```
@@ -129,19 +129,19 @@ cd miking
 ```
 
 If you do not have `git` installed on your system then you can manually
-download a zip file of the source code from our GitHub page:
+download a zip file with the source code from our GitHub page:
 [https://github.com/miking-lang/miking/archive/refs/heads/develop.zip](https://github.com/miking-lang/miking/archive/refs/heads/develop.zip)
 
 Assuming that you have downloaded the repository and are currently located in
 that directory, then you can either install Miking on your system with `make`
-or directly from your shell:
+or directly using your shell:
 
 :::info Install Miking
 
 <Tabs>
 <TabItem value="mi-install-makefile" label="Makefile" default>
 
-With `make` available, we can install Miking as:
+With `make` available, you can install Miking as:
 
 ```
 make install
@@ -188,14 +188,13 @@ For Mac you will need to install the Docker Desktop application. See <a href="ht
 <br /><br />
 <div class="admonition admonition-warning alert alert--warning">
 <span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>
-<b>Due to the current performance of Docker on Mac, we highly recommend using Opam if possible.</b>
+<b>Due to the current performance of Docker on Mac, we recommend using Opam if possible.</b>
 </div>
-<br />
 Now install the CLI interface for Docker using <a href="https://docs.brew.sh/Installation">Homebrew</a>:
 
     brew install docker
 
-Now you should be able to run Docker containers from the terminal through the <code>docker</code> command, given that the Docker Desktop application is running.
+Now you should be able to run Docker containers from the terminal through the `docker` command, given that the Docker Desktop application is running.
 
 If using Mac with Apple Silicon, you might have to include the `--platform=linux/amd64` parameter when running the image.
 </TabItem>
@@ -205,7 +204,9 @@ For Linux we recommend using Docker Engine. See <a href="https://docs.docker.com
 <br /><br />
 If using Arch Linux or one of its derivatives, follow the instructions on the Arch Wiki page (<a href="https://wiki.archlinux.org/title/Docker">link</a>) instead.
 <br /><br />
-It is possible that your Docker Engine process is running with root privileges. <b>In this case you will need to run all commands below with <code>sudo</code> or add yourself to the docker group.</b> If unsure, try running a Docker command without <code>sudo</code> first.
+
+It is possible that your Docker Engine process is running with root privileges. **In this case you will need to run all commands below with `sudo` or add yourself to the docker group.** If unsure, try running a Docker command without `sudo` first.
+
 </TabItem>
 </Tabs>
 
@@ -251,8 +252,8 @@ the Miking source code under `/src/miking` included in the image.
 ### Example Launch Scripts
 
 The entire Docker run command can be a bit cumbersome to type every time you
-want to compile something with Miking. We therefore recommend some suggestions
-of scripts for starting the Miking container:
+want to compile something with Miking. We recommend wrapping the Docker run
+command in a script, for example:
 
 :::note Docker Helper scripts
 
@@ -274,8 +275,8 @@ run-docker:
 ```
 
 This will mount the directory where the Makefile is located under `/mnt`. If
-also with to write data to the same directory then this can be done by removing
-the `:ro` part.
+you also wish to write data to the same directory then this can be done by
+removing the `:ro` part.
 
 If you need to run Docker with `sudo`, then either prepend the `docker run`
 in the Makefile rule with `sudo` or instead run `sudo make docker-run`.
@@ -321,7 +322,7 @@ In PowerShell on Windows, launch the image using the following script as
 $Image = "mikinglang/miking:latest-alpine"
 $ContainerName = "hello-miking"
 
-# Mount Directory that we are running the script from
+# Mount Directory that you are running the script from
 $MountDir = Get-Location
 
 # Uncomment this to use the relative location to script instead
