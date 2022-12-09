@@ -51,9 +51,9 @@ const config = {
         // },
         items: [
           {
-            to: 'installation',
+            to: 'install',
             position: 'left',
-            label: 'Installation',
+            label: 'Install',
           },
           {
             type: 'doc',
