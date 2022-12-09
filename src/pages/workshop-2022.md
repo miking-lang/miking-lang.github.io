@@ -45,7 +45,7 @@ The workshop is free of charge and includes lunch, coffee, and dinner. The forma
 
 **16.00** **Session 2: Probabilistic programming in Miking**
 
- * Title: *Probabilistic Programming and Miking CorePPL*. Speaker: Daniel Lundén
+ * Title: *Probabilistic Programming and Miking DPPL*. Speaker: Daniel Lundén
  * Title: *Static Delayed Sampling for Probabilistic Programming Languages*. Speaker: Gizem Çaylak
  * Title: *TreePPL: A DSL for Evolutionary Trees*. Speaker: Viktor Senderov
 
