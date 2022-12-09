@@ -64,9 +64,19 @@ additional dependencies needed.
 </TabItem>
 <TabItem value="optdep-macos-x86" label="Mac (Intel x86)">
 
-Install the dependencies with Opam:
+It might be necessary to add openblas to the pkg-config path if installed with
+Homebrew. Replace `/usr/local` in the `PKG_CONFIG_PATH` variable below with
+your Homebrew prefix if they differ.
 
-```
+```bash
+# Install openblas
+brew install openblas
+
+# Double check if /usr/local is what your Homebrew installation uses as its
+# prefix. Change if it is different.
+export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig:${PKG_CONFIG_PATH}"
+
+# Now install the dependencies with Opam:
 opam install pyml toml lwt owl ocamlformat.0.24.1
 ```
 
