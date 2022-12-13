@@ -36,7 +36,7 @@ The workshop is free of charge and includes lunch, coffee, and dinner. The forma
 
 * Title: *Miking Compiler Overview*. Speaker: Lars Hummelgren
 * Title: *ML-style Type Checking for Miking MExpr*. Speaker: Anders Ågren Thuné
-* Title: *Compiler backends*. Speaker: William Rågstad
+* Title: *Compiler backends*. Speaker: William Rågstad and Daniel Lundén
 * Title: *Making a Friendlier Compiler with Resolvable Ambiguity*. Speaker: Viktor Palmkvist
 
 **14.00** **Coffee break**
