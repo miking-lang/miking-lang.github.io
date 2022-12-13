@@ -59,6 +59,10 @@ The workshop is free of charge and includes lunch, coffee, and dinner. The forma
 
 **18.00** **Dinner and happy hacking!**
 
-## Links
+## Links to Workshop Resources
 
+These links refer to material that will be covered during the workshop
+tutorial sessions:
+
+ * [**Installation Instructions**](/workshop-2022-install)
  * [Tutorials Repository](https://github.com/miking-lang/miking-workshop-2022-tutorials)
