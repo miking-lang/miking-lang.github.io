@@ -30,7 +30,7 @@ how to install Opam on Mac or on your Linux distribution:
 
 :::
 
-Create the Opam 4.14.0 switch:
+Create the Opam 4.14.0 switch named `miking-workshop`:
 
 ```
 opam update
@@ -240,7 +240,7 @@ An executable built inside the Docker container should only be executed inside t
 Now you can run the Docker image as:
 
 ```
-docker run --rm -it mikinglang/miking bash
+docker run --rm -it mikinglang/workshop bash
 ```
 
 This will launch the miking Docker image with a bash shell where you have
@@ -267,7 +267,7 @@ Using GNU Make to launch the image with `make run-docker`:
 
 ```makefile title="Makefile"
 run-docker:
-	$(eval IMAGE := mikinglang/miking:latest-alpine)
+	$(eval IMAGE := mikinglang/workshop:2022-1)
 	$(eval CONTAINERNAME := hello-miking)
 	$(eval PWD := $(shell pwd))
 	docker run --name $(CONTAINERNAME)     \
@@ -291,7 +291,7 @@ Using a Bash script launch the image with `./midock.sh`:
 ```bash title="midock.sh"
 #!/usr/bin/env bash
 
-IMAGE='mikinglang/miking:latest-alpine'
+IMAGE='mikinglang/workshop:2022-1'
 CONTAINERNAME='hello-miking'
 
 # This can be used to help you specify relative directory to the Bash
@@ -322,7 +322,7 @@ In PowerShell on Windows, launch the image using the following script as
 `.\midock.ps1`:
 
 ```powershell title="midock.ps1"
-$Image = "mikinglang/miking:latest-alpine"
+$Image = "mikinglang/workshop:2022-1"
 $ContainerName = "hello-miking"
 
 # Mount Directory that you are running the script from
