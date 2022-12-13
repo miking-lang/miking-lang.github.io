@@ -58,3 +58,7 @@ The workshop is free of charge and includes lunch, coffee, and dinner. The forma
  * Title: *Programming with holes*. Speaker: Linnea Stjerna
 
 **18.00** **Dinner and happy hacking!**
+
+## Links
+
+ * [Tutorials Repository](https://github.com/miking-lang/miking-workshop-2022-tutorials)

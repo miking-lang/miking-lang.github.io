@@ -263,14 +263,14 @@ Using GNU Make to launch the image with `make run-docker`:
 
 ```makefile title="Makefile"
 run-docker:
-    $(eval IMAGE := mikinglang/miking:latest-alpine)
-    $(eval CONTAINERNAME := hello-miking)
-    $(eval PWD := $(shell pwd))
-    docker run --name $(CONTAINERNAME)     \
-               --hostname $(CONTAINERNAME) \
-               --rm -it                    \
-               -v "$(PWD):/mnt:ro"         \
-               $(IMAGE) bash
+	$(eval IMAGE := mikinglang/miking:latest-alpine)
+	$(eval CONTAINERNAME := hello-miking)
+	$(eval PWD := $(shell pwd))
+	docker run --name $(CONTAINERNAME)     \
+	           --hostname $(CONTAINERNAME) \
+	           --rm -it                    \
+	           -v "$(PWD):/mnt:ro"         \
+	           $(IMAGE) bash
 ```
 
 This will mount the directory where the Makefile is located under `/mnt`. If
