@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Install Miking for the 2022 Workshop
+# Miking Workshop 2022: Install Miking
 
 We currently support two methods of installing Miking:
 
