@@ -50,6 +50,11 @@ const config = {
         //   src: 'img/logo.svg',
         // },
         items: [
+          //{
+          //  to: 'install',
+          //  position: 'left',
+          //  label: 'Install',
+          //},
           {
             type: 'doc',
             docId: 'miking',
