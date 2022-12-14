@@ -28,7 +28,7 @@ The workshop is free of charge and includes lunch, coffee, and dinner. The forma
 **9.45** **Coffee break**
 
 **10.00** **Tutorial 1: Getting started with MCore**.
-  Organizers: David Broman, John Wikman, and Oscar Eriksson
+  Organizers: David Broman, John Wikman, Oscar Eriksson, and Viktor Palmkvist
 
 **12.00** **Lunch**
 
@@ -41,20 +41,19 @@ The workshop is free of charge and includes lunch, coffee, and dinner. The forma
 
 **14.00** **Coffee break**
 
-**14.30** **Tutorial 2: Making your own DSL**. Organizer: Viktor Palmkvist
+**14.30** **Tutorial 2: Making your own DSL**. Organizer: Viktor Palmkvist and Oscar Eriksson
 
-**16.00** **Session 2: Probabilistic programming in Miking**
+**16.15** **Session 2: Probabilistic programming in Miking**
 
  * Title: *Probabilistic Programming and Miking DPPL*. Speaker: Daniel Lundén
  * Title: *Static Delayed Sampling for Probabilistic Programming Languages*. Speaker: Gizem Çaylak
  * Title: *TreePPL: A DSL for Evolutionary Trees*. Speaker: Viktor Senderov
 
-**16.45** **Coffee break**
+**17.00** **Coffee break**
 
-**17.15** **Session 3: Accelerating performance in Miking**
+**17.30** **Session 3: Accelerating performance in Miking**
 
  * Title: *GPU Acceleration of Expressions*. Speaker: Lars Hummelgren
- * Title: *Differential Algebraic Equation Solvers and Automatic Differentiation*. Speaker: Oscar Eriksson
  * Title: *Programming with holes*. Speaker: Linnea Stjerna
 
 **18.00** **Dinner and happy hacking!**
