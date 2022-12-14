@@ -65,3 +65,7 @@ tutorial sessions:
 
  * [**Installation Instructions**](/workshop-2022-install)
  * [Tutorials Repository](https://github.com/miking-lang/miking-workshop-2022-tutorials)
+
+Slides:
+
+ * [Tutorial 1](/workshop-2022/tutorial-1.pdf)
