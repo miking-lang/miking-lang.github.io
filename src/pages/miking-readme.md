@@ -1,7 +1,3 @@
----
-sidebar_position: 1
-id: miking
----
 # Miking
 
 Miking (Meta vIKING) is a meta language system for creating embedded domain-specific and general-purpose languages. Miking is not a programming language, but rather a language system for
@@ -170,7 +166,7 @@ Typically when you develop MCore programs, you do not use the `print` function. 
 
 In the rest of this document, we omit the `mexpr` keyword for brevity, and just write the MExpr itself. Remember to add it as appropriate when trying the various examples.
 
-The equality between the left-hand and right-hand sides in a utest is automatically deduced for many expressions. However, if you want to compare more complex language structures, or want to define equality in a different way, you can supply a custom equality function as, e.g., 
+The equality between the left-hand and right-hand sides in a utest is automatically deduced for many expressions. However, if you want to compare more complex language structures, or want to define equality in a different way, you can supply a custom equality function as, e.g.,
 
 ```
 utest addi 1 2 with 0 using neqi in ()
@@ -1182,11 +1178,11 @@ let mathExtMap =
   mapFromSeq cmpString
   [
     ("externalExp", [
-      { 
-        expr = "Float.exp", 
-        ty = tyarrow_ tyfloat_ tyfloat_ , 
-        libraries = [], 
-        cLibraries = [] 
+      {
+        expr = "Float.exp",
+        ty = tyarrow_ tyfloat_ tyfloat_ ,
+        libraries = [],
+        cLibraries = []
       }
     ])
   ]
@@ -1211,7 +1207,7 @@ to use `Float.exp` from a library `foo`, then we should instead have the field
 Conversion between Miking values and OCaml values is defined in
 [stdlib/ocaml/external.mc](stdlib/ocaml/external.mc). Since externals are in an
 early stage of development these conversions are not complete and subject to
-change. 
+change.
 
 The following Basic types are converted without any computational overhead:
 
@@ -1230,7 +1226,7 @@ elements. Strings in Miking is a special case of sequences.
 | `[A]`                | `'a list`      |                                                                                             |
 | `[A]`                | `'a array`     | A copy is made, mutating the OCaml array does not mutate the sequence.                      |
 | `[Char]` or `String` | `string`       | The Miking string is converted to, and the OCaml string is assumed to be, encoded in UTF-8. |
-    
+
 Tensors are passed by reference to OCaml, i.e. mutating the corresponding
 data-structure in OCaml will mutate the tensor. As a temporary solution the
 conversion depends on the underlying implementation of the tensor, which is
@@ -1253,7 +1249,7 @@ projected to form an new OCaml records, and vice versa. The fields of the Miking
 record are associated with the fields of the OCaml record by an explicit mapping
 defined in the `*.ext-ocaml.mc` file.
 
-If the Miking type is abstract, i.e. we define it as 
+If the Miking type is abstract, i.e. we define it as
 ```
 type MyType
 ```

@@ -1,7 +1,3 @@
----
-sidebar_position: 2
-id: miking-dppl
----
 # Miking DPPL
 Miking DPPL is a framework for developing probabilistic programming languages (PPLs) using [Miking](https://github.com/miking-lang/miking).
 Currently, the framework includes the PPLs [CorePPL](#coreppl) and [RootPPL](#rootppl).
@@ -101,10 +97,10 @@ However, if the program contains one or more `infer` applications, the program m
 
 The `infer` keyword currently has a few limitations on how it can be used:
 
-* The second argument to `infer` must be provided inline. That is, we cannot store the argument in a let-binding to reuse it. We have to write it out explicitly for each case: 
+* The second argument to `infer` must be provided inline. That is, we cannot store the argument in a let-binding to reuse it. We have to write it out explicitly for each case:
     ```
     let d = infer (Importance {particles = 1000}) model in -- OK
-    
+
     let args = Importance {particles = 1000} in
     let d = infer args model in -- ERROR
     ```
@@ -113,9 +109,9 @@ The `infer` keyword currently has a few limitations on how it can be used:
     ```
     let f = lam. ... in
     let d = infer (Importance {particles = 1000}) f in -- OK
-    
+
     let d = infer (Importance {particles = 1000}) (lam. ...) in -- OK
-    
+
     let g = lam f.
       ...
       let d = infer (Importance {particles = 1000}) f in -- ERROR
