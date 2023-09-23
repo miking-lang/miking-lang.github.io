@@ -30,6 +30,7 @@ const prismIncludeLanguages = (PrismObject) => {
 
     // Custom syntax highlighting
     require("../prism/prism-mcore.js")
+    require("../prism/prism-syn.js")
 
     delete window.Prism;
   }

@@ -10,11 +10,10 @@ We are currently in the process of restructuring our documentation (see [here](h
 
 ## Content
 
-- [Tutorials](./tutorials) are meant for initial learning, and give step-by-step instructions for solving small, self-contained tasks.
-- [How-to guides](./how-to-guides) give step-by-step instructions on how to accomplish commonly occurring tasks or solve problems.
-- The [Reference](./reference) documents the more technical details of the project: APIs, syntax, semantics, etc.
-- [Explanations](./explanations) give more theoretical descriptions of concepts used in the Miking project, how they relate, and why they are designed the way they are.
-
+- [Tutorials](./tutorials/index.md) are meant for initial learning, and give step-by-step instructions for solving small, self-contained tasks.
+- [How-to guides](./how-to-guides/index.md) give step-by-step instructions on how to accomplish commonly occurring tasks or solve problems.
+- The [Reference](./reference/index.md) documents the more technical details of the project: APIs, syntax, semantics, etc.
+- [Explanations](./explanations/index.md) give more theoretical descriptions of concepts used in the Miking project, how they relate, and why they are designed the way they are.
 
 ## Old Content
 
