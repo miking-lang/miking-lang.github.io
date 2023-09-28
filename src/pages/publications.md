@@ -5,9 +5,11 @@ The following vision paper is currently the main paper for Miking. Please cite t
 - David Broman. **A Vision of Miking: Interactive Programmatic Modeling, Sound Language Composition, and Self-Learning Compilation**. In *Proceedings of the 12th ACM SIGPLAN International Conference on Software Language Engineering (SLE 2019)*, Athens, Greece, ACM, 2019. [[PDF](https://people.kth.se/~dbro/papers/broman-2019-miking-vision.pdf)] [[ACM Link](https://dl.acm.org/doi/10.1145/3357766.3359531)]
 
 
-The following publictions are related to the Miking effort, directly or indirectly:
+The following publications are related to the Miking effort, directly or indirectly:
 
-- Viktor Palmkvist, Elias Castegren, Philipp Haller, and David Broman. **Statically Resolvable Ambiguity**. In the Proceedings of the 50th ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2023), 2023. [[PDF](https://people.kth.se/~dbro/papers/palmkvist-et-al-popl-2023-statically-resolvable-ambiguity.pdf)]
+- Daniel Lundén, Gizem Çaylak, Fredrik Ronquist, and David Broman. **Automatic Alignment in Higher-Order Probabilistic Programming Languages**. In Proceedings of the 32nd European Symposium on Programming (ESOP 2023), 2023. (Best Paper Award) [[Open Access, Springer Link](https://link.springer.com/chapter/10.1007/978-3-031-30044-8_20)]
+
+- Viktor Palmkvist, Elias Castegren, Philipp Haller, and David Broman. **Statically Resolvable Ambiguity**. In the Proceedings of the 50th ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2023), 2023. [[Open Access, ACM Link](https://dl.acm.org/doi/abs/10.1145/3571251)]
 
 - Daniel Lundén, Joey Öhman, Jan Kudlicka, Viktor Senderov, Fredrik Ronquist, and David Broman. **Compiling Universal Probabilistic Programming Languages with Efficient Parallel Sequential Monte Carlo Inference**. To appear in the *Proceedings of 31th European Symposium on Programming (ESOP 2022)*, 2022. [[Springer Link](https://link.springer.com/chapter/10.1007/978-3-030-99336-8_2)] [[PDF](https://rdcu.be/cKhIR)]
 
