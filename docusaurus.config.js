@@ -57,7 +57,7 @@ const config = {
           //},
           {
             type: 'doc',
-            docId: 'miking',
+            docId: 'root',
             position: 'left',
             label: 'Documentation',
           },
@@ -85,12 +85,20 @@ const config = {
             title: 'Documentation',
             items: [
               {
-                label: 'Miking',
-                to: '/docs/miking',
+                label: 'Tutorials',
+                to: '/docs/tutorials',
               },
               {
-                label: 'Miking DPPL',
-                to: '/docs/miking-dppl',
+                label: 'How-to Guides',
+                to: '/docs/how-to-guides',
+              },
+              {
+                label: 'Reference',
+                to: '/docs/reference',
+              },
+              {
+                label: 'Explanations',
+                to: '/docs/explanations',
               },
             ],
           },

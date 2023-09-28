@@ -8,7 +8,7 @@ Prism.languages.mcore = {
             pattern: /"(?:\\(?:[\s\S]|\r\n)|[^\\"])*"/,
             greedy: true
         },
-        // Below is actually char, but using string name since highlighter does not like characters
+        // // Below is actually char, but using string name since highlighter does not like characters
         {
             pattern: /['](?:[^\\])?[\s\S][']/,
             greedy: true
@@ -32,14 +32,16 @@ Prism.languages.mcore = {
     'keyword': /\b(?:if|then|else|match|with|let|recursive|utest|lam|lang|syn|sem|con|type|use|in|using|end|mexpr|never|switch|case|all|external|include|accelerate)\b/,
     'boolean': /\b(?:false|true)\b/,
 
-    'constant': [
+    'builtin': [
         // Types
         /\b(?:Unknown|Bool|Int|Float|Char|String)\b/,
         // Operators
-        /\b(?:unit|addi|subi|muli|divi|modi|negi|lti|leqi|gti|geqi|eqi|neqi|slli|srli|srai|arity|addf|subf|mulf|divf|negf|ltf|leqf|gtf|geqf|eqf|neqf|char2int|int2char|int2float|string2float|length|concat|reverse|splitAt|makeSeq|cons|snoc|get|set|print|dprint|argv|readFile|writeFile|fileExists|deleteFile|error|floorfi|ceilfi|roundfi)\b/,
+        /\b(?:addi|subi|muli|divi|modi|negi|lti|leqi|gti|geqi|eqi|neqi|slli|srli|srai|arity|addf|subf|mulf|divf|negf|ltf|leqf|gtf|geqf|eqf|neqf|char2int|int2char|int2float|string2float|length|concat|reverse|splitAt|makeSeq|cons|snoc|get|set|print|dprint|argv|readFile|writeFile|fileExists|deleteFile|error|floorfi|ceilfi|roundfi)\b/,
     ],
 
+    'class-name': /[A-Z][a-zA-Z0-9_]*/,
+
     'operator': /\-\>|[=]/i,
-    'punctuation': /[.;]/
+    'punctuation': /[.;]/,
 };
 Prism.languages.mc = Prism.languages.mcore;
