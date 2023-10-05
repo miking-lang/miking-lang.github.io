@@ -35,7 +35,7 @@ const FeatureList: FeatureItem[] = [
     image: '/img/documentation.png',
     description: (
       <>
-        To learn more, please check out the online documentation for both the <a href="/docs/miking">Miking core environment</a>, and the domain-specific language for differentiable probabilistic programming, <a href="/docs/miking-dppl">Miking DPPL</a>.
+        To learn more, please check out the <a href="/docs">online documentation</a>.
       </>
     ),
   },
