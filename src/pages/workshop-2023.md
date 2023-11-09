@@ -4,9 +4,9 @@
 
 ![img alt](/img/background.jpg)
 
-Welcome to the 2nd Miking workshop! Miking is an open-source project developed mainly at KTH Royal Institute of Technology, with several collaborators within Sweden and internationally. The framework is a meta-language system for creating domain-specific languages and tools. Please see the [vision paper](https://people.kth.se/~dbro/papers/broman-2019-miking-vision.pdf), the [Miking webpage](https://miking.org/), or the [GitHub pages](https://github.com/miking-lang) for more information. In this year's workshop, you will be exposed to the latest developments of the framework. There will be informal hacking sessions, technical talks, and research talks. Please bring your laptop!
+Welcome to the 2nd Miking workshop! Miking is an open-source project developed mainly at KTH Royal Institute of Technology, with several collaborators within Sweden and internationally. The framework is a meta-language system for creating domain-specific languages and tools. For more information, please see the [vision paper](https://people.kth.se/~dbro/papers/broman-2019-miking-vision.pdf), the [Miking webpage](https://miking.org/), or the [GitHub pages](https://github.com/miking-lang). In this year's workshop, you will be exposed to the latest developments of the framework. There will be informal hacking sessions, technical talks, and research talks. Please bring your laptop!
 
-The workshop is free of charge and includes lunch, coffee, and Swedish fika. The format is hybrid. That is, it is possible to attend both in person, and online using Zoom. In both cases, you need to register (first come, first served). The workshop is organized together with Digital Futures. Several organizations have been funding research projects related to the Miking framework, including the Swedish research council (VR), the Swedish Foundation for Strategic Research (SSF), Vinnova, and Wallenberg AI, Autonomous Systems and Software Program (WASP).
+The workshop is free of charge and includes lunch, coffee, and Swedish fika. The format is hybrid. That is, it is possible to attend both in person, and online using Zoom. In both cases, you need to register (first come, first served). The workshop is organized together with Digital Futures. Several organizations have been funding research projects related to the Miking framework, including the Swedish Research Council (VR), the Swedish Foundation for Strategic Research (SSF), Vinnova, and Wallenberg AI, Autonomous Systems and Software Program (WASP).
 
 ## Quick facts
 
@@ -53,7 +53,7 @@ Speaker: David Broman
 * Title: *Real-time Probabilistic Programming, a DSL in Miking*. Speaker: Lars Hummelgren
 * Title: *Equation-based modeling and efficient simulation in Miking*. Speaker: Oscar Eriksson
 
-**16.15** **Hacking session 2: Try out your favorit DSL or hack on the compiler**
+**16.15** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
 Organizers: The Miking core team
 
 **17.00** **Conclusions and more happy hacking!**
