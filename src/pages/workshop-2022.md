@@ -20,7 +20,7 @@ The workshop is free of charge and includes lunch, coffee, and dinner. The forma
 **REGISTRATION (Zoom participation): **The in-person spots are now full, but it is still possible to register and participate online via Zoom. [Please register as soon as possible by clicking on this link](https://www.kth.se/form/miking-workshop-2022)!
 
 
-## Agenda (tentative)
+## Agenda
 **9.00** **Registration**
 
 **9.15** **Welcome and introduction to Miking**. Speaker: David Broman

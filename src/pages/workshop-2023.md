@@ -20,7 +20,7 @@ The workshop is free of charge and includes lunch, coffee, and Swedish fika. The
 **REGISTRATION:**  [Please register as soon as possible by clicking on this link](https://www.kth.se/form/miking-workshop-2023)!
 
 
-## Agenda (tentative)
+## Agenda
 **10.00** **Registration**
 
 **10.15** **Welcome and introduction to Miking**.
