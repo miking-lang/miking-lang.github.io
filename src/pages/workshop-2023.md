@@ -12,12 +12,12 @@ The workshop is free of charge and includes lunch, coffee, and Swedish fika. The
 
 
 * **Date:** November 23, 2023
-* **Time:** 10.00-15.00 (including lunch and fika, see below)
+* **Time:** 10.00-17.00 (including lunch and fika, see below)
 * **Cost:** Free of charge
 * **Format:** Hybrid (in person or online via Zoom)
 * **Place:** KTH Campus, Digital Futures Hub, Stockholm. For a map, [see here](https://www.digitalfutures.kth.se/contact/how-to-get-here/).
 
-**REGISTRATION:**  [Please register as soon as possible by clicking on this link](https://www.kth.se/form/miking-workshop-2022)!
+**REGISTRATION:**  [Please register as soon as possible by clicking on this link](https://www.kth.se/form/miking-workshop-2023)!
 
 
 ## Agenda (tentative)
@@ -57,3 +57,9 @@ Speaker: David Broman
 Organizers: The Miking core team
 
 **17.00** **Conclusions and more happy hacking!**
+
+
+
+## Previous workshops
+
+* [workshop-2022](2022: 1st Miking Workshop, KTH, Stockholm)
