@@ -7,7 +7,7 @@ The following vision paper is currently the main paper for Miking. Please cite t
 
 The following publications are related to the Miking effort, directly or indirectly:
 
-- Oscar Eriksson, Viktor Palmkvist, and David Broman. **Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers**. In *Proceedings of the 22nd ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences (GPCE 2023)*, 2023. [[Open Access, Springer Link](https://doi.org/10.1145/3624007.3624054)
+- Oscar Eriksson, Viktor Palmkvist, and David Broman. **Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers**. In *Proceedings of the 22nd ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences (GPCE 2023)*, 2023. [[Open Access, Springer Link](https://doi.org/10.1145/3624007.3624054)]
 
 - Daniel Lundén, Gizem Çaylak, Fredrik Ronquist, and David Broman. **Automatic Alignment in Higher-Order Probabilistic Programming Languages**. In *Proceedings of the 32nd European Symposium on Programming (ESOP 2023)*, 2023. (Best Paper Award) [[Open Access, Springer Link](https://link.springer.com/chapter/10.1007/978-3-031-30044-8_20)]
 
