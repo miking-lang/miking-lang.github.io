@@ -7,11 +7,13 @@ The following vision paper is currently the main paper for Miking. Please cite t
 
 The following publications are related to the Miking effort, directly or indirectly:
 
-- Daniel Lundén, Gizem Çaylak, Fredrik Ronquist, and David Broman. **Automatic Alignment in Higher-Order Probabilistic Programming Languages**. In Proceedings of the 32nd European Symposium on Programming (ESOP 2023), 2023. (Best Paper Award) [[Open Access, Springer Link](https://link.springer.com/chapter/10.1007/978-3-031-30044-8_20)]
+- Oscar Eriksson, Viktor Palmkvist, and David Broman. **Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers**. In *Proceedings of the 22nd ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences (GPCE 2023)*, 2023. [[Open Access, Springer Link](https://doi.org/10.1145/3624007.3624054)
 
-- Viktor Palmkvist, Elias Castegren, Philipp Haller, and David Broman. **Statically Resolvable Ambiguity**. In the Proceedings of the 50th ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2023), 2023. [[Open Access, ACM Link](https://dl.acm.org/doi/abs/10.1145/3571251)]
+- Daniel Lundén, Gizem Çaylak, Fredrik Ronquist, and David Broman. **Automatic Alignment in Higher-Order Probabilistic Programming Languages**. In *Proceedings of the 32nd European Symposium on Programming (ESOP 2023)*, 2023. (Best Paper Award) [[Open Access, Springer Link](https://link.springer.com/chapter/10.1007/978-3-031-30044-8_20)]
 
-- Daniel Lundén, Joey Öhman, Jan Kudlicka, Viktor Senderov, Fredrik Ronquist, and David Broman. **Compiling Universal Probabilistic Programming Languages with Efficient Parallel Sequential Monte Carlo Inference**. To appear in the *Proceedings of 31th European Symposium on Programming (ESOP 2022)*, 2022. [[Springer Link](https://link.springer.com/chapter/10.1007/978-3-030-99336-8_2)] [[PDF](https://rdcu.be/cKhIR)]
+- Viktor Palmkvist, Elias Castegren, Philipp Haller, and David Broman. **Statically Resolvable Ambiguity**. In *Proceedings of the 50th ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2023)*, 2023. [[Open Access, ACM Link](https://dl.acm.org/doi/abs/10.1145/3571251)]
+
+- Daniel Lundén, Joey Öhman, Jan Kudlicka, Viktor Senderov, Fredrik Ronquist, and David Broman. **Compiling Universal Probabilistic Programming Languages with Efficient Parallel Sequential Monte Carlo Inference**. In *Proceedings of 31th European Symposium on Programming (ESOP 2022)*, 2022. [[Springer Link](https://link.springer.com/chapter/10.1007/978-3-030-99336-8_2)] [[PDF](https://rdcu.be/cKhIR)]
 
 - Fredrik Ronquist, Jan Kudlicka, Viktor Senderov, Johannes Borgström, Nicolas Lartillot, Daniel Lundén, Lawrence Murray, Thomas B. Schön, and David Broman. **Universal probabilistic programming offers a powerful approach to statistical phylogenetics**. In *Communications Biology*, Volume 4, Article number 244, Nature Publishing Group, 2021. [[Open Access, Nature Publishing Group](https://doi.org/10.1038/s42003-021-01753-7)]
 
