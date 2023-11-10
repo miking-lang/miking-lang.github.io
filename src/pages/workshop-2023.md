@@ -62,4 +62,4 @@ Organizers: The Miking core team
 
 ## Previous workshops
 
-* [workshop-2022](2022: 1st Miking Workshop, KTH, Stockholm)
+* [2022: 1st Miking Workshop, KTH, Stockholm](workshop-2022)
