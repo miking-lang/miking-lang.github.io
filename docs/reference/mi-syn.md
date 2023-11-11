@@ -1,11 +1,15 @@
 ---
+sidebar_position: 3
+---
+
+---
 sidebar_label: 'mi syn: AST and Parser Generator'
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# `mi syn`: AST and Parser Generator
+# Parser and AST Generator
 
 The `syn` subcommand of `mi` is used to generate a parser and language fragments for a language defined in a `.syn` file.
 
