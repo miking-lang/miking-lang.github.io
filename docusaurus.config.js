@@ -56,15 +56,15 @@ const config = {
           //  label: 'Install',
           //},
           {
+            to: 'installation',
+            position: 'left',
+            label: 'Installation',
+          },
+          {
             type: 'doc',
             docId: 'root',
             position: 'left',
             label: 'Documentation',
-          },
-          {
-            to: 'installation',
-            position: 'left',
-            label: 'Installation',
           },
           {
             to: 'publications',
