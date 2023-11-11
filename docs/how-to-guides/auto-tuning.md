@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Auto tuning using holes
+# Auto tune using context-dependent holes
 
 An MExpr program can contain decision variables, or so called holes, whose
 values are to be decided by an autotuner. A hole is introduced into a program
