@@ -1,10 +1,5 @@
 # Miking
 
-Miking (Meta vIKING) is a meta language system for creating embedded domain-specific and general-purpose languages. Miking is not a programming language, but rather a language system for
-creating languages and generating efficient compilers.
-
-## Getting started
-
 Before you can use the Miking system, you need to install
 [OCaml](https://ocaml.org/) and the
 [OPAM](https://opam.ocaml.org/) package manager.
