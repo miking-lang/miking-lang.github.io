@@ -62,6 +62,11 @@ const config = {
             label: 'Documentation',
           },
           {
+            to: 'installation',
+            position: 'left',
+            label: 'Installation',
+          },
+          {
             to: 'publications',
             position: 'left',
             label: 'Publications',
