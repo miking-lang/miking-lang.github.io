@@ -9,7 +9,7 @@ creating languages and generating efficient compilers.
 
 ## Installation
 
-If you have not already done so, please [install](https://miking.org/installation) the Miking compiler.
+If you have not already done so, please [install](/installation) the Miking compiler.
 
 ## MCore
 

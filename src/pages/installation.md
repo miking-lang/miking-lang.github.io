@@ -1,87 +1,214 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-# Installing Miking
+# Installation
+This page covers how to install and run Miking natively on your system. See
+[other installation methods](#other-installation-methods) at the bottom of this page for options.
 
+## Install Miking
+:::info Required Dependencies
 
-Before you can use the Miking system, you need to install
-[OCaml](https://ocaml.org/) and the
-[OPAM](https://opam.ocaml.org/) package manager.
+**You need to install Opam** (OCaml package manager)
+before you can use the Miking system. See the
+[Opam installation guide](https://opam.ocaml.org/doc/Install.html) for
+how to install Opam on Mac or on your Linux distribution:
+[Link](https://opam.ocaml.org/doc/Install.html)
 
-After the installation, you need to install the OCaml compiler by
-running the following:
+For Windows, install Opam using Windows Subsystem for Linux (WSL).
+
+:::
+
+With `opam` installed, create a switch for Miking and install the packages
+`dune` and `linenoise`. Do that by running the following:
+
 ```
 opam update
 opam switch create miking-ocaml 5.0.0
 eval $(opam env)
-```
 
-After this, you need to install the `opam` packages `dune` and `linenoise` by
-running the following:
-
-```
 opam install dune linenoise
 ```
+
+:::tip If Using Multiple Opam Switches
 
 Note that the `opam switch` command lets you have several OCaml installations on
 your system. When using the Miking system, you need to use the `miking-ocaml`
 switch. Running `opam switch miking-ocaml` followed by `eval $(opam env)`
 always takes you back to the correct switch.
 
-To compile the project, go back to the Miking repository and execute:
+:::
+
+Clone the Miking git repository to a suitable location on your system and enter
+the directory:
 
 ```
-make
+git clone https://github.com/miking-lang/miking.git
+cd miking
 ```
 
-This creates two binaries in the `build` directory: `build/boot` and
-`build/mi`. `build/boot` is the bootstrap interpreter, and `build/mi`
-is the main Miking executable, containing both an interpreter and a
-compiler. You will mainly be using `mi`, but `boot` provides a few
-features not yet available in the main executable, such as a REPL.
+If you do not have `git` installed on your system then you can manually
+download a zip file with the source code from our GitHub page:
+[https://github.com/miking-lang/miking/archive/refs/heads/develop.zip](https://github.com/miking-lang/miking/archive/refs/heads/develop.zip)
 
-To run tests checking that everything has been installed correctly,
-use
+Assuming that you have downloaded the repository and are currently located in
+that directory, then you can either install Miking on your system with `make`
+or directly using your shell:
 
-```
-make test
-```
+:::info Install
 
-Alternatively, you can use `make test-all` to run the full test suite. Beware
-that this may take some time. Alternatively you can use `make
-test-all-prune-utests` which will exclude tests whose external dependencies are
-not met on the current system (with the exception of `pyml`).
+<Tabs>
+<TabItem value="mi-install-makefile" label="Makefile" default>
 
-To run a hello world program, create a file `hello.mc` with the following code,
-
-```
-mexpr print "Hello world!\n"
-```
-
-and then run it using the command:
-
-```
-build/mi hello.mc
-```
-
-To help Miking find its standard library, you should define the environment variable `MCORE_LIBS` with an entry for `stdlib` pointing to the appropriate path, for example by running the following:
-
-    export MCORE_LIBS=stdlib=`pwd`/stdlib
-
-To run the Miking compiler, you must also extend the `OCAMLPATH` variable to point to the build directory containing the `boot` library:
-
-    export OCAMLPATH=`pwd`/build/lib:$OCAMLPATH
-
-If you install Miking on your system, neither of these settings is necessary.
-To install the compiler along with the standard library for the current
-user, issue:
+With `make` available, you can install Miking as:
 
 ```
 make install
 ```
+</TabItem>
 
-This will install `mi` to `$HOME/.local/bin` and the standard library to `$HOME/.local/lib/mcore/stdlib`, according to the [systemd file system hierarchy overview](https://www.freedesktop.org/software/systemd/man/file-hierarchy.html). If `MCORE_LIBS` is unset, Miking will look in this installation folder as its default library location. The `boot` OCaml library will also be installed to your OPAM prefix. NOTE: on some systems (e.g., macOS), you need to _manually_ add `$HOME/.local/bin` to your `PATH` environment variable to access the `mi` command from your shell.
+<TabItem value="mi-install-shell" label="Shell">
 
-Conversely, to uninstall, issue:
+If `make` is not available on your system, then you can directly install Miking
+by running the provided `make.sh` shell script as:
+
+```
+./make.sh boot && ./make.sh install-boot && ./make.sh && ./make.sh install
+```
+</TabItem>
+</Tabs>
+
+:::
+
+This will install the `mi` binary under `$HOME/.local/bin`, as well as the
+standard library under `$HOME/.local/lib`. If not already, make sure that
+`$HOME/.local/bin` is on your shell's PATH by running the following command
+directly or adding it to the appropriate .rc-file (e.g. `.bashrc` or `.zshrc`):
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+**This concludes the basic installation.** You can now compile and run MCore
+programs using `mi compile`:
+
+```bash
+> echo 'mexpr print "Hello, Miking!\n"' > hello.mc
+> mi compile hello.mc
+> ./hello
+Hello, Miking!
+```
+
+See the [documentation](/docs) page for more usage.
+
+:::note Uninstall
+
+<Tabs>
+<TabItem value="mi-install-makefile" label="Makefile" default>
+
+To uninstall Miking, run the following in the cloned Miking repository:
 
 ```
 make uninstall
 ```
+</TabItem>
+
+<TabItem value="mi-install-shell" label="Shell">
+
+To uninstall Miking, run the following in the cloned Miking repository:
+
+```
+./make.sh uninstall
+```
+</TabItem>
+</Tabs>
+
+:::
+
+## Optional Dependencies
+
+Certain parts of the standard library depends on additional OCaml packages to
+properly function. See below for how to install them for your system:
+
+:::tip Optional Dependencies
+
+<Tabs>
+<TabItem value="optdep-linux" label="Linux" default>
+
+Install the dependencies with Opam:
+
+```
+opam install pyml toml lwt owl ocamlformat.0.24.1
+```
+
+Opam should invoke your distribution's package manager if there are any
+additional dependencies needed.
+
+</TabItem>
+<TabItem value="optdep-macos-x86" label="Mac (Intel x86)">
+
+It might be necessary to add openblas to the pkg-config path if installed with
+Homebrew. Replace `/usr/local` in the `PKG_CONFIG_PATH` variable below with
+your Homebrew prefix if they differ.
+
+```bash
+# Install openblas
+brew install openblas
+
+# Double check if /usr/local is what your Homebrew installation uses as its
+# prefix. Change if it is different.
+export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig:${PKG_CONFIG_PATH}"
+
+# Now install the dependencies with Opam:
+opam install pyml toml lwt owl ocamlformat.0.24.1
+```
+
+</TabItem>
+<TabItem value="optdep-macos-arm64" label="Mac (Apple Silicon)">
+
+Before installing the Opam packages, it is most likely necessary to perform
+the following steps before proceeding with the installation:
+
+```bash
+# Install gcc and openblas
+brew install gcc openblas
+
+# Make sure that you have gcc as your cc compiler (change version from 12 to
+# your GCC version if it is different)
+cd $HOMEBREW_PREFIX/bin && ln -s gcc-12 cc
+```
+
+Now verify that your `cc` compiler points to the correct location by running
+`which cc`. **You might need to open a new terminal window for this.**
+
+Once `cc` points to the correct location, run the following commands to install
+the remaining dependencies:
+
+```bash
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/openblas/lib/pkgconfig:${PKG_CONFIG_PATH}"
+export OWL_CFLAGS="-g -O3 -Ofast -funroll-loops -ffast-math -DSFMT_MEXP=19937 -fno-strict-aliasing -Wno-tautological-constant-out-of-range-compare"
+export OWL_AEOS_CFLAGS="-g -O3 -Ofast -funroll-loops -ffast-math -DSFMT_MEXP=19937 -fno-strict-aliasing"
+export EIGENCPP_OPTFLAGS="-Ofast -funroll-loops -ffast-math"
+export EIGEN_FLAGS="-O3 -Ofast -funroll-loops -ffast-math"
+
+# If opened a new terminal window, make sure to run `eval $(opam env)` first
+
+opam install pyml toml lwt owl ocamlformat.0.24.1
+```
+
+You can now remove the `cc` symlink created earlier.
+
+</TabItem>
+</Tabs>
+
+:::
+
+## Other Installation Methods
+
+There are various packaging options for Miking including `nix`, `guix`, and a
+self-contained tarball. See the README under [misc/packaging](https://github.com/miking-lang/miking/tree/develop/misc/packaging)
+directory in the Miking repository for more information.
+
+We also provide Docker images for
+[Miking on Docker Hub](https://hub.docker.com/r/mikinglang/miking) that come
+with a prebuilt `mi` binary and all dependencies. See the documentation on
+Docker Hub for how to run it.
