@@ -50,7 +50,7 @@ Speaker: David Broman
 
 * Title: *TreePPL - a new DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov
 * Title: *Real-time Probabilistic Programming, a DSL in Miking*. Speaker: Lars Hummelgren
-* Title: *Equation-based modeling and efficient simulation in Miking*. Speaker: Oscar Eriksson
+* Title: *Equation-based modeling and simulation in Miking*. Speaker: Oscar Eriksson
 
 **16.15** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
 Organizers: The Miking core team
