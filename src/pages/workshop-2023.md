@@ -17,7 +17,7 @@ The workshop is free of charge and includes lunch, coffee, and Swedish fika. The
 * **Format:** Hybrid (in person or online via Zoom)
 * **Place:** KTH Campus, Digital Futures Hub, Stockholm. For a map, [see here](https://www.digitalfutures.kth.se/contact/how-to-get-here/).
 
-**REGISTRATION (Deadline November 16, noon):**  [Please register as soon as possible by clicking on this link](https://www.kth.se/form/miking-workshop-2023)!
+**REGISTRATION (Deadline November 16, noon):**  The registration is now closed.
 
 
 ## Agenda
@@ -40,10 +40,9 @@ Speaker: David Broman
 **13.00** **Hacking session 1: Getting started and playing around**
   Organizers: The Miking core team
 
-**14:15** **Session 2: Tuning and Optimization**
+**14:30** **Session 2: Tuning and Optimization**
 * Title: *Programming with Context-Sensitive Holes using Dependency-Aware Tuning*. Speaker: Linnea Stjerna
 * Title: *Functional programming on the JVM*. Speaker: Asta Olofsson
-* Title: *Automated pruning in phylogenetics*. Speaker: Gizem Çaylak
 
 **15.00** **Coffee break**
 
