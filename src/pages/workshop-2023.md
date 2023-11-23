@@ -40,7 +40,7 @@ Speaker: David Broman
 **13.00** **Hacking session 1: Getting started and playing around**
   Organizers: The Miking core team
 
-**14:30** **Session 2: Tuning and Optimization**
+**14:30** **Session 2: Tuning and Code Generation**
 * Title: *Programming with Context-Sensitive Holes using Dependency-Aware Tuning*. Speaker: Linnea Stjerna
 * Title: *Functional programming on the JVM*. Speaker: Asta Olofsson
 
