@@ -43,36 +43,46 @@ This is as of writing a not public page on intrinsic documentation.
 | :----------| :---------------- | :------------------ | :---------- |
 | **`floorfi`** | Floor          | <nobr>`Float -> Int`</nobr> | `floorfi x` rounds x down the to the nearest integer. Example: `floorfi 2.7` returns `2`. |
 | **`ceilfi`** | Ceil       | `Float -> Int` | `ceilfi x` rounds x up the to the nearest integer. Example: `ceilfi 2.1` returns `3`. |
-| **`roundfi`** | Rounding    | `Float -> Int` | `roundfi x` rounds x up the to the nearest integer. Example: `roundfi 2.1` returns `2`, and `roundfi 2.7` returns `3`. |
+| **`roundfi`** | Rounding    | `Float -> Int` | `roundfi x` rounds x the to the nearest integer. Example: `roundfi 2.1` returns `2`, and `roundfi 2.7` returns `3`. |
 | **`int2float`** | To Float Type | `Int -> Float` | `int2float x` converts x to a Float type, potentially losing precision for very large integers. |
+
+## Character and String Intrinsics
+
+| Name       | <nobr>Brief Description</nobr> | Type Signature      | Description |
+| :----------| :---------------- | :------------------ | :---------- |
+| **`eqc`**  | Equal (==)          | <nobr>`Char -> Char -> Bool`</nobr> | `eqc a b` returns `true` if a == b, otherwise `false`. |
+| **`char2int`** | To Unicode          | `Char -> Int` | `char2int c` returns the unicode encoding for the character c. |
+| **`int2char`** | From Unicode          | `Int -> Char` | `int2char i` returns a character with the unicode encoding i. |
+| **`stringIsFloat`** | Check if String is Formatted as a Float | `String -> Bool` | `stringIsFloat s` returns `true` if s is a properly formatted string representing a float, otherwise `false`. If this returns `true`, then it means that `float2string` is safe to use on s. |
+| **`string2float`** | To Float          | `String -> Float` | `string2float s` returns the Float represented by s. Use `stringIsFloat` prior to this if unsure whether about the format of s properly follows that for a Float. |
+| **`float2string`** | From Float     | `Float -> String` | `float2string x` returns the string representation for x. |
+
+## Sequence Intrinsics
+
+| Name       | <nobr>Brief Description</nobr> | Type Signature      | Description |
+| :----------| :---------------- | :------------------ | :---------- |
+| **`create`**  | Create a Sequence          | <nobr>`all a. Int -> (Int -> a) -> [a]`</nobr> | `create n f` creates a sequence of length n where an element at index i is instantiated as `f i`. Example: `create 5 (lam i. muli i 3)` returns the sequence `[0, 3, 6, 9, 12]`. |
+| **`createRope`**  | Create a Rope Sequence          | <nobr>`all a. Int -> (Int -> a) -> [a]`</nobr> | Same interface as for `create`, but ensures that the underlying sequence representation is a rope. |
+| **`createList`**  | Create a List Sequence          | <nobr>`all a. Int -> (Int -> a) -> [a]`</nobr> | Same interface as for `create`, but ensures that the underlying sequence representation is a list. |
+| **`isRope`**  | Check if Rope          | <nobr>`all a. [a] -> Bool`</nobr> | `isRope l` returns `true` if the underlying representation of l is a rope, otherwise `false`. |
+| **`isList`**  | Check if List          | <nobr>`all a. [a] -> Bool`</nobr> | `isList l` returns `true` if the underlying representation of l is a list, otherwise `false`. |
+| **`length`**  | Sequence Length          | <nobr>`all a. [a] -> Int`</nobr> | `length l` returns the length of the sequence l. |
+| **`concat`**  | Concatenate Sequences | <nobr>`all a. [a] -> [a] -> [a]`</nobr> | `concat l1 l2` returns the concatenation of l1 and l2. Example: `concat [4,5,6] [1,2,3]` returns `[4,5,6,1,2,3]`. |
+| **`get`**  | Get Element          | <nobr>`all a. [a] -> Int -> a`</nobr> | `get l i` returns the element at index i in sequence l. Example: `get [10,11,12] 1` returns `11`. |
+| **`set`**  | Set Element          | <nobr>`all a. [a] -> Int -> a -> [a]`</nobr> | `set l i e` returns a copy of l where the element at index i has been set to e. Example: `set [10,11,12] 1 777` returns `[10,777,12]`. |
+| **`cons`**  | Prepend Element          | <nobr>`all a. a -> [a] -> [a]`</nobr> | `cons e l` prepends e to l. Example: `cons 5 [10,11]` returns `[5,10,11]`. |
+| **`snoc`**  | Append Element          | <nobr>`all a. [a] -> a -> [a]`</nobr> | Reverse cons. `snoc l e` appends e to l. Example: `snoc [10,11] 5` returns `[10,11,5]`. |
+| **`splitAt`**  | Split Sequence          | <nobr>`all a. [a] -> Int -> ([a], [a])`</nobr> | `splitAt l i` splits the sequence at l at index i, returning a tuple with each split. Example: `splitAt [1,2,3] 2` returns `([1,2],[3])`, and `splitAt [1,2,3] 0` returns `([],[1,2,3])`. |
+| **`reverse`**  | Reverse Sequence       | <nobr>`all a. [a] -> [a]`</nobr> | `reverse l` reverses the sequence l. Example: `reverse [1,2,3]` returns `[3,2,1]`. |
+
+
 
 ## Not yet documented
 
 ```mc
 let builtin = use MExprAst in
   [ ("unsafeCoerce", CUnsafeCoerce ())
-  -- Floating-point numbers
-  , ("stringIsFloat", CStringIsFloat ())
-  , ("string2float", CString2float ())
-  , ("float2string", CFloat2string ())
-  -- Characters
-  , ("eqc", CEqc ())
-  , ("char2int", CChar2Int ())
-  , ("int2char", CInt2Char ())
   -- Sequences
-  , ("create", CCreate ())
-  , ("createList", CCreateList ())
-  , ("createRope", CCreateRope ())
-  , ("isList", CIsList ())
-  , ("isRope", CIsRope ())
-  , ("length", CLength ())
-  , ("concat", CConcat ())
-  , ("get", CGet ())
-  , ("set", CSet ())
-  , ("cons", CCons ())
-  , ("snoc", CSnoc ())
-  , ("splitAt", CSplitAt ())
-  , ("reverse", CReverse ())
   , ("head", CHead ())
   , ("tail", CTail ())
   , ("null", CNull ())
@@ -115,6 +125,7 @@ let builtin = use MExprAst in
   , ("ref", CRef ())
   , ("deref", CDeRef ())
   , ("modref", CModRef ())
+  -- NOTE: I will not include documentation for the tensor and boot parser things yet...
   -- Tensors
   , ("tensorCreateUninitInt", CTensorCreateUninitInt ())
   , ("tensorCreateUninitFloat", CTensorCreateUninitFloat ())
