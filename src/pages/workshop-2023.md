@@ -30,9 +30,9 @@ Speaker: David Broman
 
 **11:15** **Session 1: Types and Parsing in Miking**
 
-* Title: *Universal Collection Types*. Speaker: Viktor Palmkvist
-* Title: *Towards LR parsing in Miking - key ideas and challenges*. Speaker: John Wikman
-* Title: *A new polymorphic type system for Miking*. Speaker: Anders Ågren Thuné
+* Title: *Universal Collection Types*. Speaker: Viktor Palmkvist [[slides](/workshop-2023/ucts.pdf)]
+* Title: *Towards LR parsing in Miking - key ideas and challenges*. Speaker: John Wikman [[slides](/workshop-2023/lrkparser.pdf)]
+* Title: *A new polymorphic type system for Miking*. Speaker: Anders Ågren Thuné [[slides](/workshop-2023/typesystem.pdf)]
 
 **12.00** **Lunch**
 
@@ -48,8 +48,8 @@ Speaker: David Broman
 
 **15:30** **Session 3: Domain-Specific Languages (DSLs) in Miking**
 
-* Title: *TreePPL - a new DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov
-* Title: *Real-time Probabilistic Programming, a DSL in Miking*. Speaker: Lars Hummelgren
+* Title: *TreePPL - a new DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov [[slides](/workshop-2023/treeppl.pdf)]
+* Title: *Real-time Probabilistic Programming, a DSL in Miking*. Speaker: Lars Hummelgren [[slides](/workshop-2023/probtime.pdf)]
 * Title: *Equation-based modeling and simulation in Miking*. Speaker: Oscar Eriksson
 
 **16.15** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
