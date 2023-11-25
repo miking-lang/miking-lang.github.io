@@ -62,7 +62,7 @@ exclusive. That is, you cannot use both configurations simultaneously.
 
 Assume the program below is saved in a file `example.mc`.
 
-```
+```mc
 mexpr
 let f = lam x. addi (muli x 2) 1 in
 let s = [1,2,3] in
@@ -101,7 +101,7 @@ information results in a Futhark compilation error.
 
 Consider the following example
 
-```
+```mc
 mexpr
 let g : [Int] -> [Int] = lam s. snoc s 5 in
 let f : [[Int]] -> [[Int]] = lam s. map g s in
@@ -121,7 +121,7 @@ within the inner function. Here `s` is an expression referring to a sequence
 and `n` is a variable from an outer scope (or a parameter), such that the
 compiler knows it is the same for every inner sequence. We rewrite `f` as
 
-```
+```mc
 let f : [[Int]] -> [[Int]] = lam s.
   -- 'n' is defined outside the map function so that the compiler knows this
   -- size will be the same for every inner sequence.
@@ -140,7 +140,7 @@ in
 Consider the following implementation of the transpose operation on a square
 matrix:
 
-```
+```mc
 let transposeSq : [[Int]] -> [[Int]] = lam m.
   let n = length m in
   create n (lam i : Int.
