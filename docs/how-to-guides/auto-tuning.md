@@ -13,7 +13,7 @@ using the keyword `hole`. The `hole` takes as argument the type of the hole
 For example, the following defines a function `sort` that chooses sorting
 algorithm based on input data length.
 
-```
+```mc
 let sort = lam seq.
   let threshold = hole (IntRange {default = 10, min = 0, max = 10000}) in
   if leqi (length seq) threshold then insertionSort seq
@@ -69,7 +69,7 @@ each possible context.
 For instance, the following defines a function `hcreate` that chooses between
 two sequence representations:
 
-```
+```mc
 let hcreate = lam n. lam f.
   let rope = hole (Boolean {default = true, depth = 1}) in
   (if rope then createRope else createList) n f
