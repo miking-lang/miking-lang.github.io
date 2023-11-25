@@ -24,7 +24,7 @@ The workshop is free of charge and includes lunch, coffee, and Swedish fika. The
 **10.00** **Registration**
 
 **10.15** **Welcome and introduction to Miking**.
-Speaker: David Broman
+Speaker: David Broman [[slides](/workshop-2023/intro.pdf)]
 
 **11.00** **Coffee break**
 
