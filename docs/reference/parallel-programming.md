@@ -23,7 +23,7 @@ multi-threaded execution. Atomic references are provided in
 `atomicMake` creates a new atomic reference and gives it an initial value. The
 value of the atomic reference can be read by `atomicGet`:
 
-```
+```mc
 include "multicore/atomic.mc"
 mexpr
 let a = atomicMake 0 in
@@ -35,7 +35,7 @@ updates the value of `a` to `newVal` if the current value is identical to
 `oldVal`, and then returns a Boolean representing if the update was successful
 or not:
 
-```
+```mc
 utest atomicCAS a 0 1 with true in
 utest atomicCAS a 42 3 with false in
 utest atomicGet a with 1 in
@@ -47,7 +47,7 @@ references only.
 To unconditionally set the value of an atomic reference, we can use
 `atomicExchange`, which also returns the old value of the reference:
 
-```
+```mc
 utest atomicExchange a 2 with 1 in
 ```
 
@@ -55,7 +55,7 @@ Finally, for integer references, we can use `atomicFetchAndAdd` to increase or
 decrease the value of the reference. The function returns the old value of the
 reference:
 
-```
+```mc
 utest atomicFetchAndAdd a 1 with 2 in
 -- Current value is now 3
 utest atomicFetchAndAdd a (subi 0 45) with 3 in
@@ -69,7 +69,7 @@ Functions for handling threads are provided in
 The following example program spawns 10 threads that compete for printing their
 IDs:
 
-```
+```mc
 include "string.mc"
 include "multicore/thread.mc"
 mexpr
