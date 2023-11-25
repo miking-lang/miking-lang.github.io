@@ -24,21 +24,21 @@ standard library for its implementation.
 We first define the external in a file under [stdlib/ext](stdlib/ext), let's
 say [stdlib/ext/math-ext.mc](stdlib/ext/math-ext.mc), as
 
-```
+```mc
 external externalExp : Float -> Float
 ```
 
 which makes an external value `externalExp` of type `Float -> Float` available
 at the top-level. The corresponding MCore syntax is:
 
-```
+```mc
 external ident : Type in expr
 ```
 
 If the external has side-effects it should be annotated with a `!` after the
 identifier, e.g.
 
-```
+```mc
 external print ! : String -> ()
 ```
 
@@ -53,7 +53,7 @@ do this by creating a file
 and in it we define a map from external
 identifiers to a list of implementations as follows:
 
-```
+```mc
 include "map.mc"
 include "ocaml/ast.mc"
 
@@ -134,7 +134,7 @@ record are associated with the fields of the OCaml record by an explicit mapping
 defined in the `*.ext-ocaml.mc` file.
 
 If the Miking type is abstract, i.e. we define it as
-```
+```mc
 type MyType
 ```
 then no conversion is performed to and from this type.
