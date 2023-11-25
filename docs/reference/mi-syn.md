@@ -62,7 +62,7 @@ precedence {
 </TabItem>
 <TabItem value="mc" label="example.mc (excerpt)">
 
-```mcore
+```mc
 lang ExampleBaseAst
   syn File =
   syn Expr =
@@ -341,7 +341,7 @@ The first language fragment is named based on the language name (see [`language`
 
 Each `prod` declaration gives rise to a language fragment defining its constructor and appropriate implementations for the convenience functions defined in the base AST fragment. For example, given a `prod Foo: Bar = ...` definition:
 
-```mcore
+```mc
 lang FooBarAst = -- ...
   type FooBarRecord = { info : Info, /- ... -/ }
   syn Bar =
@@ -361,7 +361,7 @@ The generated file contains a language fragment that composes all of the `prod` 
 
 There are one primary parsing function generated, along with one simple wrapper. Given the declarations [`lang Example`](#language) and [`start Foo`](#start):
 
-```mcore
+```mc
 -- Takes a filename and the contents of that file, then parse
 -- it. In case of error, return `Left [...errors...]`, otherwise
 -- `Right result`
