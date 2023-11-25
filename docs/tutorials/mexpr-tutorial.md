@@ -14,14 +14,14 @@ In the end, an MCore file `.mc` is always translated into an MCore expression. I
 
 When writing MCore programs, it is typically done by writing explicit unit tests as part of the code. For instance
 
-```
+```mc
 mexpr
 utest addi 1 2 with 3 in
 ()
 ```
 checks that the addition of `1` and `2` is in fact `3`. To run the tests in an `.mc` file, run the `mi` command with argument `test` (assuming that you have now installed `mi` in your path):
 
-```
+```mc
 mi run program.mc --test
 ```
 
