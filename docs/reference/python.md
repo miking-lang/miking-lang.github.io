@@ -37,7 +37,7 @@ To install for the current user, run `make install` as usual.
 The following example shows how to use the intrinsics to sort a sequence using
 Python's builtin `sorted` function.
 
-```ocaml
+```mc
 let builtins = pyimport "builtins"
 
 let x = [5.,4.5,4.,1.,1.5]
@@ -57,7 +57,7 @@ or converted back to an MCore sequence using the `pyconvert` builtin.
 instead of a module as the first argument. For example, the following code
 will invoke the `count` method of a list:
 
-```ocaml
+```mc
 let builtins = pyimport "builtins"
 
 let pylist = pycall builtins "list" ([1,1,2],)
@@ -73,7 +73,7 @@ The following example shows how a numpy `nparray` can be created and converted
 to an MCore sequence. The key here is to use numpy's `tolist` method first,
 since conversion directly from `nparray` is not supported.
 
-```ocaml
+```mc
 let rnd = pyimport "numpy.random"
 
 let nparray = pycall rnd "normal" (0., 0.1, 10)
@@ -83,7 +83,7 @@ let mc_seq = pyconvert (pycall nparray "tolist" ())
 In the next example, we use `matplotlib` to produce a plot; this works in
 exactly the same way as in a regular Python program.
 
-```ocaml
+```mc
 let plt = pyimport "matplotlib.pyplot"
 let np = pyimport "numpy"
 
