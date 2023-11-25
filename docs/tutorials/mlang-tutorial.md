@@ -17,7 +17,7 @@ before the `mexpr` keyword of an MCore program. The syntax is
 identical to that of the corresponding MExpr definitions, without
 the trailing `in`:
 
-```
+```mc
 let id = lam x. x
 type T
 con Foo : Int -> T
@@ -33,7 +33,7 @@ simply moved into the beginning of the `mexpr` program. The
 usefulness of top-level definitions becomes more apparent when
 adding included files. A file can be included using the syntax
 
-```
+```mc
 include "path/to/prog.mc"
 ```
 
@@ -41,7 +41,7 @@ before any top-level definitions in a file.
 The string is a file path relative to the file that contains the `include`.
 To refer to files from other libraries, the path can be prefixed with a _namespace_ using the syntax
 
-```
+```mc
 include "mylib::prog.mc"
 ```
 
@@ -66,7 +66,7 @@ language fragments can be defined before the `mexpr` keyword in an
 MCore program. For example, here is a language fragment for simple
 arithmetics:
 
-```
+```mc
 lang Arith
   syn Expr =
   | Num Int
@@ -93,7 +93,7 @@ the value (if any) carried by the current syntactic form.
 In the main MExpr program, a language fragment can be opened by
 a `use` expression:
 
-```
+```mc
 mexpr
 use Arith in
 utest eval (Add (Num 2, Num 3)) with Num 5 in
@@ -108,7 +108,7 @@ composed to form new language fragments. As an example, we might
 want to extend our arithmetics language with booleans and `if`
 expressions:
 
-```
+```mc
 lang MyBool
   syn Expr =
   | True()
@@ -139,7 +139,7 @@ language fragment with all the syntactic and semantic cases of
 cases to the language composition as well, and refer to the syntax
 and semantics of the fragments being composed:
 
-```
+```mc
 lang ArithBool = Arith + MyBool
   syn Expr =
   | IsZero Expr
