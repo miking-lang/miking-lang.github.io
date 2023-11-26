@@ -75,7 +75,7 @@ using `mi compile --accelerate example.mc`, the `map` function `f` is applied
 to the elements of `s` in parallel, on the GPU. In this case, as we make use of
 `map`, it will execute using the Futhark backend.
 
-See the [accelerate examples](test/examples/accelerate) directory for more
+See the [accelerate examples](https://github.com/miking-lang/miking/tree/develop/test/accelerate) directory for more
 examples.
 
 ## Sequence sizes
