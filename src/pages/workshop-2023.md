@@ -50,7 +50,7 @@ Speaker: David Broman [[slides](/workshop-2023/intro.pdf)]
 
 * Title: *TreePPL - a new DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov [[slides](/workshop-2023/treeppl.pdf)]
 * Title: *Real-time Probabilistic Programming, a DSL in Miking*. Speaker: Lars Hummelgren [[slides](/workshop-2023/probtime.pdf)]
-* Title: *Equation-based modeling and simulation in Miking*. Speaker: Oscar Eriksson
+* Title: *Equation-based modeling and simulation in Miking*. Speaker: Oscar Eriksson [[slides](/workshop-2023/eoo.pdf)]
 
 **16.15** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
 Organizers: The Miking core team
