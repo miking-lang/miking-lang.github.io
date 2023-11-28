@@ -41,7 +41,7 @@ Speaker: David Broman [[slides](/workshop-2023/intro.pdf)]
   Organizers: The Miking core team
 
 **14:30** **Session 2: Tuning and Code Generation**
-* Title: *Programming with Context-Sensitive Holes using Dependency-Aware Tuning*. Speaker: Linnea Stjerna
+* Title: *Programming with Context-Sensitive Holes using Dependency-Aware Tuning*. Speaker: Linnea Stjerna [[slides](/workshop-2023/tuning.pdf)]
 * Title: *Functional programming on the JVM*. Speaker: Asta Olofsson
 
 **15.00** **Coffee break**
