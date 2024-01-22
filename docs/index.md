@@ -6,7 +6,7 @@ id: root
 
 Miking is a meta-language system for creating embedded languages, and this site holds its documentation.
 
-To get started, first [install Miking](./how-to-guides/installing-miking.md), then [write your first program](./tutorials/writing-your-first-program.md) and [write your first language](./tutorials/arithmetic-language.md).
+To get started, first [install Miking](/installation), then follow the [getting-started tutorial](./tutorials/getting-started.md) to learn about the core languages of Miking.
 
 :::warning
 
