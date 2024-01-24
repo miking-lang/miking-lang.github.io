@@ -125,7 +125,7 @@ lang MyBool
     else error "Not a boolean"
 end
 
-lang ArithBool = Arith + MyBool
+lang ArithBool = Arith + MyBool end
 
 mexpr
 use ArithBool in
