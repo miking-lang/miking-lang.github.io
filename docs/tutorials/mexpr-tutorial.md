@@ -263,6 +263,12 @@ utest r1.name with "foobar" in
 ()
 ```
 
+It is possible to replace the value of a field using the `with` keyword.
+```mc
+let r = {x = 1, y = 1} in
+utest {x = 1, y = 2} with {r with y = 2} in ()
+```
+
 A record type is not just a general product type in MCore, it is the only
 product type. That is, a tuple is just *syntactic sugar* for a record. This means that the compiler encodes a tuple as a record, where the names of the fields are numbers `0`, `1`, etc. Labels can internally be any kind of string. For strings that cannot be defined as a normal identifier, the label form `#label"x"`
 can be used, where `x` is the string of the label.
