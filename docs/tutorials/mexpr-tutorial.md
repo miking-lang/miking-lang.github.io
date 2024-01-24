@@ -440,6 +440,18 @@ or the `get` function picks out the nth element of a sequence
 ```mc
 utest get [3,5,8,9] 2 with 8 in ()
 ```
+The functions `cons` can be used to prepend an element to a sequence.
+
+```mc
+utest cons 1 [2,3] with [1, 2, 3] in ()
+```
+The head and tail of a sequence can be obtaining using the functions `head` and `tail`.
+
+```mc
+utest head [1, 2, 3] with 1 in
+utest tail [1, 2, 3] with [2, 3] in ()
+````
+
 
 It is also possible to pattern match on sequences, to either extract the *tail* of a sequence, if the first part matches
 
