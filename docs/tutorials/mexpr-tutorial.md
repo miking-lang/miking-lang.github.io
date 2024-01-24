@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # MExpr tutorial
 
-One design objective of MExpr is to make the concrete syntax very close to the abstract syntax of the language. That is, no syntactic sugar is introduced to the concrete MCore syntax. The MExpr language is not intended to be a general-purpose programming language. Instead, the aim of MCore is to be a core language that other languages can translate into.
+One design objective of MExpr is to make the concrete syntax very close to the abstract syntax of the language. That is, no syntactic sugar is introduced to the concrete MCore syntax. The MExpr language is not intended to be a general-purpose programming language. Instead, the aim of MCore is to be a core language that other languages can be translated into.
 
 Nevertheless, to understand the Miking system, it is a good idea to learn to write basic programs directly as MCore expressions.
 
