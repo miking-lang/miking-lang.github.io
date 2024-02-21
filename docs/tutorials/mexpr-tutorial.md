@@ -101,7 +101,7 @@ utest double 5 with 10 in
 ()
 ```
 
-Types can be expressed in MCore programs, but they are currently not checked. For instance, the `double` function can be written as
+MExpr is statically typed, using a polymorphic type system based on [FreezeML](https://dl.acm.org/doi/10.1145/3385412.3386003). If type annotations are omitted, types will be automatically *inferred*. However, types can also be explicitly expressed in MCore programs. For instance, the `double` function can be written as
 
 ```mc
 let double = lam x:Int. muli x 2 in
