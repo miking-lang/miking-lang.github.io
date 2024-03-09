@@ -3,6 +3,16 @@
  * and scoped locally.
  */
 
+
+/*
+ Use the following line in your .md file, if you don't want to see it in the menu
+   sidebar_class_name: hidden
+*/
+.hidden {
+  display: none !important;
+}
+
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;

@@ -1,3 +1,6 @@
+
+sidebar_class_name: hidden
+
 # CorePPL Tutorial
 
 In this tutorial, you will learn how to:
