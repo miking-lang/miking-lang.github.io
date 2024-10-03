@@ -137,7 +137,7 @@ properly function. See below for how to install them for your system:
 Install the dependencies with Opam:
 
 ```
-opam install pyml toml lwt owl ocamlformat.0.24.1
+opam install pyml toml lwt owl.0.10.0 ocamlformat.0.24.1 conf-openblas.0.2.1
 ```
 
 Opam should invoke your distribution's package manager if there are any
@@ -159,7 +159,7 @@ brew install openblas
 export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
 # Now install the dependencies with Opam:
-opam install pyml toml lwt owl ocamlformat.0.24.1
+opam install pyml toml lwt owl.0.10.0 ocamlformat.0.24.1 conf-openblas.0.2.1
 ```
 
 </TabItem>
@@ -192,7 +192,7 @@ export EIGEN_FLAGS="-O3 -Ofast -funroll-loops -ffast-math"
 
 # If opened a new terminal window, make sure to run `eval $(opam env)` first
 
-opam install pyml toml lwt owl ocamlformat.0.24.1
+opam install pyml toml lwt owl.0.10.0 ocamlformat.0.24.1 conf-openblas.0.2.1
 ```
 
 You can now remove the `cc` symlink created earlier.
