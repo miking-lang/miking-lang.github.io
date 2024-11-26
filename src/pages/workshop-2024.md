@@ -37,6 +37,7 @@ Speaker: David Broman
 **11.15** **Coffee break**
 
 **11:30** **Tutorial: Parsing with Miking using Resolvable Ambiguity**
+
 Speaker: Viktor Palmkvist
 
 **12.00** **Lunch**
@@ -47,6 +48,7 @@ Speaker: Viktor Palmkvist
 * Title: *Empowering DSLs with Automated Language Server Generation*. Speaker: Didrik Munther
 
 **13:45** **Hacking session 1: Getting started and playing around**
+
   Organizers: The Miking core team
 
 **14:30** **Session 2: Optimized and Efficient Domain-Specific Languages**
@@ -65,6 +67,7 @@ Speaker: Viktor Palmkvist
 
 
 **16.30** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
+
 Organizers: The Miking core team
 
 **17.00** **Conclusions and more happy hacking!**
