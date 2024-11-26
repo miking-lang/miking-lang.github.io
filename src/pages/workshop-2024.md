@@ -36,14 +36,14 @@ Speaker: David Broman
 **11.15** **Coffee break**
 
 **11:30** **Tutorial: Parsing with Miking using Resolvable Ambiguity**
-Speaker: Viktor Palmkvist 
+Speaker: Viktor Palmkvist
 
 **12.00** **Lunch**
 
 **13:15** **Session 1: Next generation of Miking: Types and Tool Support**
 
 * Title: *Language Composition through Product Extension and Its Use Cases for DSL Development*. Speaker: Marten Voorberg
-* Title: *Empowering DSLs with Automated Language Server Generation*. Speaker: Didrik Munther 
+* Title: *Empowering DSLs with Automated Language Server Generation*. Speaker: Didrik Munther
 
 **13:45** **Hacking session 1: Getting started and playing around**
   Organizers: The Miking core team
@@ -51,7 +51,7 @@ Speaker: Viktor Palmkvist
 **14:30** **Session 2: Optimized and Efficient Domain-Specific Languages**
 
 * Title: *Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers*. Speaker: Oscar Ericsson
-* Title: *Trellis: A Domain-Specific Language for Hidden Markov Models with Sparse Transitions*. Speaker: Lars Hummelgren 
+* Title: *Trellis: A Domain-Specific Language for Hidden Markov Models with Sparse Transitions*. Speaker: Lars Hummelgren
 
 **15.00** **Coffee break**
 
