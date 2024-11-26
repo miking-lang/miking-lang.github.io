@@ -29,7 +29,7 @@ The workshop is free of charge and includes lunch, coffee, and Swedish fika. The
 **10.00** **Registration and Coffee**
 
 
-**10.35** **Welcome and an introduction to Miking**.
+**10.35** **Welcome and Introduction to Miking**.
 Speaker: David Broman 
 
 
@@ -57,10 +57,10 @@ Speaker: Viktor Palmkvist
 
 **15:30** **Session 3: TreePPL - Phylogenetic Inference using Miking**
 
-* Title: *Phylogenetic inference problems: a brief introduction*. Speaker: Fredrik Ronquist
+* Title: *Phylogenetic Inference Problems: a Brief Introduction*. Speaker: Fredrik Ronquist
 * Title: *TreePPL: a DSL in Miking for Phyologenetics*. 
-* Title: *Implementing a complex biological model in TreePPL*. Speaker: Mariana P Braga
-* Title: *Automated inference optimizations in the probabilistic programming language Miking CorePPL*. Speaker: Gizem Caylak
+* Title: *Implementing a Complex Biological Model in TreePPL*. Speaker: Mariana P Braga
+* Title: *Automated Inference Optimizations in the Probabilistic Programming Language Miking CorePPL*. Speaker: Gizem Caylak
 
 
 **16.30** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
