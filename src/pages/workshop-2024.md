@@ -49,7 +49,7 @@ Speaker: Viktor Palmkvist
 
 **13:45** **Hacking session 1: Getting started and playing around**
 
-  Organizers: The Miking core team
+Organizers: The Miking core team
 
 **14:30** **Session 2: Optimized and Efficient Domain-Specific Languages**
 
