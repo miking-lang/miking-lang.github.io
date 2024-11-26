@@ -22,7 +22,7 @@ The workshop is free of charge and includes lunch, coffee, and Swedish fika. The
 * **Format:** Hybrid (in person or online via Zoom)
 * **Place:** KTH Campus, Digital Futures Hub, Stockholm. For a map, [see here](https://www.digitalfutures.kth.se/contact/how-to-get-here/).
 
-**REGISTRATION (Deadline November 28, end-of-day):** [REGISER NOW!](https://www.kth.se/form/miking-workshop-2024)
+**REGISTRATION (Deadline November 28, end-of-day):** [REGISTER NOW!](https://www.kth.se/form/miking-workshop-2024)
 
 
 ## Agenda
