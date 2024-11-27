@@ -61,7 +61,7 @@ Organizers: The Miking core team
 **15:30** **Session 3: TreePPL - Phylogenetic Inference using Miking**
 
 * Title: *Phylogenetic Inference Problems: a Brief Introduction*. Speaker: Fredrik Ronquist
-* Title: *TreePPL: a DSL in Miking for Phyologenetics*. 
+* Title: *TreePPL: a DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov
 * Title: *Implementing a Complex Biological Model in TreePPL*. Speaker: Mariana P Braga
 * Title: *Automated Inference Optimizations in the Probabilistic Programming Language Miking CorePPL*. Speaker: Gizem Caylak
 
