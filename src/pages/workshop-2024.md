@@ -42,12 +42,12 @@ Speaker: Viktor Palmkvist
 
 **12.00** **Lunch**
 
-**13:15** **Session 1: Next generation of Miking: Types and Tool Support**
+**13:00** **Session 1: Next generation of Miking: Types and Tool Support**
 
 * Title: *Language Composition through Product Extension and Its Use Cases for DSL Development*. Speaker: Marten Voorberg
 * Title: *Empowering DSLs with Automated Language Server Generation*. Speaker: Didrik Munther
 
-**13:45** **Hacking session 1: Getting started and playing around**
+**13:30** **Hacking session 1: Getting started and playing around**
 
 Organizers: The Miking core team
 
