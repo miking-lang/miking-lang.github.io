@@ -51,10 +51,11 @@ Speaker: Viktor Palmkvist
 
 Organizers: The Miking core team
 
-**14:30** **Session 2: Optimized and Efficient Domain-Specific Languages**
+**14:15** **Session 2: Optimized and Efficient Domain-Specific Languages**
 
 * Title: *Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers*. Speaker: Oscar Ericsson
 * Title: *Trellis: A Domain-Specific Language for Hidden Markov Models with Sparse Transitions*. Speaker: Lars Hummelgren
+* Title: *Automated Inference Optimizations in the Probabilistic Programming Language Miking CorePPL*. Speaker: Gizem Caylak
 
 **15.00** **Coffee break**
 
@@ -63,9 +64,8 @@ Organizers: The Miking core team
 * Title: *Phylogenetic Inference Problems: a Brief Introduction*. Speaker: Fredrik Ronquist
 * Title: *TreePPL: a DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov
 * Title: *Implementing a Complex Biological Model in TreePPL*. Speaker: Mariana P Braga
-* Title: *Automated Inference Optimizations in the Probabilistic Programming Language Miking CorePPL*. Speaker: Gizem Caylak
-
-
+* Title: *Rapid prototyping with TreePPL using Jupyter Notebook*. Speaker: Jan Kudlicka
+ 
 **16.30** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
 
 Organizers: The Miking core team
