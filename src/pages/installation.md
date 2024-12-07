@@ -26,7 +26,7 @@ opam update
 opam switch create miking-ocaml 5.0.0
 eval $(opam env)
 
-opam install dune linenoise menhir
+opam install dune linenoise menhir ocamlfind
 ```
 
 :::tip If Using Multiple Opam Switches
