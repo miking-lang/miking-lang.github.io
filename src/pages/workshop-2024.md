@@ -31,7 +31,7 @@ The workshop is free of charge and includes lunch, coffee, and Swedish fika. The
 
 **10.30** **Welcome and Introduction to Miking**.
 
-Speaker: David Broman 
+Speaker: David Broman [[slides](/workshop-2024/intro-miking-workshop-2024.pdf)]
 
 
 **11.15** **Coffee break**
@@ -44,8 +44,8 @@ Speaker: Viktor Palmkvist
 
 **13:00** **Session 1: Next generation of Miking: Types and Tool Support**
 
-* Title: *Language Composition through Product Extension and Its Use Cases for DSL Development*. Speaker: Marten Voorberg
-* Title: *Empowering DSLs with Automated Language Server Generation*. Speaker: Didrik Munther
+* Title: *Language Composition through Product Extension and Its Use Cases for DSL Development*. Speaker: Marten Voorberg [[slides](/workshop-2024/miking-product-extension.pdf)]
+* Title: *Empowering DSLs with Automated Language Server Generation*. Speaker: Didrik Munther [[slides](/workshop-2024/miking-lsp.pdf)]
 
 **13:30** **Hacking session 1: Getting started and playing around**
 
@@ -54,7 +54,7 @@ Organizers: The Miking core team
 **14:15** **Session 2: Optimized and Efficient Domain-Specific Languages**
 
 * Title: *Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers*. Speaker: Oscar Ericsson
-* Title: *Trellis: A Domain-Specific Language for Hidden Markov Models with Sparse Transitions*. Speaker: Lars Hummelgren
+* Title: *Trellis: A Domain-Specific Language for Hidden Markov Models with Sparse Transitions*. Speaker: Lars Hummelgren [[slides](/workshop-2024/miking-trellis.pdf)]
 * Title: *Automated Inference Optimizations in the Probabilistic Programming Language Miking CorePPL*. Speaker: Gizem Caylak
 
 **15.00** **Coffee break**
@@ -63,7 +63,7 @@ Organizers: The Miking core team
 
 * Title: *Phylogenetic Inference Problems: a Brief Introduction*. Speaker: Fredrik Ronquist
 * Title: *TreePPL: a DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov
-* Title: *Implementing a Complex Biological Model in TreePPL*. Speaker: Mariana P Braga
+* Title: *Implementing a Complex Biological Model in TreePPL*. Speaker: Mariana P Braga [[slides](/workshop-2024/miking-treeppl-complex-model.pdf)]
 * Title: *Rapid prototyping with TreePPL using Jupyter Notebook*. Speaker: Jan Kudlicka
  
 **16.30** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
