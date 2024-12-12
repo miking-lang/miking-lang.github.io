@@ -53,7 +53,7 @@ Organizers: The Miking core team
 
 **14:15** **Session 2: Optimized and Efficient Domain-Specific Languages**
 
-* Title: *Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers*. Speaker: Oscar Ericsson
+* Title: *Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers*. Speaker: Oscar Ericsson [[slides](/workshop-2024/miking-peadae.pdf)]
 * Title: *Trellis: A Domain-Specific Language for Hidden Markov Models with Sparse Transitions*. Speaker: Lars Hummelgren [[slides](/workshop-2024/miking-trellis.pdf)]
 * Title: *Automated Inference Optimizations in the Probabilistic Programming Language Miking CorePPL*. Speaker: Gizem Caylak
 
