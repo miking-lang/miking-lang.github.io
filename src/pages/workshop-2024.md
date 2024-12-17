@@ -64,7 +64,7 @@ Organizers: The Miking core team
 * Title: *Phylogenetic Inference Problems: a Brief Introduction*. Speaker: Fredrik Ronquist
 * Title: *TreePPL: a DSL in Miking for Phyologenetics*. Speaker: Viktor Senderov [[slides](/workshop-2024/miking-treeppl.pdf)]
 * Title: *Implementing a Complex Biological Model in TreePPL*. Speaker: Mariana P Braga [[slides](/workshop-2024/miking-treeppl-complex-model.pdf)]
-* Title: *Rapid prototyping with TreePPL using Jupyter Notebook*. Speaker: Jan Kudlicka
+* Title: *Rapid prototyping with TreePPL using Jupyter Notebook*. Speaker: Jan Kudlicka [[slides](/workshop-2024/miking-treeppl-jupyter.pdf)]
  
 **16.30** **Hacking session 2: Try out your favorite DSL or hack on the compiler**
 
