@@ -2,10 +2,10 @@
 sidebar_position: 4
 ---
 
-# How to contribute
+# Contributing to Miking
 
-1. Before making a pull request please make sure that all tests pass. Run
-appropriate tests as described above.
+1. Before making a pull request please make sure that all tests in
+   `make test` pass. See [here](../reference/make-targets#testing).
 
 2. Make sure you follow the conventions declared in the
 [wiki](https://github.com/miking-lang/miking/wiki/Conventions).
