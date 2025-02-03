@@ -509,7 +509,7 @@ utest tensorGetExn t0 [] with 'b' in
 ()
 ```
 
-The file [tensor.mc](stdlib/tensor.mc) contains a wide variety of useful tensor
+The file [tensor.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/tensor.mc) contains a wide variety of useful tensor
 functions. We can import it into a program using the `include`
 keyword (more on this [later](#MLang)). We can construct a rank 1
 tensor (i.e. vector) as
