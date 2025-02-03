@@ -195,25 +195,25 @@ uses the built-in function `print` which has the type `String -> ()`, i.e., it p
 The current documentation of intrinsics is implicit via code
 containing `utest` expressions. Please see the following files:
 
-* [Boolean intrinsics](test/mexpr/bool-test.mc)
+* [Boolean intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/bool-test.mc)
 
-* [Integer intrinsics](test/mexpr/int-test.mc)
+* [Integer intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/int-test.mc)
 
-* [Floating-point number intrinsics](test/mexpr/float-test.mc)
+* [Floating-point number intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/float-test.mc)
 
-* [Strings intrinsics ](test/mexpr/string-test.mc)
+* [Strings intrinsics ](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/string-test.mc)
 
-* [Sequences intrinsics ](test/mexpr/seq-test.mc)
+* [Sequences intrinsics ](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/seq-test.mc)
 
-* [Side effect (printing, I/O, debugging etc.) intrinsics](test/mexpr/effects.mc)
+* [Side effect (printing, I/O, debugging etc.) intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/effects.mc)
 
-* [Symbol intrinsics](test/mexpr/symbs.mc)
+* [Symbol intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/symbs.mc)
 
-* [Reference intrinsics](test/mexpr/references.mc)
+* [Reference intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/references.mc)
 
-* [Random number generation intrinsics](test/mexpr/random-test.mc)
+* [Random number generation intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/random-test.mc)
 
-* [Time intrinsics](test/mexpr/time.mc)
+* [Time intrinsics](https://github.com/miking-lang/miking/blob/develop/src/test/mexpr/time.mc)
 
 
 ### Let Expressions
@@ -628,7 +628,7 @@ utest tensorGetExn t0 [] with 'b' in
 ()
 ```
 
-The file [tensor.mc](stdlib/tensor.mc) contains a wide variety of useful tensor
+The file [tensor.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/tensor.mc) contains a wide variety of useful tensor
 functions. We can import it into a program using the `include`
 keyword (more on this [later](#MLang)). We can construct a rank 1
 tensor (i.e. vector) as
@@ -1130,15 +1130,15 @@ in an early stage of development. The example below only covers the case where
 OCaml is the target language.
 
 You can find an example of externals definitions in
-[stdlib/ext/math-ext.mc](stdlib/ext/math-ext.mc) and
-[stdlib/ext/math-ext.ext-ocaml.mc](stdlib/ext/math-ext.ext-ocaml.mc).
+[stdlib/ext/math-ext.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext/math-ext.mc) and
+[stdlib/ext/math-ext.ext-ocaml.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext/math-ext.ext-ocaml.mc).
 
 For the sake of this example, lets say we want to define the exponential
 function and that miking targeting OCaml should use `Float.exp` from OCaml's
 standard library for its implementation.
 
-We first define the external in a file under [stdlib/ext](stdlib/ext), let's
-say [stdlib/ext/math-ext.mc](stdlib/ext/math-ext.mc), as
+We first define the external in a file under [stdlib/ext](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext), let's
+say [stdlib/ext/math-ext.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext/math-ext.mc), as
 
 ```
 external externalExp : Float -> Float
@@ -1165,7 +1165,7 @@ partially applied.
 As a temporary solution, the next step is to supply a list of implementation for
 our external in the language we target for compilation (in this case OCaml). We
 do this by creating a file
-[stdlib/ext/math-ext.ext-ocaml.mc](stdlib/ext/math-ext.ext-ocaml.mc)
+[stdlib/ext/math-ext.ext-ocaml.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext/math-ext.ext-ocaml.mc)
 and in it we define a map from external
 identifiers to a list of implementations as follows:
 
@@ -1191,7 +1191,7 @@ let mathExtMap =
 This map associates the `externalExp` external to a list of expressions in the
 target language, which here only has one element, namely the function
 `Float.exp` from OCaml's standard library. The field `ty` encode the OCaml type
-of this value (see [stdlib/ocaml/ast.mc](stdlib/ocaml/ast.mc)), which is needed
+of this value (see [stdlib/ocaml/ast.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ocaml/ast.mc)), which is needed
 to convert values between miking and OCaml. In the case where you have multiple
 implementations, the compiler will try to pick the implementation which gives
 the least amount of overhead when converting to and from OCaml values. The
@@ -1201,11 +1201,11 @@ none are needed since it is part of the standard library. If let's say we wanted
 to use `Float.exp` from a library `foo`, then we should instead have the field
 `libraries = ["foo"]`. Finally, we need to add `mathExtMap` to
 `globalExternalImplsMap` in
-[stdlib/ocaml/external-includes.mc](stdlib/ocaml/external-includes.mc).
+[stdlib/ocaml/external-includes.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ocaml/external-includes.mc).
 
 ### Conversion between values
 Conversion between Miking values and OCaml values is defined in
-[stdlib/ocaml/external.mc](stdlib/ocaml/external.mc). Since externals are in an
+[stdlib/ocaml/external.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ocaml/external.mc). Since externals are in an
 early stage of development these conversions are not complete and subject to
 change.
 
@@ -1255,16 +1255,16 @@ type MyType
 ```
 then no conversion is performed to and from this type.
 
-Please consult [stdlib/ext/ext-test.mc](stdlib/ext/ext-test.mc) and
-[stdlib/ext/ext-test.ext-ocaml.mc](stdlib/ext/ext-test.ext-ocaml.mc), for more
+Please consult [stdlib/ext/ext-test.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext/ext-test.mc) and
+[stdlib/ext/ext-test.ext-ocaml.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext/ext-test.ext-ocaml.mc), for more
 examples.
 
 ### Sundials
 A more involved example on the use of externals is an interface to the
 [Sundials](https://computing.llnl.gov/projects/sundials) numerical DAE solver.
 You find the implementation in
-[stdlib/sundials/sundials.mc](stdlib/sundials/sundials.mc) and
-[stdlib/sundials/sundials.ext-ocaml.mc](stdlib/sundials/sundials.ext-ocaml.mc).
+[stdlib/sundials/sundials.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/sundials/sundials.mc) and
+[stdlib/sundials/sundials.ext-ocaml.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/sundials/sundials.ext-ocaml.mc).
 Note that these externals depends on the library `sundialsml`.
 
 
@@ -1314,8 +1314,8 @@ To install for the current user, run `make install` as usual.
 ### Ipopt
 Another example use of externals is an interface to the constrained Non-Linear
 Program solver [Ipopt](https://coin-or.github.io/Ipopt/). This interface is
-defined in [stdlib/ipopt/ipopt.mc](stdlib/ipopt/ipopt.mc) and
-[stdlib/ipopt/ipopt.ext-ocaml.mc](stdlib/ipopt/ipopt.ext-ocaml.mc). This library
+defined in [stdlib/ipopt/ipopt.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ipopt/ipopt.mc) and
+[stdlib/ipopt/ipopt.ext-ocaml.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ipopt/ipopt.ext-ocaml.mc). This library
 depends on both the OCaml library [ipoptml](https://github.com/br4sco/ipoptml)
 and the ipopt c library.
 
@@ -1467,7 +1467,7 @@ using `mi compile --accelerate example.mc`, the `map` function `f` is applied
 to the elements of `s` in parallel, on the GPU. In this case, as we make use of
 `map`, it will execute using the Futhark backend.
 
-See the [accelerate examples](test/examples/accelerate) directory for more
+See the [accelerate examples](https://github.com/miking-lang/miking/blob/develop/src/test/examples/accelerate) directory for more
 examples.
 
 ### Sequence sizes
@@ -1589,7 +1589,7 @@ mi tune sort.mc
 The autotuner uses offline profiling in order to assign the holes values such
 that the execution time of the program is minimized. Available command-line
 options (for setting search strategy, stopping condition, etc.) are listed in
-`stdlib/tuning/tune-options.mc`.
+`https://github.com/miking-lang/miking/blob/develop/src/stdlib/tuning/tune-options.mc`.
 
 The result of `mi tune` is a tune file, which by default is written to
 `sort.tune` (if your program is called `sort.mc`). To compile the program using
@@ -1670,7 +1670,7 @@ For convenience, `make lint` will run `dune build @fmt` and `make fix` will run
 ### Git Blame
 
 Since automatic code formatting commits will obscure `git blame` we maintain a
-file  [.git-blame-ignore-revs](.git-blame-ignore-revs) that will contain the
+file  [.git-blame-ignore-revs](https://github.com/miking-lang/miking/blob/develop/.git-blame-ignore-revs) that will contain the
 commit hashes of code formatting commits. We can then run `git blame`, ignoring
 these commits as:
 

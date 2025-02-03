@@ -10,7 +10,7 @@ atomic operations and threads running on multiple cores.
 The parallel programming primitives consist of atomic references and functions
 for creating and synchronizing threads. In addition to the examples below, more
 documentation can be found in the standard library at
-[stdlib/multicore](stdlib/multicore/).
+[stdlib/multicore](https://github.com/miking-lang/miking/blob/develop/src/stdlib/multicore/).
 
 ## Atomic References
 
@@ -18,7 +18,7 @@ Atomic references are similar to ordinary references, except that operations
 performed on them are *atomic*, which means that no other execution thread can
 interfere with the result. In other words, they are safe to use in
 multi-threaded execution. Atomic references are provided in
-[multicore/atomic.mc](stdlib/multicore/atomic.mc).
+[multicore/atomic.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/multicore/atomic.mc).
 
 `atomicMake` creates a new atomic reference and gives it an initial value. The
 value of the atomic reference can be read by `atomicGet`:
@@ -65,7 +65,7 @@ utest atomicFetchAndAdd a (subi 0 45) with 3 in
 ## Multi-Threaded Execution
 
 Functions for handling threads are provided in
-[multicore/threads.mc](stdlib/multicore/threads.mc).
+[multicore/threads.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/multicore/threads.mc).
 The following example program spawns 10 threads that compete for printing their
 IDs:
 
@@ -110,8 +110,8 @@ different runs.
 
 Externals for thread synchronization in the form of mutual exclusion locks and
 condition variables are defined in
-[multicore/mutex.mc](stdlib/multicore/mutex.mc) and
-[multicore/cond.mc](stdlib/multicore/cond.mc), respectively.
+[multicore/mutex.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/multicore/mutex.mc) and
+[multicore/cond.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/multicore/cond.mc), respectively.
 
 ## Probability distributions
-Externals for probability distributions are defined in `stdlib/ext/dist-ext.mc`. To use these, you must install the `opam` package `owl` (i.e., `opam install owl`)
+Externals for probability distributions are defined in `https://github.com/miking-lang/miking/blob/develop/src/stdlib/ext/dist-ext.mc`. To use these, you must install the `opam` package `owl` (i.e., `opam install owl`)

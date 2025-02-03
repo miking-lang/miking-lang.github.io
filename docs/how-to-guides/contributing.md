@@ -34,7 +34,7 @@ For convenience, `make lint` will run `dune build @fmt` and `make fix` will run
 ## Git Blame
 
 Since automatic code formatting commits will obscure `git blame` we maintain a
-file  [.git-blame-ignore-revs](.git-blame-ignore-revs) that will contain the
+file  [.git-blame-ignore-revs](https://github.com/miking-lang/miking/blob/develop/.git-blame-ignore-revs) that will contain the
 commit hashes of code formatting commits. We can then run `git blame`, ignoring
 these commits as:
 
