@@ -1,14 +1,32 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Examining large ASTs as JSON
 
 Sometimes the ASTs you wish to examine are too large for the various
-`--debug-*` flags to be viable, or you want the ability to
-programmatically explore it outside the compiler.
+`--debug-*` flags that pretty-print code to be viable, or you want the
+ability to programmatically explore it outside the compiler.
 
-This can be achieved using `mexpr/json-debug.mc`, which is a small
-library in the standard library. Usage centers around a few functions
-like `exprToJson`, `typeToJson`, etc., To use these functions you need
-include `mexpr/json-debug.mc` and `use` the `MExprToJson` language
-fragment:
+<Tabs>
+<TabItem value="debug-phases" label="In the compiler" default>
+
+In the compiler itself this can be achieved with the `--debug-phase
+<phase-name>` flag, which will print a JSON representation of the AST
+after the given phase. To see which phases are available, run with
+`--debug-phases`, which will print a list of phases in order, as well
+as the amount of time taken for each.
+
+</TabItem>
+
+<TabItem value="json-debug" label="Using json-debug.mc">
+
+When working on another language, or debugging inside some
+transformation not already covered by `--debug-phase`, you can use the
+underlying library directly. The relevant code can be located in
+`mexpr/json-debug.mc`, which is a small library inside the standard
+library. Usage centers around a few functions like `exprToJson`,
+`typeToJson`, etc., To use these functions you need include
+`mexpr/json-debug.mc` and `use` the `MExprToJson` language fragment:
 
 ```mc
 -- Add this include to the file
@@ -16,7 +34,7 @@ include "mexpr/json-debug.mc"
 
 -- Later:
 let ast = /- Some code producing an AST to examine -/ in
-printLn (json2string (use MExprToJson in exprToJson ast));
+printLn (printJsonLn (use MExprToJson in exprToJson ast));
 -- ... more code that keeps processing the AST ...
 ```
 
@@ -28,6 +46,9 @@ the corresponding `sem`s (`exprToJson` for constructors in `Expr`,
 etc.). See `stdlib/mexpr/json-debug.mc` for examples.
 
 :::
+
+</TabItem>
+</Tabs>
 
 When run, this code will typically print a *very* large json object,
 thus it's typically useful to redirect the output to a file for later
