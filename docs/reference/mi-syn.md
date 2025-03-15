@@ -104,7 +104,7 @@ A language defined by a `.syn` file has a name, a number of syntactic types, tok
 
 :::info
 
-The syntax of a `.syn` file is itself defined in [a `.syn` file](https://github.com/miking-lang/miking/blob/develop/stdlib/parser/selfhost.syn).
+The syntax of a `.syn` file is itself defined in [a `.syn` file](https://github.com/miking-lang/miking/blob/develop/src/stdlib/parser/selfhost.syn).
 
 :::
 
@@ -169,7 +169,7 @@ token LName {
 
 A `token` declaration extends the generated lexer with tokens and how to lex them. Each token is declared in its own language fragment in an `.mc` file, which can be included via an [`include` declaration](#include).
 
-For examples of lexing language fragments, see [parser/lexer.mc](https://github.com/miking-lang/miking/blob/develop/stdlib/parser/lexer.mc) in the Miking standard library. All language fragments in `parser/lexer.mc` are available in a `.syn` without an explicit `include`, though they still require `token` declarations to be usable in the grammar.
+For examples of lexing language fragments, see [parser/lexer.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/parser/lexer.mc) in the Miking standard library. All language fragments in `parser/lexer.mc` are available in a `.syn` without an explicit `include`, though they still require `token` declarations to be usable in the grammar.
 
 Each token declaration can have a number of properties:
 
