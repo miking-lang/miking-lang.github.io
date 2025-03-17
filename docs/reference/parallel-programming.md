@@ -65,7 +65,7 @@ utest atomicFetchAndAdd a (subi 0 45) with 3 in
 ## Multi-Threaded Execution
 
 Functions for handling threads are provided in
-[multicore/threads.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/multicore/threads.mc).
+[multicore/thread.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/multicore/thread.mc).
 The following example program spawns 10 threads that compete for printing their
 IDs:
 
