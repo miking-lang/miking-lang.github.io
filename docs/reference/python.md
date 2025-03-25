@@ -24,12 +24,6 @@ NOTE: Currently, there seems to be a problem with the current OPAM bindings with
 opam pin stdcompat 15
 ```
 
-To run the Python-specific test suite:
-
-```
-make test-boot-py
-```
-
 To install for the current user, run `make install` as usual.
 
 ## Usage

@@ -189,7 +189,7 @@ make
 To run the sundials-specific test suite, use the command:
 
 ```
-make test-sundials
+misc/test sundials
 ```
 
 To install for the current user, run `make install` as usual.
@@ -265,10 +265,11 @@ removed as these currently do not support externals at all.
 #### Test organization
 `make test-all` runs all tests, disabling utest pruning for compiled files
 (i.e. if dependencies are not met, you get an error). The recepie `make
-test-all-prune-utests` runs all tests but prunes non-supported utests which is
+test` runs all tests but non-supported tests which is
 handy if your system only meet the dependencies of a subset of the
 externals. Interpreted files are always pruned of external dependent
-utests. Please consult the makefiles for more details.
+utests. Please consult the [testing page](/docs/reference/testing-miking)
+or makefiles for more details.
 
 #### Authoring new external libraries
 To maintain the flexibility of the test organization, future external libraries
