@@ -194,38 +194,38 @@ make test-sundials
 
 To install for the current user, run `make install` as usual.
 
-
-### Ipopt
-Another example use of externals is an interface to the constrained Non-Linear
-Program solver [Ipopt](https://coin-or.github.io/Ipopt/). This interface is
-defined in [stdlib/ipopt/ipopt.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ipopt/ipopt.mc) and
-[stdlib/ipopt/ipopt.ext-ocaml.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ipopt/ipopt.ext-ocaml.mc). This library
-depends on both the OCaml library [ipoptml](https://github.com/br4sco/ipoptml)
-and the ipopt c library.
-
-To use this library you need to do the following:
-
-Install the ipopt c library, which you can do on ubuntu 20.04 with
-```
-sudo apt-get install coinor-libipopt-dev
-```
-
-Install dependencies for [ipoptml](https://github.com/br4sco/ipoptml),
-```
-opam install ctypes ctypes-foreign
-```
-
-Clone the [ipoptml](https://github.com/br4sco/ipoptml) repo and in its root run
-```
-dune build
-dune install
-```
-
-You can then test the solver in Miking with
-
-```
-make test-ipopt
-```
+<!-- NOTE(wmuth, 2025-03-25): Commenting this out since the ipopt stdlib is removed in PR #929. -->
+<!-- ### Ipopt -->
+<!-- Another example use of externals is an interface to the constrained Non-Linear -->
+<!-- Program solver [Ipopt](https://coin-or.github.io/Ipopt/). This interface is -->
+<!-- defined in [stdlib/ipopt/ipopt.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ipopt/ipopt.mc) and -->
+<!-- [stdlib/ipopt/ipopt.ext-ocaml.mc](https://github.com/miking-lang/miking/blob/develop/src/stdlib/ipopt/ipopt.ext-ocaml.mc). This library -->
+<!-- depends on both the OCaml library [ipoptml](https://github.com/br4sco/ipoptml) -->
+<!-- and the ipopt c library. -->
+<!---->
+<!-- To use this library you need to do the following: -->
+<!---->
+<!-- Install the ipopt c library, which you can do on ubuntu 20.04 with -->
+<!-- ``` -->
+<!-- sudo apt-get install coinor-libipopt-dev -->
+<!-- ``` -->
+<!---->
+<!-- Install dependencies for [ipoptml](https://github.com/br4sco/ipoptml), -->
+<!-- ``` -->
+<!-- opam install ctypes ctypes-foreign -->
+<!-- ``` -->
+<!---->
+<!-- Clone the [ipoptml](https://github.com/br4sco/ipoptml) repo and in its root run -->
+<!-- ``` -->
+<!-- dune build -->
+<!-- dune install -->
+<!-- ``` -->
+<!---->
+<!-- You can then test the solver in Miking with -->
+<!---->
+<!-- ``` -->
+<!-- misc/test ipopt -->
+<!-- ``` -->
 
 ### External Dependent Utests Pruning
 As part of the parsing (see `prune_external_utests` in `parserutils.ml` for
