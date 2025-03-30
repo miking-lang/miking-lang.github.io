@@ -11,11 +11,11 @@ This is as of writing a not public page on intrinsic documentation.
 | **`divi`** | Division          | `Int -> Int -> Int` | `divi x y` computes x / y. |
 | **`modi`** | Modulus           | `Int -> Int -> Int` | `modi x y` computes x % y. |
 | **`negi`** | Negation          | `Int -> Int`        | `negi x` computes -x. |
-| **`slli`** | Logical Shift Left    | `Int -> Int -> Int` | `slli x y` computes x << y, disregarding any information about the sign of x. Example: `slli 5 2` returns `20`. |
+| **`slli`** | Logical Shift Left    | `Int -> Int -> Int` | `slli x y` computes x \<< y, disregarding any information about the sign of x. Example: `slli 5 2` returns `20`. |
 | **`srli`** | Logical Shift Right   | `Int -> Int -> Int` | `srli x y` computes x >> y, disregarding any information about the sign of x. Example: `srli 5 2` returns `1`. |
 | **`srai`** | Arithmetic Shift Right   | `Int -> Int -> Int` | `srai x y` computes x >> y, retaining information about the sign of x. Example: `srli (negi 5) 2` returns `-2`. |
-| **`lti`** | Less-Than (<) | <nobr>`Int -> Int -> Bool`</nobr> | `lti x y` returns `true` if x < y, otherwise `false`. |
-| **`leqi`** | Less or Equal (<=) | `Int -> Int -> Bool` | `leqi x y` returns `true` if x <= y, otherwise `false`. |
+| **`lti`** | Less-Than (\<) | <nobr>`Int -> Int -> Bool`</nobr> | `lti x y` returns `true` if x < y, otherwise `false`. |
+| **`leqi`** | Less or Equal (\<=) | `Int -> Int -> Bool` | `leqi x y` returns `true` if x \<= y, otherwise `false`. |
 | **`gti`** | Greater-Than (>) | `Int -> Int -> Bool` | `gti x y` returns `true` if x > y, otherwise `false`. |
 | **`geqi`** | <nobr>Greater or Equal (>=)</nobr> | `Int -> Int -> Bool` | `geqi x y` returns `true` if x >= y, otherwise `false`. |
 | **`eqi`** | Equal (==) | `Int -> Int -> Bool` | `eqi x y` returns `true` if x == y, otherwise `false`. |
@@ -30,8 +30,8 @@ This is as of writing a not public page on intrinsic documentation.
 | **`mulf`** | Multiplication    | `Float -> Float -> Float` | `mulf x y` computes x * y. |
 | **`divf`** | Division          | `Float -> Float -> Float` | `divf x y` computes x / y. |
 | **`negf`** | Negation          | `Float -> Float -> Float` | `negf x y` computes -x. |
-| **`ltf`** | Less-Than (<) | <nobr>`Float -> Float -> Bool`</nobr> | `ltf x y` returns `true` if x < y, otherwise `false`. |
-| **`leqf`** | Less or Equal (<=) | `Float -> Float -> Bool` | `leqf x y` returns `true` if x <= y, otherwise `false`. |
+| **`ltf`** | Less-Than (\<\) | <nobr>`Float -> Float -> Bool`</nobr> | `ltf x y` returns `true` if x < y, otherwise `false`. |
+| **`leqf`** | Less or Equal (\<=) | `Float -> Float -> Bool` | `leqf x y` returns `true` if x \<= y, otherwise `false`. |
 | **`gtf`** | Greater-Than (>) | `Float -> Float -> Bool` | `gtf x y` returns `true` if x > y, otherwise `false`. |
 | **`geqf`** | <nobr>Greater or Equal (>=)</nobr> | `Float -> Float -> Bool` | `geqf x y` returns `true` if x >= y, otherwise `false`. |
 | **`eqf`** | Equal (==) | `Float -> Float -> Bool` | `eqf x y` returns `true` if x == y, otherwise `false`. |
