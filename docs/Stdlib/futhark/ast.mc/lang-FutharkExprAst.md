@@ -1,0 +1,320 @@
+import { DocBlock, Signature, Description, ToggleWrapper, S} from '@site/docs/Stdlib/MikingDocGen';
+import Search from '@site/docs/Stdlib/Search';
+
+<Search />
+# FutharkExprAst  
+  
+
+  
+  
+  
+## Syntaxes  
+  
+
+          <DocBlock title="FutExpr" kind="syn">
+
+```mc
+syn FutExpr
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+syn FutExpr =
+  | FEVar { ident : Name, ty : FutType, info : Info }
+  | FEVarExt { ident : String, ty : FutType, info : Info }
+  | FESizeCoercion { e : FutExpr, ty : FutType, info : Info }
+  | FESizeEquality { x1 : Name, d1 : Int, x2 : Name, d2 : Int, ty : FutType,
+                     info : Info }
+  | FEProj { target : FutExpr, label : SID, ty : FutType, info : Info }
+  | FERecord { fields : Map SID FutExpr, ty : FutType, info : Info }
+  | FERecordUpdate { rec : FutExpr, key : SID, value : FutExpr, ty : FutType,
+                     info : Info }
+  | FEArray { tms : [FutExpr], ty : FutType, info : Info }
+  | FEArrayAccess { array : FutExpr, index : FutExpr, ty : FutType,
+                    info : Info }
+  | FEArrayUpdate { array : FutExpr, index : FutExpr, value : FutExpr,
+                    ty : FutType, info : Info }
+  | FEArraySlice { array : FutExpr, startIdx : FutExpr, endIdx : FutExpr,
+                   ty : FutType, info : Info }
+  | FEConst { val : FutConst, ty : FutType, info : Info }
+  | FELam { ident : Name, body : FutExpr, ty : FutType, info : Info }
+  | FEApp { lhs : FutExpr, rhs : FutExpr, ty : FutType, info : Info }
+  | FELet { ident : Name, tyBody : FutType, body : FutExpr, inexpr : FutExpr,
+            ty : FutType, info : Info }
+  | FEIf { cond : FutExpr, thn : FutExpr, els : FutExpr, ty : FutType,
+           info : Info }
+  | FEForEach { param : (FutPat, FutExpr), loopVar : Name, seq : FutExpr,
+                body : FutExpr, ty : FutType, info : Info }
+  | FEMatch { target : FutExpr, cases : [(FutPat, FutExpr)], ty : FutType,
+              info : Info }
+```
+</ToggleWrapper>
+</DocBlock>
+
+## Semantics  
+  
+
+          <DocBlock title="infoFutTm" kind="sem">
+
+```mc
+sem infoFutTm : FutharkExprAst_FutExpr -> Info
+```
+
+<Description>{`No documentation available here.No documentation available here.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem infoFutTm =
+  | FEVar t -> t.info
+  | FEVarExt t -> t.info
+  | FESizeCoercion t -> t.info
+  | FESizeEquality t -> t.info
+  | FEProj t -> t.info
+  | FERecord t -> t.info
+  | FERecordUpdate t -> t.info
+  | FEArray t -> t.info
+  | FEArrayAccess t -> t.info
+  | FEArrayUpdate t -> t.info
+  | FEArraySlice t -> t.info
+  | FEConst t -> t.info
+  | FELam t -> t.info
+  | FEApp t -> t.info
+  | FELet t -> t.info
+  | FEIf t -> t.info
+  | FEForEach t -> t.info
+  | FEMatch t -> t.info
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="withInfoFutTm" kind="sem">
+
+```mc
+sem withInfoFutTm : Info -> FutharkExprAst_FutExpr -> FutharkExprAst_FutExpr
+```
+
+<Description>{`No documentation available here.No documentation available here.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem withInfoFutTm info =
+  | FEVar t -> FEVar {t with info = info}
+  | FEVarExt t -> FEVarExt {t with info = info}
+  | FESizeCoercion t -> FESizeCoercion {t with info = info}
+  | FESizeEquality t -> FESizeEquality {t with info = info}
+  | FEProj t -> FEProj {t with info = info}
+  | FERecord t -> FERecord {t with info = info}
+  | FERecordUpdate t -> FERecordUpdate {t with info = info}
+  | FEArray t -> FEArray {t with info = info}
+  | FEArrayAccess t -> FEArrayAccess {t with info = info}
+  | FEArrayUpdate t -> FEArrayUpdate {t with info = info}
+  | FEArraySlice t -> FEArraySlice {t with info = info}
+  | FEConst t -> FEConst {t with info = info}
+  | FELam t -> FELam {t with info = info}
+  | FEApp t -> FEApp {t with info = info}
+  | FELet t -> FELet {t with info = info}
+  | FEIf t -> FEIf {t with info = info}
+  | FEForEach t -> FEForEach {t with info = info}
+  | FEMatch t -> FEMatch {t with info = info}
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="tyFutTm" kind="sem">
+
+```mc
+sem tyFutTm : FutharkExprAst_FutExpr -> FutharkTypeAst_FutType
+```
+
+<Description>{`No documentation available here.No documentation available here.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem tyFutTm =
+  | FEVar t -> t.ty
+  | FEVarExt t -> t.ty
+  | FESizeCoercion t -> t.ty
+  | FESizeEquality t -> t.ty
+  | FEProj t -> t.ty
+  | FERecord t -> t.ty
+  | FERecordUpdate t -> t.ty
+  | FEArray t -> t.ty
+  | FEArrayAccess t -> t.ty
+  | FEArrayUpdate t -> t.ty
+  | FEArraySlice t -> t.ty
+  | FEConst t -> t.ty
+  | FELam t -> t.ty
+  | FEApp t -> t.ty
+  | FELet t -> t.ty
+  | FEIf t -> t.ty
+  | FEForEach t -> t.ty
+  | FEMatch t -> t.ty
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="withTypeFutTm" kind="sem">
+
+```mc
+sem withTypeFutTm : FutharkTypeAst_FutType -> FutharkExprAst_FutExpr -> FutharkExprAst_FutExpr
+```
+
+<Description>{`No documentation available here.No documentation available here.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem withTypeFutTm ty =
+  | FEVar t -> FEVar {t with ty = ty}
+  | FEVarExt t -> FEVarExt {t with ty = ty}
+  | FESizeCoercion t -> FESizeCoercion {t with ty = ty}
+  | FESizeEquality t -> FESizeEquality {t with ty = ty}
+  | FEProj t -> FEProj {t with ty = ty}
+  | FERecord t -> FERecord {t with ty = ty}
+  | FERecordUpdate t -> FERecordUpdate {t with ty = ty}
+  | FEArray t -> FEArray {t with ty = ty}
+  | FEArrayAccess t -> FEArrayAccess {t with ty = ty}
+  | FEArrayUpdate t -> FEArrayUpdate {t with ty = ty}
+  | FEArraySlice t -> FEArraySlice {t with ty = ty}
+  | FEConst t -> FEConst {t with ty = ty}
+  | FELam t -> FELam {t with ty = ty}
+  | FEApp t -> FEApp {t with ty = ty}
+  | FELet t -> FELet {t with ty = ty}
+  | FEIf t -> FEIf {t with ty = ty}
+  | FEForEach t -> FEForEach {t with ty = ty}
+  | FEMatch t -> FEMatch {t with ty = ty}
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="smapAccumL_FExpr_FExpr" kind="sem">
+
+```mc
+sem smapAccumL_FExpr_FExpr : all a. (a -> FutharkExprAst_FutExpr -> (a, FutharkExprAst_FutExpr)) -> a -> FutharkExprAst_FutExpr -> (a, FutharkExprAst_FutExpr)
+```
+
+<Description>{`No documentation available here.No documentation available here.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem smapAccumL_FExpr_FExpr f acc =
+  | FESizeCoercion t ->
+    match f acc t.e with (acc, e) in
+    (acc, FESizeCoercion {t with e = e})
+  | FEProj t ->
+    match f acc t.target with (acc, target) in
+    (acc, FEProj {t with target = target})
+  | FERecord t ->
+    match mapMapAccum (lam acc. lam. lam v. f acc v) acc t.fields with (acc, fields) in
+    (acc, FERecord {t with fields = fields})
+  | FERecordUpdate t ->
+    match f acc t.rec with (acc, rec) in
+    match f acc t.value with (acc, value) in
+    (acc, FERecordUpdate {{t with rec = rec} with value = value})
+  | FEArray t ->
+    match mapAccumL f acc t.tms with (acc, tms) in
+    (acc, FEArray {t with tms = tms})
+  | FEArrayAccess t ->
+    match f acc t.array with (acc, array) in
+    match f acc t.index with (acc, index) in
+    (acc, FEArrayAccess {{t with array = array} with index = index})
+  | FEArrayUpdate t ->
+    match f acc t.array with (acc, array) in
+    match f acc t.index with (acc, index) in
+    match f acc t.value with (acc, value) in
+    (acc, FEArrayUpdate {{{t with array = array}
+                             with index = index}
+                             with value = value})
+  | FEArraySlice t ->
+    match f acc t.array with (acc, array) in
+    match f acc t.startIdx with (acc, startIdx) in
+    match f acc t.endIdx with (acc, endIdx) in
+    (acc, FEArraySlice {{{t with array = array}
+                            with startIdx = startIdx}
+                            with endIdx = endIdx})
+  | FELam t ->
+    match f acc t.body with (acc, body) in
+    (acc, FELam {t with body = body})
+  | FEApp t ->
+    match f acc t.lhs with (acc, lhs) in
+    match f acc t.rhs with (acc, rhs) in
+    (acc, FEApp {{t with lhs = lhs} with rhs = rhs})
+  | FELet t ->
+    match f acc t.body with (acc, body) in
+    match f acc t.inexpr with (acc, inexpr) in
+    (acc, FELet {{t with body = body} with inexpr = inexpr})
+  | FEIf t ->
+    match f acc t.cond with (acc, cond) in
+    match f acc t.thn with (acc, thn) in
+    match f acc t.els with (acc, els) in
+    (acc, FEIf {{{t with cond = cond} with thn = thn} with els = els})
+  | FEForEach t ->
+    match f acc t.param.1 with (acc, paramExpr) in
+    match f acc t.seq with (acc, seq) in
+    match f acc t.body with (acc, body) in
+    (acc, FEForEach {{{t with param = (t.param.0, paramExpr)}
+                         with seq = seq}
+                         with body = body})
+  | FEMatch t ->
+    let caseFunc = lam acc. lam patExpr : (FutPat, FutExpr).
+      match f acc patExpr.1 with (acc, expr) in
+      (acc, (patExpr.0, expr))
+    in
+    match f acc t.target with (acc, target) in
+    match mapAccumL caseFunc acc t.cases with (acc, cases) in
+    (acc, FEMatch {{t with target = target} with cases = cases})
+  | t -> (acc, t)
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="smap_FExpr_FExpr" kind="sem">
+
+```mc
+sem smap_FExpr_FExpr : (FutharkExprAst_FutExpr -> FutharkExprAst_FutExpr) -> FutharkExprAst_FutExpr -> FutharkExprAst_FutExpr
+```
+
+<Description>{`No documentation available here.No documentation available here.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem smap_FExpr_FExpr f =
+  | t ->
+    match smapAccumL_FExpr_FExpr (lam. lam a. ((), f a)) () t with (_, e) in
+    e
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="sfold_FExpr_FExpr" kind="sem">
+
+```mc
+sem sfold_FExpr_FExpr : all a. (a -> FutharkExprAst_FutExpr -> a) -> a -> FutharkExprAst_FutExpr -> a
+```
+
+<Description>{`No documentation available here.No documentation available here.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem sfold_FExpr_FExpr f acc =
+  | t ->
+    match smapAccumL_FExpr_FExpr (lam acc. lam a. (f acc a, a)) acc t with (acc, _) in
+    acc
+```
+</ToggleWrapper>
+</DocBlock>
+

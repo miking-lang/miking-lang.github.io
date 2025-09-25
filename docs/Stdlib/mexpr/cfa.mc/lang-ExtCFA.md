@@ -1,0 +1,243 @@
+import { DocBlock, Signature, Description, ToggleWrapper, S} from '@site/docs/Stdlib/MikingDocGen';
+import Search from '@site/docs/Stdlib/Search';
+
+<Search />
+# ExtCFA  
+  
+
+  
+  
+  
+## Syntaxes  
+  
+
+          <DocBlock title="AbsVal" kind="syn">
+
+```mc
+syn AbsVal
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+syn AbsVal =
+  -- Abstract representation of externals. Handled in a similar way as
+  -- constants. We directly store the external arity in the abstract
+  -- value. Note that ANF eta expands all external definitions, so from the
+  -- perspective of CFA, externals are curried (need not be fully applied as in
+  -- standard MExpr).
+  -- NOTE(dlunde,2022-06-15): I'm not convinced the current approach for
+  -- handling externals is optimal. The additional \\`let\\` added by ANF to shadow
+  -- the original external definition is quite clunky. Maybe we can
+  -- incorporate the fact that externals are always fully applied into the
+  -- analysis somehow?
+  -- NOTE(2023-07-12,dlunde): Do we have higher-order externals and/or
+  -- externals returning functions (or constant functions) in Miking? If so,
+  -- I'm not sure how we should handle that (seems very difficult to have some
+  -- general mechanism for this). For now, we assume that externals are never
+  -- higher-order and do not return functions (or constant functions).
+  | AVExt { ext: IName, arity: Int, args: [IName] }
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="Constraint" kind="syn">
+
+```mc
+syn Constraint
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+syn Constraint =
+  -- {ext args} ⊆ lhs ⇒ {ext args lhs} ⊆ res
+  | CstrExtApp { lhs: IName, rhs : IName, res: IName }
+```
+</ToggleWrapper>
+</DocBlock>
+
+## Semantics  
+  
+
+          <DocBlock title="absValToString" kind="sem">
+
+```mc
+sem absValToString : Index_IndexMap -> PprintEnv -> CFABase_AbsVal -> (PprintEnv, String)
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem absValToString im (env: PprintEnv) =
+  | AVExt { ext = ext, args = args } ->
+    -- We ignore the arity (one can simply look up the ext to get the arity)
+    match mapAccumL (pprintVarIName im) env args with (env,args) in
+    let args = strJoin ", " args in
+    match pprintVarIName im env ext with (env,ext) in
+    (env, join [ext, "(", args, ")"])
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="cmpAbsValH" kind="sem">
+
+```mc
+sem cmpAbsValH : (CFABase_AbsVal, CFABase_AbsVal) -> Int
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem cmpAbsValH =
+  | (AVExt lhs, AVExt rhs) ->
+    -- We ignore the arity (if ext is the same, arity is the same)
+    let cmp = subi lhs.ext rhs.ext in
+    if eqi 0 cmp then seqCmp subi lhs.args rhs.args
+    else cmp
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="cmpConstraintH" kind="sem">
+
+```mc
+sem cmpConstraintH : (CFABase_Constraint, CFABase_Constraint) -> Int
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem cmpConstraintH =
+  | (CstrExtApp { lhs = lhs1, rhs = rhs1, res = res1 },
+     CstrExtApp { lhs = lhs2, rhs = rhs2, res = res2 }) ->
+     let d = subi res1 res2 in
+     if eqi d 0 then
+       let d = subi lhs1 lhs2 in
+       if eqi d 0 then subi rhs1 rhs2
+       else d
+     else d
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="initConstraint" kind="sem">
+
+```mc
+sem initConstraint : CFA_CFAGraph -> CFABase_Constraint -> CFA_CFAGraph
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem initConstraint (graph: CFAGraph) =
+  | CstrExtApp r & cstr -> initConstraintName r.lhs graph cstr
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="propagateConstraint" kind="sem">
+
+```mc
+sem propagateConstraint : (IName, CFABase_AbsVal) -> CFA_CFAGraph -> CFABase_Constraint -> CFA_CFAGraph
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem propagateConstraint (update: (IName,AbsVal)) (graph: CFAGraph) =
+  | CstrExtApp { lhs = lhs, rhs = rhs, res = res } ->
+    match update.1
+    with AVExt ({ ext = ext, args = args, arity = arity } & ave) then
+      let args = snoc args rhs in
+      if eqi arity (length args) then
+        -- Last application
+        -- TODO(dlunde,2022-06-15): We currently do nothing here. Optimally, we
+        -- would like to delegate to a \\`propagateConstraintExt\\` here, similar
+        -- to constants. I'm not sure where/how \\`propagateConstraintExt\\` should
+        -- be defined.
+        graph
+      else
+        -- Curried application, add the new argument
+        addData graph (AVExt { ave with args = args }) res
+    else graph
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="collectConstraints" kind="sem">
+
+```mc
+sem collectConstraints : [CFA_GenFun] -> CFA_CFAGraphInit -> Ast_Expr -> CFA_CFAGraphInit
+```
+
+<Description>{`This ensures that \`collectConstraints\` does \_not\_ try to collect constraints  
+from \`let\`s immediately following externals. These \`let\`s are generated by  
+the ANF transform and define eta expanded versions of the externals \(so  
+that they can be curried\).`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem collectConstraints cgfs graph =
+  | TmDecl {decl = DeclExt _, inexpr = TmDecl {decl = DeclLet {ident = ident}, inexpr = inexpr}} & t ->
+    let graph = foldl (lam acc. lam f. f graph t) graph cgfs in
+    collectConstraints cgfs graph inexpr
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="generateConstraints" kind="sem">
+
+```mc
+sem generateConstraints : CFA_GenFun
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem generateConstraints graph =
+  | TmDecl {decl = DeclExt _, inexpr = TmDecl {decl = DeclLet {ident = ident}, inexpr = inexpr}} ->
+    -- NOTE(dlunde,2022-06-15): Currently, we do not generate any constraints
+    -- for externals. Similarly to constants, we probably want to delegate to
+    -- \\`generateConstraintsExts\\` here. As with \\`propagateConstraintExt\\`, it is
+    -- not clear where the \\`generateConstraintsExts\\` function should be defined.
+    --
+    graph
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="exprName" kind="sem">
+
+```mc
+sem exprName : Ast_Expr -> Name
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem exprName =
+  -- Skip the eta expanded let added by ANF,
+  | TmDecl {decl = DeclExt _, inexpr = TmDecl {decl = DeclLet _, inexpr = inexpr}} -> exprName inexpr
+```
+</ToggleWrapper>
+</DocBlock>
+
