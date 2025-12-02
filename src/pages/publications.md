@@ -7,7 +7,13 @@ The following vision paper is currently the main paper for Miking. Please cite t
 
 The following publications are related to the Miking effort, directly or indirectly:
 
-- Daniel Lundén, Lars Hummelgren, Jan Kudlicka, Oscar Eriksson, and David Broman. **Suspension Analysis and Selective Continuation-Passing Style for Universal Probabilistic Programming Languages**. In *Proceedings of the 33nd European Symposium on Programming (ESOP 2024)*, 2024. (to appear)
+-  Viktor Senderov, Jan Kudlicka, Daniel Lundén, Viktor Palmkvist, Mariana P. Braga, Emma Granqvist, Gizem Çaylak, Thimothée Virgoulay, David Broman, and Fredrik Ronquist. **TreePPL: A Universal Probabilistic Programming Language for Phylogenetics**. preprint, 2024.  [[Open Access, bioRxiv](https://www.biorxiv.org/content/10.1101/2023.10.10.561673v2)]
+
+- Gizem Caylak, Daniel Lundén, Viktor Senderov, and David Broman. **Statically and Dynamically Delayed Sampling for Typed Probabilistic Programming Languages**. In *Proceedings of the 17th ACM SIGPLAN International Conference on Software Language Engineering (SLE 2024)*, 2024. [[Open Access, ACM Link](https://dl.acm.org/doi/abs/10.1145/3687997.3695634)]
+
+- Lars Hummelgren, Viktor Palmkvist, Linnea Stjerna, Xuechun Xu, Joakim Jaldén, and David Broman. **Trellis: A Domain-Specific Language for Hidden Markov Models with Sparse Transitions**, In *Proceedings of the 17th ACM SIGPLAN International Conference on Software Language Engineering (SLE 2024)*, 2024. [[Open Access, ACM Link](https://dl.acm.org/doi/abs/10.1145/3687997.3695641)]
+
+- Daniel Lundén, Lars Hummelgren, Jan Kudlicka, Oscar Eriksson, and David Broman. **Suspension Analysis and Selective Continuation-Passing Style for Universal Probabilistic Programming Languages**. In *Proceedings of the 33nd European Symposium on Programming (ESOP 2024)*, 2024. [[Open Access, Springer Link](https://link.springer.com/chapter/10.1007/978-3-031-57267-8_12)]
 
 - Oscar Eriksson, Viktor Palmkvist, and David Broman. **Partial Evaluation of Automatic Differentiation for Differential-Algebraic Equations Solvers**. In *Proceedings of the 22nd ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences (GPCE 2023)*, 2023. [[Open Access, Springer Link](https://doi.org/10.1145/3624007.3624054)]
 

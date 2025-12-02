@@ -2,10 +2,10 @@
 sidebar_position: 4
 ---
 
-# How to contribute
+# Contributing to Miking
 
-1. Before making a pull request please make sure that all tests pass. Run
-appropriate tests as described above.
+1. Before making a pull request please make sure that all tests in
+   `make test` pass. See [here](../reference/make-targets#testing).
 
 2. Make sure you follow the conventions declared in the
 [wiki](https://github.com/miking-lang/miking/wiki/Conventions).
@@ -34,7 +34,7 @@ For convenience, `make lint` will run `dune build @fmt` and `make fix` will run
 ## Git Blame
 
 Since automatic code formatting commits will obscure `git blame` we maintain a
-file  [.git-blame-ignore-revs](.git-blame-ignore-revs) that will contain the
+file  [.git-blame-ignore-revs](https://github.com/miking-lang/miking/blob/develop/.git-blame-ignore-revs) that will contain the
 commit hashes of code formatting commits. We can then run `git blame`, ignoring
 these commits as:
 

@@ -277,7 +277,7 @@ For this to be used, the `SMC` macro call in main must be
 changed to: `SMC(sampleMean);`
 
 This example can be found in
-[`rootppl/models/simple-examples/coin_flip_mean.cu`](rootppl/models/simple-examples/coin_flip_mean.cu)
+[`rootppl/models/simple-examples/coin_flip_mean.cu`](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/simple-examples/coin_flip_mean.cu)
 and, being in the `rootppl` directory, compiled with:
 ```
 rppl models/simple-examples/coin_flip_mean.cu
@@ -301,7 +301,7 @@ no statements that alter the weights of the particles.
 Below follows some examples, these are all models that are defined within one single block.
 
 ##### Coin Flip Posterior
-Full example: [`rootppl/models/simple-examples/coin_flip.cu`](rootppl/models/simple-examples/coin_flip.cu)
+Full example: [`rootppl/models/simple-examples/coin_flip.cu`](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/simple-examples/coin_flip.cu)
 
 In this model, a bias for a coin is sampled from the prior beta distribution. Then we observe that the coin flip is true. This model thus infers the
 posterior distribution of the bias, conditioned on the observation.
@@ -316,7 +316,7 @@ BBLOCK(coinFlip, {
 ```
 
 ##### Gaussian Mixture Model
-Full example: [`rootppl/models/simple-examples/mixture.cu`](rootppl/models/simple-examples/mixture.cu)
+Full example: [`rootppl/models/simple-examples/mixture.cu`](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/simple-examples/mixture.cu)
 
 This model demonstrates an example of *stochastic branching*, meaning that different code is executed depending on the outcome of the sample.
 ```CUDA
@@ -333,7 +333,7 @@ BBLOCK(mixture, {
 ```
 
 ##### Geometric Distribution (Recursive)
-Full example: [`rootppl/models/simple-examples/geometric_recursive.cu`](rootppl/models/simple-examples/geometric_recursive.cu)
+Full example: [`rootppl/models/simple-examples/geometric_recursive.cu`](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/simple-examples/geometric_recursive.cu)
 
 This model combines stochastic branching with recursion. Basic blocks do not fully support recursion themselves, as they take no custom arguments or return values. Instead, a helper function is used to express the recursive model:
 
@@ -357,7 +357,7 @@ Note that the helper function takes its return value and parameters comma-separa
 
 While recursive functions is supported by CUDA, iterative solutions are encouraged. Below is the same model, implemented with a loop instead.
 ##### Geometric Distribution (Iterative)
-Full example: [`rootppl/models/simple-examples/geometric_iterative.cu`](rootppl/models/simple-examples/geometric_iterative.cu)
+Full example: [`rootppl/models/simple-examples/geometric_iterative.cu`](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/simple-examples/geometric_iterative.cu)
 ```CUDA
 BBLOCK(geometric, {
     int numFlips = 1;
@@ -370,8 +370,8 @@ BBLOCK(geometric, {
 
 #### Phylogenetic Models
 
-More sophisticated models can be found in the [phylogenetics directory](rootppl/models/phylogenetics). These probabilistic
-models to inference on observed phylogenetic trees. These observed trees can be found in [phylogenetics/tree-utils/trees.cuh](rootppl/models/phylogenetics/tree-utils/trees.cuh).
+More sophisticated models can be found in the [phylogenetics directory](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/phylogenetics). These probabilistic
+models to inference on observed phylogenetic trees. These observed trees can be found in [phylogenetics/tree-utils/trees.cuh](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/phylogenetics/tree-utils/trees.cuh).
 The correct phylogenetic models contain a link in the top of the file to the WebPPL source code used as reference when implementing them.
 These models contain a number of new things, e.g.:
 - Multiple basic blocks
@@ -381,8 +381,8 @@ These models contain a number of new things, e.g.:
 - Resampling throughout the traversal of the observed tree
 
 ##### Constant-rate birth-death
-In [phylogenetics/crbd](rootppl/models/phylogenetics/crbd), the constant-rate birth-death models can be found.
-The most interesting file here is [crbd.cu](rootppl/models/phylogenetics/crbd/crbd.cu) as it is a correct model
+In [phylogenetics/crbd](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/phylogenetics/crbd), the constant-rate birth-death models can be found.
+The most interesting file here is [crbd.cu](https://github.com/miking-lang/miking-dppl/blob/master/rootppl/models/phylogenetics/crbd/crbd.cu) as it is a correct model
 used by evolutionary biologists. This model uses a pre-processed DFS traversal path over the observed tree, rather than using a call stack.
 
 ##### Further phylogenetic models
