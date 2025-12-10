@@ -36,7 +36,7 @@ Speaker: David Broman
 
 **14:15** **Tutorial: An Introduction to the Type System of MCore**
 
-Speaker: Anders Ågren Thuné
+Speaker: Anders Ågren Thuné [[slides](/workshop-2025/miking-type-system.pdf)]
 
 **14:45** **Coffee and Hacking**
 
