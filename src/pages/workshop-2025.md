@@ -42,7 +42,7 @@ Speaker: Anders Ågren Thuné [[slides](/workshop-2025/miking-type-system.pdf)]
 
 **15:15** **Session 1: Tooling and New DSLs**
 
-* Title: *What would Doxygen look like if it were written in Miking?* Speaker: Martin Zivojinovic
+* Title: *What would Doxygen look like if it were written in Miking?* Speaker: Martin Zivojinovic [[slides](/workshop-2025/miking-doxygen.pdf)]
 
 * Title: *Differential Probabilistic Programming in Miking*. Speaker: Oscar Ericsson
 
@@ -59,9 +59,9 @@ Speaker: David Broman
 
 **17:30** **Session 2: Optimization techniques for DSLs**
 
-* Title: *Annotated Automatic Pruning in Miking CorePPL*. Speaker: Gizem Caylak
+* Title: *Annotated Automatic Pruning in Miking CorePPL*. Speaker: Gizem Caylak [[slides](/workshop-2025/miking-pruning.pdf)]
 
-* Title: *Optimizing PPL model evaluation with graphs and applicative functors*. Speaker: Viktor Palmkvist
+* Title: *Optimizing PPL model evaluation with graphs and applicative functors*. Speaker: Viktor Palmkvist [[slides](/workshop-2025/miking-optimize-graph.pdf)]
 
 
 **18:00** **Closing of the Technical Session**
