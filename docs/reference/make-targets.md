@@ -44,5 +44,5 @@ For more information about testing Miking, see [here](testing-miking).
 - `test-all`: like `test`, except assumes all possible dependencies
   are installed. Note that tests requiring specialized hardware will
   still not run if that hardware is absent.
-- `test-quick`: run a smaller set of tests, turning off all optional
-  test collections.
+- `test-quick`: run a smaller set of tests, turning off all tests
+  requiring optional dependencies.
