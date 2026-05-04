@@ -10,25 +10,38 @@ while making it very flexible to use.
 ## Running Tests
 
 There is one primary entry point to running the test-suite:
-`misc/test`. It has no mandatory arguments, and will by default turn
-off all optional test collections, uses a "cheated" `mi` (see the
-`cheat` target [here](make-targets#building-the-compiler)), and runs
-all remaining tests.
-
-There are three kinds of optional arguments: flags, which specify
-which `mi` to use, test collections to include, and files to test:
-
-```bash
-misc/test [FLAGS] [COLLECTIONS] -- [FILES]
-```
+`misc/test`. It has no mandatory arguments, and will by default run
+all tests except those with missing external dependencies, using a
+"cheated" `mi` (see the `cheat` target
+[here](make-targets#building-the-compiler)).
 
 :::tip
 
-The other entry point is `misc/watch`, which takes exactly the same
-arguments, but reruns tests whenever any file in the repository
-changes. Note that `misc/watch` requires `entr` to be installed.
+If you have not yet run any tests you may need to build `misc/test`
+first:
+
+```bash
+make misc/test
+```
 
 :::
+
+The `misc/test` executable has a fairly large number of flags, all of
+which can be seen with `misc/test --help`, but here are some
+particularly important ones:
+
+- `--make` runs tests using `make`. This is the default when you clone
+  the repository. `make` will always run all specified tests, even if
+  nothing has changed, and will never rebuild the compiler used.
+- `--tup` runs tests using `tup`. `tup` has dependency tracking,
+  meaning tests will only run if something has changed, and it will
+  automatically rebuild the chosen compiler if necessary. The first
+  time `--tup` is used some setup will be performed; read what's
+  printed and follow instructions. After that `--tup` becomes the
+  default.
+- `--watch` uses [entr](https://eradman.com/entrproject/) to watch for
+  changes in the repository and automatically rerun tests when
+  something changes.
 
 :::warning
 
@@ -39,6 +52,13 @@ should detect attempts to do otherwise and refuse to run.
 
 ### Reading Test Output
 
+The test suite attempts to make the output of tests run be concise, as
+such it only prints output of tests that fail, and if that output is
+long then only the first and last few lines are displayed. This is
+often enough to, e.g., pinpoint _where_ an error is, because location
+information is printed early, but sometimes you do need the entire
+output.
+
 All outputs (both standard out and standard err, as well as
 intermediate results such as executables) are stored in the `build`
 folder in the root of the repository. The folder structure mirrors the
@@ -46,191 +66,157 @@ folder structure of the rest of the repository, i.e., outputs from
 tests in `src/stdlib/parser` can be found under
 `build/src/stdlib/parser`.
 
-Each file follows a (rather verbose) naming scheme to clarify its
-origin: `filename.test-collection.mi-version.tag` for intermediate
-outputs, plus `.out` and `.err` extensions for standard out and
-standard err, respectively. The `tag` is chosen by the test
-collection. For example:
+Each file follows a naming scheme to clarify its origin:
+`filename.mi-version.tag` for intermediate outputs, plus `.out` and
+`.err` extensions for standard out and standard err, respectively. The
+`tag` is chosen by the test runner. For example:
 
 ```bash
-$ ls build/src/stdlib/annotate*
-build/src/stdlib/annotate.mc.constructor-types.installed.constructor-types
-build/src/stdlib/annotate.mc.constructor-types.installed.constructor-types.err
-build/src/stdlib/annotate.mc.constructor-types.installed.constructor-types.out
-build/src/stdlib/annotate.mc.constructor-types.installed.constructor-types-run.err
-build/src/stdlib/annotate.mc.constructor-types.installed.constructor-types-run.out
-build/src/stdlib/annotate.mc.normal.installed.eval.err
-build/src/stdlib/annotate.mc.normal.installed.eval.out
-build/src/stdlib/annotate.mc.normal.installed.exe
-build/src/stdlib/annotate.mc.normal.installed.exe.err
-build/src/stdlib/annotate.mc.normal.installed.exe.out
-build/src/stdlib/annotate.mc.normal.installed.run.err
-build/src/stdlib/annotate.mc.normal.installed.run.out
+$ ls build/src/stdlib/parser/lexer.mc*
+build/src/stdlib/parser/lexer.mc.cheat.compile
+build/src/stdlib/parser/lexer.mc.cheat.compile.err
+build/src/stdlib/parser/lexer.mc.cheat.compile.out
+build/src/stdlib/parser/lexer.mc.cheat.eval.err
+build/src/stdlib/parser/lexer.mc.cheat.eval.out
+build/src/stdlib/parser/lexer.mc.cheat.run.err
+build/src/stdlib/parser/lexer.mc.cheat.run.out
 ```
 
-Here `normal` are default tests, `eval` are results of interpretation,
-`exe` is the compiled executable and compile logs, and `run` are
-results of running the executable.
+Here `eval` is for results of interpretation, `compile` is for the
+compiled executable and compile logs, and `run` is for results of
+running the executable.
 
 ### Selecting `mi` version
 
 The `mi` version to use is specified by one of `--installed` (using an
-`mi` from your `$PATH`), `--bootstrapped` (using a fully bootstrapped
-compiler), and `--cheated` (using a compiler built using an installed
-`mi`). The default is `--cheated`, and more than one option can be
-given to run tests for more than one compiler.
+`mi` from your `$PATH`), `--boot` (using a fully bootstrapped
+compiler), and `--cheat` (using a compiler built using an installed
+`mi`). The default is `--cheat`, and more than one option can be given
+to run tests for more than one compiler.
 
 ```bash
 # Run tests using an installed `mi`
 misc/test --installed
 ```
 
-### Selecting Test Collections
+:::tip
 
-Some tests are split into collections (see
-[below](#specifying-tests)), which must be turned on to run. These can
-be specified by name, or using the `smart` or `all`
-pseudo-collections. `smart` includes all collections whose
-dependencies are met, while `all` includes all collections except
-those with unmet *hardware* requirements.
+You would typically use `--installed` if you're working on a library,
+`--cheat` if you're working on the compiler and can get away with it,
+and `--boot` if you're changing the compiler such that `--cheat` isn't
+enough.
 
-```bash
-# Run tests not in a test collection, as well as those in the `java`
-# collection, regardless of whether its dependencies are met
-misc/test java
+`--cheat` is typically a good default.
 
-# Any number of collections can be included
-misc/test microbenchmarks tuning
-
-# Run all tests whose dependencies are met
-misc/test smart
-```
+:::
 
 ### Selecting Files to Test
 
 The test-suite can be instructed to run only those tests related to an
 explicit set of files. This is useful when working on a particular
-feature. Such files must be given after a `--` argument.
+feature.
 
 ```bash
 # Run all tests related to `src/stdlib/annotate.mc`
-misc/test smart -- src/stdlib/annotate.mc
+misc/test src/stdlib/annotate.mc
 
 # Test all files in the `src/stdlib/parser` folder
-misc/test smart -- src/stdlib/parser/**/*.mc
+misc/test src/stdlib/parser/**/*.mc
 ```
-
-:::warning
-
-Note that explicitly specifying files does not automatically turn on
-related test collections. Including the `smart` collection, as in the
-examples above, is typically a good idea.
-
-:::
 
 ## Specifying Tests
 
-Tests are specified in `misc/test-spec.mc`. By default, all tests in
-all `.mc` files are expected to pass, both through interpretation (`mi
-eval`) and compilation (`mi compile` and running the
-executable). Exceptions to this, as well as new tests, can be added
-through *test collections*, specified at the end of
-`misc/test-spec.mc`. This section gives a brief overview of the
-concepts; for more detail, see the documentation comments for
-`TestCollection` in
-[`misc/test-spec.mc`](https://github.com/miking-lang/miking/blob/develop/misc/test-spec.mc),
-as well as the collections already defined at the end of the same
-file.
+Tests are specified in `misc/test-spec.mc`, which uses the library in
+`src/stdlib/test-spec.mc`. Both of these contain documentation, the
+former on choices made for the Miking test suite in particular, the
+latter for the building blocks used. The remainder of this page gives
+a brief overview of `misc/test-spec.mc`.
 
-A test collection is defined via `testColl`:
+:::tip
 
-```mcore
-{ testColl "name-of-collection"
-  with ...
-}
+When running `misc/test`, it will first check if `misc/test-spec.mc`
+has changed, in which case it will recompile itself to make sure
+everything is up-to-date.
+
+This depends on having `mi` available on your `PATH`, which might not
+be the case if you have just cloned the repository. In such a case you
+can either use `make install` to install `mi`, or use `make misc/test`
+to rebuild `misc/test` with a locally built `mi`.
+
+:::
+
+`misc/test-spec.mc` first defines three substituters, one for each
+version of `mi` tests can be run by. These are later used by putting
+`%m` in the command of tests.
+
+:::warning
+
+When a test needs to run `mi` it _must_ use `%m` rather than `mi`
+explicitly. The latter would always use an installed `mi`, regardless
+of what the user specified.
+
+:::
+
+Then it calls `testMain` with a callback function used to declare all
+tests, which contains the bulk of the test configuration.
+
+First is a number of checks for external dependencies, using
+`api.dependency`. These perform side-effects, running external
+commands to check what's installed.
+
+```mc
+let javac = api.dependency (lam.
+  if sysCommandExists "javac"
+  then DepAvailable ()
+  else DepUnavailable ()) in
 ```
 
-The collection is configured through a record update, with a number of
-possible fields.
+Next is a few calls to `api.endStep` and `api.midStep`. These define
+test steps that _can_ be enabled for source files. `midStep` declares
+a step that outputs a file of some sort, while `endStep` is a step
+that only uses stdout and stderr. Note the use of `%m` to call `mi`,
+`%i` to refer to inputs, and `%o` to refer to the output.
 
-### Changing Default Tests
-
-Some files cannot be tested with the default approach, are expected to
-fail, or take too long to run as part of the default test suite. We
-can change these by providing the `exclusions` and/or
-`conditionalInclusions` functions. These functions are expected to
-"mark" files, e.g.:
-
-```mcore
-{ testColl "example"
-  with exclusions = lam api.
-    api.mark { defaultTasks with interpret = Fail (), run = Dont () }
-      (api.strsToPaths ["stdlib/foo.mc", "stdlib/bar.mc"])
-}
+```mc
+let compile = api.midStep
+  { uses = [origin]
+  , tag = "compile"
+  , cmd = "%m compile --disable-prune-utests --test %i --output %o"
+  } in
+let run = api.endStep
+  { uses = [compile]
+  , tag = "run"
+  , cmd = "command %i"
+  } in
 ```
 
-Note that the files marked by `conditionalInclusions` are only tested
-when the collection is enabled, while files marked by `exclusions` are
-tested regardless.
+Finally, test steps are enabled/disabled using `api.tests`. These take
+effect in the order they're written, with later calls overwriting
+earlier ones. For example, below we first turn on default test steps
+for all `.mc` files, then disable them for `src/main/mi.mc` in
+particular.
 
-### Checking Dependencies
+```mc
+api.tests []
+  (strEndsWith ".mc")
+  [(eval, succ), (compile, succ), (run, succ)];
 
-Some tests require, e.g., external libraries to be installed to
-run. The `checkCondition` function is expected check for such
-cases. There are three cases, mostly self-explanatory:
-`ConditionsMet`, `ConditionsUnmet`, and `ConditionsImpossible`. The
-last of these should be used if a hardware dependency is unmet, to
-exclude this collection from the `all` pseudo-collection.
-
-Note that `checkCondition` is expected to directly interact with the
-outside world by, e.g., running external commands.
-
-```mcore
-{ testColl "toml"
-  with checkCondition = lam.
-    if eqi 0 (command "ocamlfind query toml >/dev/null 2>&1")
-    then ConditionsMet ()
-    else ConditionsUnmet ()
-  conditionalInclusions = lam api.
-    -- ...elided...
-}
+-- The compiler itself is tested through the bootstrap process, so
+-- skip it here
+api.tests []
+  (eqString "src/main/mi.mc")
+  [(eval, dont), (compile, dont), (run, dont)];
 ```
 
-### Adding New Tests
+The remainder of the file defines more tests and files to run them on,
+roughly organized with related files/tests close to each other.
 
-New tests are added by providing the `newTests` function. Tests often
-have multiple steps, e.g., compiling a file, then running the
-executable. A new step can be added using one of three functions:
+:::tip
 
-- `success` adds a step expected to succeed and produce no outputs.
-- `fail` adds a step expected to fail and produce no outputs.
-- `mid` adds a step expected to succeed and produce exactly one
-  output.
+The heading above each group of tests is a remnant of our previous
+test system, which had a concept of explicitly named test
+collections. Of course, grouping related things by proximity is useful
+for readability even if the test system itself makes no use of it,
+thus it remains.
 
-All steps are expected to take exactly one file as input. Each step is
-specified as a shell command to run, with a few placeholders to be
-filled in:
-
-- `%i`: the input file.
-- `%o`: the output file for a `mid` step.
-- `%m`: an invocation of the appropriate version of `mi`. *Do not* use
-  `mi` directly.
-
-Note that no step should write to *any* file except `%o` (i.e.,
-`success` and `fail` should not write to any file, only standard out
-and standard error). This is to ensure, amongst other things, that all
-tests can run in parallel and that no tests will clobber results from
-other tests.
-
-Note also that each step is given a "tag", which should be unique
-across steps in the same test collection.
-
-```mcore
-{ testColl "mlang-pipeline"
-  with newTests = lam api.
-    let files = api.strsToPaths [...] in
-    for_ files (lam mc.
-      let exe = api.mid {input = mc, cmd = "%m compile --test --mlang-pipeline %i --output %o", tag = "mlang"} in
-      api.success {input = exe, cmd = "./%i", tag = "mlang-run"})
-}
-```
+:::
