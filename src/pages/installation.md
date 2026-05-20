@@ -23,7 +23,7 @@ With `opam` installed, create a switch for Miking and install the packages
 
 ```
 opam update
-opam switch create miking-ocaml 5.0.0
+opam switch create miking-ocaml 5.3.0
 eval $(opam env)
 
 opam install dune linenoise menhir ocamlfind
@@ -102,25 +102,12 @@ See the [documentation](/docs) page for more usage.
 
 :::note Uninstall
 
-<Tabs>
-<TabItem value="mi-install-makefile" label="Makefile" default>
 
 To uninstall Miking, run the following in the cloned Miking repository:
 
 ```
 make uninstall
 ```
-</TabItem>
-
-<TabItem value="mi-install-shell" label="Shell">
-
-To uninstall Miking, run the following in the cloned Miking repository:
-
-```
-./make.sh uninstall
-```
-</TabItem>
-</Tabs>
 
 :::
 
@@ -129,7 +116,7 @@ To uninstall Miking, run the following in the cloned Miking repository:
 Certain parts of the standard library depends on additional OCaml packages to
 properly function. See below for how to install them for your system:
 
-:::tip Optional Dependencies
+::::tip Optional Dependencies
 
 <Tabs>
 <TabItem value="optdep-linux" label="Linux" default>
@@ -137,7 +124,7 @@ properly function. See below for how to install them for your system:
 Install the dependencies with Opam:
 
 ```
-opam install pyml toml lwt owl.0.10.0 ocamlformat.0.24.1 conf-openblas.0.2.1
+opam install pyml toml lwt owl ocamlformat.0.29.0 conf-openblas
 ```
 
 Opam should invoke your distribution's package manager if there are any
@@ -145,6 +132,13 @@ additional dependencies needed.
 
 </TabItem>
 <TabItem value="optdep-macos-x86" label="Mac (Intel x86)">
+
+:::warning
+
+These instructions have not been tested for some time, consider using
+Linux or an Apple Silicon Mac if they do not work.
+
+:::
 
 It might be necessary to add openblas to the pkg-config path if installed with
 Homebrew. Replace `/usr/local` in the `PKG_CONFIG_PATH` variable below with
@@ -170,37 +164,18 @@ the following steps before proceeding with the installation:
 
 ```bash
 # Install gcc and openblas
-brew install gcc openblas
+brew install openblas libomp fftw
 
-# Make sure that you have gcc as your cc compiler (change version from 12 to
-# your GCC version if it is different)
-cd $HOMEBREW_PREFIX/bin && ln -s gcc-12 cc
+# Set some extra flags to make sure `owl` can build
+export OWL_LDFLAGS="-L/opt/homebrew/opt/libomp/lib -lomp"
+export OWL_CPPFLAGS="-Xpreprocessor -fopenmp"
+
+opam install pyml toml lwt owl ocamlformat.0.29.0 conf-openblas
 ```
-
-Now verify that your `cc` compiler points to the correct location by running
-`which cc`. **You might need to open a new terminal window for this.**
-
-Once `cc` points to the correct location, run the following commands to install
-the remaining dependencies:
-
-```bash
-export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/openblas/lib/pkgconfig:${PKG_CONFIG_PATH}"
-export OWL_CFLAGS="-g -O3 -Ofast -funroll-loops -ffast-math -DSFMT_MEXP=19937 -fno-strict-aliasing -Wno-tautological-constant-out-of-range-compare"
-export OWL_AEOS_CFLAGS="-g -O3 -Ofast -funroll-loops -ffast-math -DSFMT_MEXP=19937 -fno-strict-aliasing"
-export EIGENCPP_OPTFLAGS="-Ofast -funroll-loops -ffast-math"
-export EIGEN_FLAGS="-O3 -Ofast -funroll-loops -ffast-math"
-
-# If opened a new terminal window, make sure to run `eval $(opam env)` first
-
-opam install pyml toml lwt owl.0.10.0 ocamlformat.0.24.1 conf-openblas.0.2.1
-```
-
-You can now remove the `cc` symlink created earlier.
-
 </TabItem>
 </Tabs>
 
-:::
+::::
 
 ## Other Installation Methods
 
