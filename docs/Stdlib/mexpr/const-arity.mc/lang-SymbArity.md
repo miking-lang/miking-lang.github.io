@@ -1,0 +1,31 @@
+import { DocBlock, Signature, Description, ToggleWrapper, S} from '@site/docs/Stdlib/MikingDocGen';
+import Search from '@site/docs/Stdlib/Search';
+
+<Search />
+# SymbArity  
+  
+
+  
+  
+  
+## Semantics  
+  
+
+          <DocBlock title="constArity" kind="sem">
+
+```mc
+sem constArity : ConstAst_Const -> Int
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+sem constArity =
+  | CSymb _ -> 0
+  | CGensym _ -> 1
+  | CSym2hash _ -> 1
+```
+</ToggleWrapper>
+</DocBlock>
+

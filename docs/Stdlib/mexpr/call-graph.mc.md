@@ -1,0 +1,164 @@
+import { DocBlock, Signature, Description, ToggleWrapper, S} from '@site/docs/Stdlib/MikingDocGen';
+import Search from '@site/docs/Stdlib/Search';
+
+<Search />
+# call-graph.mc  
+  
+
+Defines a language fragment for constructing a call\-graph of the bindings in  
+a recursive let\-expression. The call graph contains an edge from a to b if  
+the body of binding a contains a call to binding b.
+
+  
+  
+## Stdlib Includes  
+  
+<a href={"/docs/Stdlib/digraph.mc"} style={S.link}>digraph.mc</a>, <a href={"/docs/Stdlib/mexpr/ast.mc"} style={S.link}>mexpr/ast.mc</a>, <a href={"/docs/Stdlib/mexpr/ast-builder.mc"} style={S.link}>mexpr/ast-builder.mc</a>, <a href={"/docs/Stdlib/mexpr/symbolize.mc"} style={S.link}>mexpr/symbolize.mc</a>, <a href={"/docs/Stdlib/mexpr/type-check.mc"} style={S.link}>mexpr/type-check.mc</a>  
+  
+## Languages  
+  
+
+          <DocBlock title="MExprCallGraph" kind="lang" link="/docs/Stdlib/mexpr/call-graph.mc/lang-MExprCallGraph">
+
+```mc
+lang MExprCallGraph
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+lang MExprCallGraph = MExprAst
+  sem constructCallGraph =
+  | TmDecl (x & {decl = DeclRecLets t}) ->
+    let g : Digraph Name Int = digraphEmpty nameCmp eqi in
+    let g = _addGraphVertices g (TmDecl {x with inexpr = unit_}) in
+    _addGraphCallEdges g t.bindings
+  | t ->
+    errorSingle [infoTm t] (join ["A call graph can only be constructed ",
+                                    "from a recursive let-expression"])
+
+  sem _addGraphVertices (g : Digraph Name Int) =
+  | TmDecl {decl = DeclLet t, inexpr = inexpr} ->
+    let g =
+      match t.tyBody with TyArrow _ then digraphAddVertex t.ident g
+      else g
+    in
+    let g = _addGraphVertices g t.body in
+    _addGraphVertices g inexpr
+  | TmDecl {decl = DeclRecLets t, inexpr = inexpr} ->
+    let g =
+      foldl
+        (lam g. lam bind : DeclLetRecord. digraphAddVertex bind.ident g)
+        g t.bindings in
+    let g =
+      foldl
+        (lam g. lam bind : DeclLetRecord.
+          _addGraphVertices g bind.body)
+        g t.bindings in
+    _addGraphVertices g inexpr
+  | t -> sfold_Expr_Expr _addGraphVertices g t
+
+  sem _addGraphCallEdges (g : Digraph Name Int) =
+  | bindings /- : [DeclLetRecord] -/ ->
+    let edges =
+      foldl
+        (lam edges. lam bind : DeclLetRecord.
+          _findCallEdges bind.ident g edges bind.body)
+        (mapEmpty nameCmp) bindings in
+    mapFoldWithKey
+      (lam g : Digraph Name Int. lam edgeSrc : Name. lam edgeDsts : Set Name.
+        mapFoldWithKey
+          (lam g : Digraph Name Int. lam edgeDst : Name. lam.
+            digraphAddEdge edgeSrc edgeDst 0 g)
+          g edgeDsts)
+      g edges
+
+  sem _findCallEdges (src : Name) (g : Digraph Name Int)
+                            (edges : Map Name (Set Name)) =
+  | TmVar t ->
+    if digraphHasVertex t.ident g then
+      let outEdges =
+        match mapLookup src edges with Some outEdges then
+          setInsert t.ident outEdges
+        else setOfSeq nameCmp [t.ident] in
+      mapInsert src outEdges edges
+    else edges
+  | TmDecl {decl = DeclLet t, inexpr = inexpr} ->
+    let letSrc = match t.tyBody with TyArrow _ then t.ident else src in
+    let edges = _findCallEdges letSrc g edges t.body in
+    _findCallEdges src g edges inexpr
+  | TmDecl {decl = DeclRecLets t, inexpr = inexpr} ->
+    let edges =
+      foldl
+        (lam edges : Map Name (Set Name). lam bind : DeclLetRecord.
+          _findCallEdges bind.ident g edges bind.body)
+        edges t.bindings in
+    _findCallEdges src g edges inexpr
+  | t -> sfold_Expr_Expr (_findCallEdges src g) edges t
+end
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="TestLang" kind="lang" link="/docs/Stdlib/mexpr/call-graph.mc/lang-TestLang">
+
+```mc
+lang TestLang
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+lang TestLang = MExprCallGraph + MExprSym + MExprTypeCheck
+end
+```
+</ToggleWrapper>
+</DocBlock>
+
+## Mexpr  
+  
+
+          <DocBlock title="mexpr" kind="mexpr">
+
+```mc
+mexpr
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+mexpr
+
+use TestLang in
+
+let preprocess = lam t.
+  typeCheck (symbolize t)
+in
+
+let a = nameSym "a" in
+let b = nameSym "b" in
+let c = nameSym "c" in
+let d = nameSym "d" in
+let t = preprocess (bind_ (nureclets_ [
+  (a, ulam_ "x" (bindall_ [
+    nulet_ b (ulam_ "x" (addi_ (var_ "x") (int_ 1))),
+    nulet_ c (ulam_ "x" (app_ (nvar_ b) (var_ "x"))),
+    nulet_ d (ulam_ "x" (app_ (nvar_ b) (var_ "x")))]
+    (addi_ (addi_ (app_ (nvar_ b) (var_ "x"))
+                 (app_ (nvar_ c) (var_ "x")))
+          (app_ (nvar_ d) (int_ 2)))))]) unit_) in
+let g = constructCallGraph t in
+utest digraphSuccessors a g with [b, c, d] using eqSeq nameEq in
+utest digraphSuccessors b g with [] using eqSeq nameEq in
+utest digraphSuccessors c g with [b] using eqSeq nameEq in
+utest digraphSuccessors d g with [b] using eqSeq nameEq in
+
+()
+```
+</ToggleWrapper>
+</DocBlock>
+

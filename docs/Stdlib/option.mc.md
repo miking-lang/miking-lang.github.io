@@ -1,0 +1,796 @@
+import { DocBlock, Signature, Description, ToggleWrapper, S} from '@site/docs/Stdlib/MikingDocGen';
+import Search from '@site/docs/Stdlib/Search';
+
+<Search />
+# option.mc  
+  
+
+  
+  
+## Stdlib Includes  
+  
+<a href={"/docs/Stdlib/bool.mc"} style={S.link}>bool.mc</a>, <a href={"/docs/Stdlib/basic-types.mc"} style={S.link}>basic-types.mc</a>  
+  
+## Variables  
+  
+
+          <DocBlock title="optionEq" kind="let">
+
+```mc
+let optionEq eq o1 o2 : all a. all b. (a -> b -> Bool) -> Option a -> Option b -> Bool
+```
+
+<Description>{`Equality check between two options. Returns true if both are None, false if  
+exactly one of them are None, and the result of evaluating the provided  
+equality function if both are Some.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionEq: all a. all b. (a -> b -> Bool) -> Option a -> Option b -> Bool =
+  lam eq. lam o1. lam o2.
+    match (o1, o2) with (Some v1, Some v2) then
+      eq v1 v2
+    else match (o1, o2) with (None (), None ()) then
+      true
+    else
+      false
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionEq eqi (Some 10) (Some 10) with true
+utest optionEq eqi (Some 10) (Some 11) with false
+utest optionEq eqi (Some 10) (None ()) with false
+utest optionEq eqi (None ()) (None ()) with true
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionCmp" kind="let">
+
+```mc
+let optionCmp cmp o1 o2 : all a. (a -> a -> Int) -> Option a -> Option a -> Int
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionCmp : all a. (a -> a -> Int) -> Option a -> Option a -> Int =
+  lam cmp. lam o1. lam o2.
+    switch (o1, o2)
+    case (None _, None _) then 0
+    case (None _, Some _) then negi 1
+    case (Some _, None _) then 1
+    case (Some a, Some b) then cmp a b
+    end
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionMap" kind="let">
+
+```mc
+let optionMap f o : all a. all b. (a -> b) -> Option a -> Option b
+```
+
+<Description>{`Applies a function to the contained value \(if any\).`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionMap: all a. all b. (a -> b) -> Option a -> Option b = lam f. lam o.
+  match o with Some t then
+    Some (f t)
+  else
+    None ()
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionMap (addi 1) (None ()) with (None ()) using optionEq eqi
+utest optionMap (addi 1) (Some 1) with (Some 2) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionMapAccum" kind="let">
+
+```mc
+let optionMapAccum f acc o : all a. all b. all acc. (acc -> a -> (acc, b)) -> acc -> Option a -> (acc, Option b)
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionMapAccum: all a. all b. all acc.
+  (acc -> a -> (acc, b)) -> acc -> Option a -> (acc, Option b) =
+  lam f. lam acc. lam o.
+    match o with Some a then
+      match f acc a with (acc, b) in (acc, Some b)
+    else (acc, None ())
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionMapAccum (lam acc. lam a. (acc, a)) () (Some 5) with ((), Some 5)
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionJoin" kind="let">
+
+```mc
+let optionJoin o : all a. Option (Option a) -> Option a
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionJoin: all a. Option (Option a) -> Option a = lam o.
+    match o with Some t then
+      t
+    else
+      None ()
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionJoin (Some (Some 1)) with (Some 1) using optionEq eqi
+utest optionJoin (Some (None ())) with (None ()) using optionEq eqi
+utest optionJoin (None ()) with (None ()) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionBind" kind="let">
+
+```mc
+let optionBind o f : all a. all b. Option a -> (a -> Option b) -> Option b
+```
+
+<Description>{`Returns \`None\` if the option is \`None\`, otherwise calls the  
+specified function on the wrapped value and returns the result.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionBind: all a. all b. Option a -> (a -> Option b) -> Option b =
+  lam o. lam f.
+  optionJoin (optionMap f o)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionBind (None ()) (lam t. Some (addi 1 t)) with (None ()) using optionEq eqi
+utest optionBind (Some 1) (lam t. Some (addi 1 t)) with (Some 2) using optionEq eqi
+utest optionBind (Some 1) (lam. None ()) with (None ()) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionCompose" kind="let">
+
+```mc
+let optionCompose f g x : all a. all b. all c. (b -> Option c) -> (a -> Option b) -> a -> Option c
+```
+
+<Description>{`'optionCompose f g' composes the option\-producing functions 'f' and 'g' into  
+a new function, which only succeeds if both 'f' and 'g' succeed.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionCompose: all a. all b. all c.
+  (b -> Option c) -> (a -> Option b) -> a -> Option c =
+  lam f. lam g. lam x.
+    optionBind (g x) f
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionCompose (lam t. Some (addi 1 t)) (lam t. Some (muli 2 t)) 2 with Some 5 using optionEq eqi
+utest optionCompose (lam t. None ()) (lam t. Some (muli 2 t)) 2 with None () using optionEq eqi
+utest optionCompose (lam t. Some (addi 1 t)) (lam t. None ()) 2 with None () using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionZipWith" kind="let">
+
+```mc
+let optionZipWith f o1 o2 : all a. all b. all c. (a -> b -> c) -> Option a -> Option b -> Option c
+```
+
+<Description>{`'optionZipWith f o1 o2' applies the function f on the values contained in  
+o1 and o2. If either o1 or o2 is None, then None is returned.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionZipWith: all a. all b. all c.
+  (a -> b -> c) -> Option a -> Option b -> Option c =
+  lam f. lam o1. lam o2.
+    match (o1, o2) with (Some v1, Some v2) then
+      Some (f v1 v2)
+    else
+      None ()
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionZipWith muli (Some 2) (Some 3) with Some 6 using optionEq eqi
+utest optionZipWith muli (Some 2) (None ()) with None () using optionEq eqi
+utest optionZipWith muli (None ()) (None ()) with None () using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionGetOrElse" kind="let">
+
+```mc
+let optionGetOrElse d o : all a. (() -> a) -> Option a -> a
+```
+
+<Description>{`Try to retrieve the contained value, or compute a default value`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionGetOrElse: all a. (() -> a) -> Option a -> a = lam d. lam o.
+  match o with Some t then
+    t
+  else
+    d ()
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionGetOrElse (lam. 3) (Some 1) with 1
+utest optionGetOrElse (lam. 3) (None ()) with 3
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionGetOr" kind="let">
+
+```mc
+let optionGetOr d : all a. a -> Option a -> a
+```
+
+<Description>{`Try to retrieve the contained value, or fallback to a default value`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionGetOr: all a. a -> Option a -> a = lam d.
+  optionGetOrElse (lam. d)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionGetOr 3 (Some 1) with 1
+utest optionGetOr 3 (None ()) with 3
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionMapOrElse" kind="let">
+
+```mc
+let optionMapOrElse d f o : all a. all b. (() -> b) -> (a -> b) -> Option a -> b
+```
+
+<Description>{`Applies a function to the contained value \(if any\),  
+or computes a default \(if not\).`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionMapOrElse: all a. all b. (() -> b) -> (a -> b) -> Option a -> b =
+  lam d. lam f. lam o.
+  optionGetOrElse d (optionMap f o)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionMapOrElse (lam. 3) (addi 1) (Some 1) with 2
+utest optionMapOrElse (lam. 3) (addi 1) (None ()) with 3
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionMapOr" kind="let">
+
+```mc
+let optionMapOr d f o : all a. all b. b -> (a -> b) -> Option a -> b
+```
+
+<Description>{`Applies a function to the contained value \(if any\),  
+or returns the provided default \(if not\).`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionMapOr: all a. all b. b -> (a -> b) -> Option a -> b =
+  lam d. lam f. lam o.
+  optionGetOr d (optionMap f o)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionMapOr 3 (addi 1) (Some 1) with 2
+utest optionMapOr 3 (addi 1) (None ()) with 3
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionZipWithOrElse" kind="let">
+
+```mc
+let optionZipWithOrElse d f o1 o2 : all a. all b. all c. (() -> c) -> (a -> b -> c) -> Option a -> Option b -> c
+```
+
+<Description>{`'optionZipWithOrElse d f o1 o2' applies the function f on the values  
+contained in o1 and o2. If either o1 or o2 is None, then d is evaluated to  
+produce a default value.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionZipWithOrElse: all a. all b. all c.
+  (() -> c) -> (a -> b -> c) -> Option a -> Option b -> c =
+  lam d. lam f. lam o1. lam o2.
+    optionGetOrElse d (optionZipWith f o1 o2)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionZipWithOrElse (lam. "ERROR") (lam a. lam b. [a,b]) (Some 'm') (Some 'i') with "mi"
+utest optionZipWithOrElse (lam. "ERROR") (lam a. lam b. [a,b]) (Some 'm') (None ()) with "ERROR"
+utest optionZipWithOrElse (lam. "ERROR") (lam a. lam b. [a,b]) (None ()) (None ()) with "ERROR"
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionZipWithOr" kind="let">
+
+```mc
+let optionZipWithOr v : all a. all b. all c. c -> (a -> b -> c) -> Option a -> Option b -> c
+```
+
+<Description>{`'optionZipWithOr v f o1 o2' applies the function f on the values contained  
+in o1 and o2. If either o1 or o2 is None, then v is returned.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionZipWithOr: all a. all b. all c.
+  c -> (a -> b -> c) -> Option a -> Option b -> c =
+  lam v. optionZipWithOrElse (lam. v)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionZipWithOr false eqi (Some 10) (Some 11) with false
+utest optionZipWithOr false eqi (Some 10) (Some 10) with true
+utest optionZipWithOr false eqi (Some 10) (None ()) with false
+utest optionZipWithOr false eqi (None ()) (None ()) with false
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionMapM" kind="let">
+
+```mc
+let optionMapM f l : all a. all b. (a -> Option b) -> [a] -> Option [b]
+```
+
+<Description>{`'optionMapM f l' maps each element of 'l' to an option using 'f'.  
+Then it collects the results to a new list option, which is 'Some'  
+only if all elements of 'l' were mapped to 'Some' by 'f'.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionMapM: all a. all b. (a -> Option b) -> [a] -> Option [b] = lam f. lam l.
+  recursive let g = lam l. lam acc.
+    match l with [hd] ++ rest then
+      match f hd with Some x then
+        g rest (snoc acc x)
+      else
+        None ()
+    else
+      Some acc
+  in
+  g l []
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionMapM (lam x. if gti x 2 then Some x else None ()) [3, 4, 5] with Some [3, 4, 5]
+utest optionMapM (lam x. if gti x 2 then Some x else None ()) [2, 3, 4] with None ()
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionMapAccumLM" kind="let">
+
+```mc
+let optionMapAccumLM f : all a. all b. all acc. (acc -> a -> Option (acc, b)) -> acc -> [a] -> Option (acc, [b])
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionMapAccumLM : all a. all b. all acc.
+  (acc -> a -> Option (acc, b))
+  -> acc
+  -> [a]
+  -> Option (acc, [b])
+  = lam f.
+    recursive let work = lam prefix. lam acc. lam l.
+      match l with [x] ++ l then
+        match f acc x with Some (acc, x) then
+          work (snoc prefix x) acc l
+        else None ()
+      else Some (acc, prefix)
+    in work []
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionMapiAccumLM" kind="let">
+
+```mc
+let optionMapiAccumLM f : all a. all b. all acc. (acc -> Int -> a -> Option (acc, b)) -> acc -> [a] -> Option (acc, [b])
+```
+
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionMapiAccumLM : all a. all b. all acc.
+  (acc -> Int -> a -> Option (acc, b))
+  -> acc
+  -> [a]
+  -> Option (acc, [b])
+  = lam f.
+    recursive let work = lam prefix. lam idx. lam acc. lam l.
+      match l with [x] ++ l then
+        match f acc idx x with Some (acc, x) then
+          work (snoc prefix x) (addi idx 1) acc l
+        else None ()
+      else Some (acc, prefix)
+    in work [] 0
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionFoldlM" kind="let">
+
+```mc
+let optionFoldlM f : all a. all b. (a -> b -> Option a) -> a -> [b] -> Option a
+```
+
+<Description>{`'optionFoldlM f acc list' folds over 'list' using 'f', starting with the value 'acc'.  
+This is foldlM in the Option monad, i.e., if 'f' returns 'None' at any point the entire  
+result is 'None'.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionFoldlM: all a. all b. (a -> b -> Option a) -> a -> [b] -> Option a = lam f.
+  recursive let recur = lam a. lam bs.
+    match bs with [b] ++ bs then
+      let res = f a b in
+      match res with Some a then
+        recur a bs
+      else match res with None () then
+        None ()
+      else never
+    else match bs with [] then
+      Some a
+    else never
+  in recur
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionFoldlM (lam a. lam b. if gti (addi a b) 3 then None () else Some (addi a b)) 0 [1, 2]
+      with Some 3 using optionEq eqi
+utest optionFoldlM (lam a. lam b. if gti (addi a b) 3 then None () else Some (addi a b)) 0 [1, 2, 3]
+      with None () using optionEq eqi
+utest optionFoldlM (lam acc. lam x. Some (addi acc x)) 0 [1,2,3,4] with Some 10 using optionEq eqi
+utest optionFoldlM (lam acc. lam x. if gti x acc then Some x else None ())
+        0 [1,2,3,4]
+with Some 4
+using optionEq eqi
+utest optionFoldlM (lam acc. lam x. if gti x acc then Some x else None ())
+        0 [1,2,2,4]
+with None ()
+using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionContains" kind="let">
+
+```mc
+let optionContains o p : all a. Option a -> (a -> Bool) -> Bool
+```
+
+<Description>{`Returns \`true\` if the option contains a value which  
+satisfies the specified predicate.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionContains: all a. Option a -> (a -> Bool) -> Bool = lam o. lam p.
+  optionMapOr false p o
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionContains (Some 1) (eqi 1) with true
+utest optionContains (Some 2) (eqi 1) with false
+utest optionContains (None ()) (eqi 1) with false
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionIsSome" kind="let">
+
+```mc
+let optionIsSome o : all a. Option a -> Bool
+```
+
+<Description>{`Returns \`true\` if the option is a \`Some\` value.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionIsSome: all a. Option a -> Bool = lam o. optionContains o (lam. true)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionIsSome (Some 1) with true
+utest optionIsSome (None ()) with false
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionIsNone" kind="let">
+
+```mc
+let optionIsNone o : all a. Option a -> Bool
+```
+
+<Description>{`Returns \`true\` if the option is a \`None\` value.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionIsNone: all a. Option a -> Bool = lam o. not (optionIsSome o)
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionIsNone (None ()) with true
+utest optionIsNone (Some 1) with false
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionFilter" kind="let">
+
+```mc
+let optionFilter p o : all a. (a -> Bool) -> Option a -> Option a
+```
+
+<Description>{`Filters the contained value \(if any\) using the specified predicate.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionFilter: all a. (a -> Bool) -> Option a -> Option a = lam p. lam o.
+    if optionContains o p then
+      o
+    else
+      None ()
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionFilter (eqi 1) (Some 1) with (Some 1) using optionEq eqi
+utest optionFilter (eqi 2) (Some 1) with (None ()) using optionEq eqi
+utest optionFilter (eqi 2) (None ()) with (None ()) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionAnd" kind="let">
+
+```mc
+let optionAnd o1 o2 : all a. Option a -> Option a -> Option a
+```
+
+<Description>{`Returns \`None\` if either option is \`None\`, otherwise returns  
+the first option.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionAnd: all a. Option a -> Option a -> Option a = lam o1. lam o2.
+  optionZipWith (lam x. lam. x) o1 o2
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionAnd (Some 1) (Some 2) with (Some 1) using optionEq eqi
+utest optionAnd (Some 1) (None ()) with (None ()) using optionEq eqi
+utest optionAnd (None ()) (Some 1) with (None ()) using optionEq eqi
+utest optionAnd (None ()) (None ()) with (None ()) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionCombine" kind="let">
+
+```mc
+let optionCombine f o1 o2 : all a. (a -> a -> Option a) -> Option a -> Option a -> Option a
+```
+
+<Description>{`Combines two options by choosing Some over None. Should both options be  
+Some, they are combined according to the given function.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionCombine
+  : all a. (a -> a -> Option a) -> Option a -> Option a -> Option a
+  = lam f. lam o1. lam o2.
+    switch (o1, o2)
+    case (None (), rhs) then rhs
+    case (lhs, None ()) then lhs
+    case (Some a, Some b) then f a b
+    end
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionOrWith" kind="let">
+
+```mc
+let optionOrWith f o1 o2 : all a. (a -> a -> a) -> Option a -> Option a -> Option a
+```
+
+<Description>{`Combines two options by choosing Some over None. Should both options be  
+Some, their contents are combined according to the given function.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionOrWith : all a. (a -> a -> a) -> Option a -> Option a -> Option a
+  = lam f. lam o1. lam o2.
+    optionCombine (lam x. lam y. Some (f x y)) o1 o2
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionOrWith addi (Some 1) (Some 2) with (Some 3) using optionEq eqi
+utest optionOrWith addi (Some 1) (None ()) with (Some 1) using optionEq eqi
+utest optionOrWith addi (None ()) (Some 2) with (Some 2) using optionEq eqi
+utest optionOrWith addi (None ()) (None ()) with (None ()) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionOr" kind="let">
+
+```mc
+let optionOr o1 o2 : all a. Option a -> Option a -> Option a
+```
+
+<Description>{`Returns the first option if it contains a value, otherwise returns  
+the second option.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionOr : all a. Option a -> Option a -> Option a = lam o1. lam o2.
+  optionCombine (lam x. lam. Some x) o1 o2
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionOr (Some 1) (Some 2) with (Some 1) using optionEq eqi
+utest optionOr (Some 1) (None ()) with (Some 1) using optionEq eqi
+utest optionOr (None ()) (Some 2) with (Some 2) using optionEq eqi
+utest optionOr (None ()) (None ()) with (None ()) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionOrElse" kind="let">
+
+```mc
+let optionOrElse f o : all a. (() -> Option a) -> Option a -> Option a
+```
+
+<Description>{`Return the option if it contains a value, otherwise use the  
+function to compute a value to return.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionOrElse : all a. (() -> Option a) -> Option a -> Option a = lam f. lam o.
+  match o with Some _ then o else f ()
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionOrElse (lam. Some 2) (Some 1) with (Some 1) using optionEq eqi
+utest optionOrElse (lam. Some 2) (None ()) with (Some 2) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
+
+          <DocBlock title="optionXor" kind="let">
+
+```mc
+let optionXor o1 o2 : all a. Option a -> Option a -> Option a
+```
+
+<Description>{`If exactly one option is \`Some\`, that option is returned,  
+otherwise returns \`None\`.`}</Description>
+
+
+<ToggleWrapper text="Code..">
+```mc
+let optionXor : all a. Option a -> Option a -> Option a = lam o1. lam o2.
+  optionCombine (lam. lam. None ()) o1 o2
+```
+</ToggleWrapper>
+<ToggleWrapper text="Tests..">
+```mc
+utest optionXor (Some 1) (Some 2) with (None ()) using optionEq eqi
+utest optionXor (Some 1) (None ()) with (Some 1) using optionEq eqi
+utest optionXor (None ()) (Some 2) with (Some 2) using optionEq eqi
+utest optionXor (None ()) (None ()) with (None ()) using optionEq eqi
+```
+</ToggleWrapper>
+</DocBlock>
+
