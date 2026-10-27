@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
+const Path = require('node:path');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -15,8 +16,39 @@ const config = {
   trailingSlash: false,
   deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
   favicon: 'img/favicon.ico',
+
+  plugins: [
+    // Allow importing .mc files as strings, except for stdlib files, which
+    // are imported as URLs so they can be fetched on demand.
+    () => ({
+      name: 'mc-loader',
+      configureWebpack() {
+        return {
+          module: {
+            rules: [
+              {
+                test: /\.mc$/,
+                oneOf: [
+                  {
+                    include: Path.resolve(__dirname, 'modules/miking/src/stdlib'),
+                    type: 'asset/resource',
+                    generator: { filename: 'assets/stdlib/[name].[contenthash:8][ext]' },
+                  },
+                  { type: 'asset/source' },
+                ],
+              },
+            ],
+          },
+        };
+      },
+    }),
+  ],
 
   presets: [
     [
@@ -73,6 +105,11 @@ const config = {
             to: 'publications',
             position: 'left',
             label: 'Publications',
+          },
+          {
+            to: 'playground',
+            position: 'left',
+            label: 'Playground',
           },
           {
             to: 'workshop-2025',

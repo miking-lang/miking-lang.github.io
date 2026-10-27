@@ -1,0 +1,30 @@
+.root {
+    max-width: 1600px !important;
+}
+
+.input {
+    height: 60vh;
+    width: 100%;
+    border: 1px solid #80808080;
+}
+
+.output {
+    height: 60vh;
+    border: 1px solid #80808080;
+    overflow: hidden;
+}
+
+.select {
+    margin-bottom: 4px;
+    font-size: 1em;
+    width: 20ch;
+}
+
+.btn {
+    margin-top: 4px;
+    font-size: 1.1em;
+}
+
+:global(.xterm .xterm-cursor) {
+    visibility: hidden;
+}
